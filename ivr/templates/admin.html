@@ -95,6 +95,10 @@
 
       <!-- Actions -->
       <div class="flex items-center gap-2.5">
+        <a href="/phone" target="_blank"
+          class="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800 transition cursor-pointer shadow-2xs">
+          📱 Open Keypad Phone
+        </a>
         <button onclick="createMockTicket()"
           class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition cursor-pointer active:scale-95 shadow-2xs">
           ➕ New Call Ticket
@@ -191,20 +195,60 @@
     const state = { status: 'all', lang: 'all', cat: 'all', search: '' };
     let allTickets = [];
 
-    // ── Boot ───────────────────────────────────────────────────────────────
+    // ── Web Audio Chime for Live Call Alert ────────────────────────────────
+    let audioCtx = null;
+    function playNotificationChime() {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.15); // A5
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.5);
+      } catch(e) {}
+    }
+
+    // ── Boot & Realtime Channel ────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
       loadTickets();
       document.getElementById('search-input')?.addEventListener('input', (e) => {
         state.search = e.target.value.toLowerCase();
         renderTickets();
       });
+
+      // Listen for Live Calls from Keypad Phone Simulator
+      try {
+        const syncChannel = new BroadcastChannel('lok_swar_ivr_sync');
+        syncChannel.onmessage = (e) => {
+          if (e.data?.type === 'NEW_CALL_TICKET') {
+            playNotificationChime();
+            showToast(`🚨 New Live Call Ingested: ${e.data.phone || '+91 8926160600'}!`);
+            loadTickets(true);
+          }
+        };
+      } catch(err) {
+        console.log('BroadcastChannel not supported', err);
+      }
+
+      // Seamless background auto-refresh every 3.5 seconds
+      setInterval(() => {
+        loadTickets(true);
+      }, 3500);
     });
 
     // ── Data fetch ─────────────────────────────────────────────────────────
-    async function loadTickets() {
-      document.getElementById('loading-state').classList.remove('hidden');
-      document.getElementById('tickets-grid').innerHTML = '';
-      document.getElementById('empty-state').classList.add('hidden');
+    async function loadTickets(silent = false) {
+      if (!silent) {
+        document.getElementById('loading-state').classList.remove('hidden');
+        document.getElementById('tickets-grid').innerHTML = '';
+        document.getElementById('empty-state').classList.add('hidden');
+      }
 
       try {
         const params = new URLSearchParams({ limit: 200 });
@@ -219,9 +263,9 @@
         renderTickets();
       } catch (err) {
         console.error(err);
-        showToast('❌ Failed to load tickets', 'error');
+        if (!silent) showToast('❌ Failed to load tickets', 'error');
       } finally {
-        document.getElementById('loading-state').classList.add('hidden');
+        if (!silent) document.getElementById('loading-state').classList.add('hidden');
       }
     }
 

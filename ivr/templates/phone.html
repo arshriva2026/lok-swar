@@ -3,153 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lok Swar — Keypad Phone IVR Simulator</title>
+  <title>Lok Swar — Keypad IVR & Realtime Admin Stream</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .font-mono-screen { font-family: 'Share Tech Mono', monospace; }
-    .key-btn:active { transform: scale(0.93); }
+    .key-btn:active { transform: scale(0.92); }
     /* Vintage Nokia Green screen tint */
     .screen-tint {
-      background: #c2d8b4;
-      color: #1e3314;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.35);
+      background: #bdd5af;
+      color: #1a3011;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.35);
     }
+    /* Wave animation */
+    @keyframes wave-bar {
+      0%, 100% { height: 4px; }
+      50% { height: 22px; }
+    }
+    .wave-anim { animation: wave-bar 0.7s ease-in-out infinite; }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-4 selection:bg-emerald-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-emerald-500 selection:text-white p-4 lg:p-8">
 
-  <!-- Back to Admin link -->
-  <div class="mb-4 flex items-center gap-3">
-    <a href="/admin" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-emerald-400 transition">
-      ← Back to IVR Admin Dashboard
-    </a>
-    <span class="text-xs text-slate-400">Caller: <strong class="text-white">+91 8926160600</strong></span>
-  </div>
-
-  <!-- ───── PHONE BODY (Chassis) ───── -->
-  <div class="relative w-full max-w-[340px] bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 border-4 border-slate-600 rounded-[42px] p-5 shadow-[0_25px_60px_rgba(0,0,0,0.7)]">
-    
-    <!-- Top Speaker Earpiece Grille -->
-    <div class="flex justify-center mb-4">
-      <div class="w-16 h-2 bg-slate-900 rounded-full border border-slate-700"></div>
-    </div>
-
-    <!-- Phone Brand Name -->
-    <div class="text-center font-bold tracking-widest text-[11px] text-slate-400 uppercase mb-3">
-      LOK SWAR • 4G KEYPAD
-    </div>
-
-    <!-- ───── LCD SCREEN ───── -->
-    <div class="screen-tint rounded-2xl p-3.5 mb-5 border-2 border-slate-600 font-mono-screen min-h-[140px] flex flex-col justify-between">
-      <!-- Screen Top Bar -->
-      <div class="flex items-center justify-between text-[11px] border-b border-black/20 pb-1">
-        <span class="font-bold flex items-center gap-1">📶 JIO 4G</span>
-        <span id="call-timer" class="font-bold">00:00</span>
-        <span>🔋 98%</span>
+  <!-- ───── Top Header ───── -->
+  <header class="max-w-7xl mx-auto mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white font-black text-base shadow-sm">
+        IVR
       </div>
-
-      <!-- Main Display Status -->
-      <div class="text-center py-2">
-        <div id="screen-status" class="text-xs font-bold uppercase tracking-wider text-black/70">Toll-Free Helpline</div>
-        <div id="screen-number" class="text-lg font-extrabold tracking-tight mt-0.5 truncate text-black">1800-892-6160</div>
-        <div id="screen-subtext" class="text-[11px] font-semibold text-black/80 mt-1 min-h-[28px] leading-tight">Press [CALL] to connect</div>
-      </div>
-
-      <!-- Screen Bottom Hints -->
-      <div class="flex items-center justify-between text-[10px] border-t border-black/20 pt-1 font-semibold">
-        <span id="left-soft">Menu</span>
-        <span id="call-badge" class="px-1.5 py-0.2 rounded bg-black/10">IDLE</span>
-        <span id="right-soft">Clear</span>
+      <div>
+        <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+          Lok Swar <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Dual-Screen Simulator</span>
+        </h1>
+        <p class="text-xs text-slate-400">Rural Keypad Phone (Left) ➔ Instant Admin Sync (Right)</p>
       </div>
     </div>
 
-    <!-- ───── CONTROL BUTTONS ───── -->
-    <div class="grid grid-cols-2 gap-3 mb-4">
-      <button id="call-btn" onclick="startCall()" class="key-btn py-3 bg-emerald-600 hover:bg-emerald-500 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-md active:scale-95 transition">
-        📞 CALL
-      </button>
-      <button id="hangup-btn" onclick="endCall()" class="key-btn py-3 bg-red-600 hover:bg-red-500 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-md active:scale-95 transition">
-        ❌ END
-      </button>
+    <div class="flex items-center gap-2.5">
+      <a href="/admin" target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-xl text-xs font-bold text-white transition flex items-center gap-1.5 shadow-sm shadow-emerald-600/30">
+        🏛️ Open Full Admin Dashboard ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- ───── Main Two-Column Layout ───── -->
+  <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+    <!-- =============================================================== -->
+    <!-- LEFT COLUMN: AUTHENTIC 4G KEYPAD PHONE CHASSIS                  -->
+    <!-- =============================================================== -->
+    <div class="lg:col-span-5 flex flex-col items-center">
+      <div class="relative w-full max-w-[340px] bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 border-4 border-slate-600 rounded-[44px] p-5 shadow-[0_25px_60px_rgba(0,0,0,0.8)]">
+        
+        <!-- Earpiece speaker grille -->
+        <div class="flex justify-center mb-3.5">
+          <div class="w-16 h-2 bg-slate-950 rounded-full border border-slate-700"></div>
+        </div>
+
+        <!-- Phone brand -->
+        <div class="text-center font-bold tracking-widest text-[10px] text-slate-400 uppercase mb-3">
+          LOK SWAR • 4G KEYPAD PHONE
+        </div>
+
+        <!-- LCD Screen -->
+        <div class="screen-tint rounded-2xl p-3.5 mb-4 border-2 border-slate-600 font-mono-screen min-h-[145px] flex flex-col justify-between select-none">
+          <!-- Top Screen Status -->
+          <div class="flex items-center justify-between text-[11px] border-b border-black/20 pb-1">
+            <span class="font-bold flex items-center gap-1">📶 JIO 4G</span>
+            <span id="call-timer" class="font-bold">00:00</span>
+            <span>🔋 98%</span>
+          </div>
+
+          <!-- Screen Center Body -->
+          <div class="text-center py-2">
+            <div id="screen-status" class="text-[11px] font-bold uppercase tracking-wider text-black/70">Toll-Free Helpline</div>
+            <div id="screen-number" class="text-lg font-extrabold tracking-tight mt-0.5 text-black">1800-892-6160</div>
+            <div id="screen-subtext" class="text-[11px] font-semibold text-black/80 mt-1 min-h-[28px] leading-tight">Press [CALL] to connect</div>
+
+            <!-- Audio waveform visualizer (visible while talking) -->
+            <div id="screen-waveform" class="hidden flex items-center justify-center gap-1 mt-1">
+              <span class="w-1 bg-black/80 rounded-full wave-anim" style="animation-delay: 0.1s"></span>
+              <span class="w-1 bg-black/80 rounded-full wave-anim" style="animation-delay: 0.3s"></span>
+              <span class="w-1 bg-black/80 rounded-full wave-anim" style="animation-delay: 0.5s"></span>
+              <span class="w-1 bg-black/80 rounded-full wave-anim" style="animation-delay: 0.2s"></span>
+              <span class="w-1 bg-black/80 rounded-full wave-anim" style="animation-delay: 0.4s"></span>
+            </div>
+          </div>
+
+          <!-- Screen Bottom soft keys -->
+          <div class="flex items-center justify-between text-[10px] border-t border-black/20 pt-1 font-bold">
+            <span>Option</span>
+            <span id="call-badge" class="px-1.5 py-0.2 rounded bg-black/15">STANDBY</span>
+            <span>Exit</span>
+          </div>
+        </div>
+
+        <!-- Call Controls (Green / Red) -->
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <button id="call-btn" onclick="startCall()" class="key-btn py-3 bg-emerald-600 hover:bg-emerald-500 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-md active:scale-95 transition cursor-pointer">
+            📞 CALL
+          </button>
+          <button id="hangup-btn" onclick="endCall()" class="key-btn py-3 bg-rose-600 hover:bg-rose-500 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-md active:scale-95 transition cursor-pointer">
+            ❌ HANG UP
+          </button>
+        </div>
+
+        <!-- Numeric Keypad Grid -->
+        <div class="grid grid-cols-3 gap-2.5">
+          <button onclick="pressDigit('1')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">1</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">हिंदी / Bijli</div>
+          </button>
+          <button onclick="pressDigit('2')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">2</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Water</div>
+          </button>
+          <button onclick="pressDigit('3')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">3</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Roads</div>
+          </button>
+
+          <button onclick="pressDigit('4')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">4</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Health</div>
+          </button>
+          <button onclick="pressDigit('5')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">5</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">JKL</div>
+          </button>
+          <button onclick="pressDigit('6')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">6</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">MNO</div>
+          </button>
+
+          <button onclick="pressDigit('7')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">7</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">PQRS</div>
+          </button>
+          <button onclick="pressDigit('8')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">8</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">TUV</div>
+          </button>
+          <button onclick="pressDigit('9')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">9</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">WXYZ</div>
+          </button>
+
+          <button onclick="pressDigit('*')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">*</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Star</div>
+          </button>
+          <button onclick="pressDigit('0')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-2.5 text-center transition cursor-pointer">
+            <div class="text-lg font-bold leading-none">0</div>
+            <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Space</div>
+          </button>
+          <button onclick="pressDigit('#')" class="key-btn bg-emerald-700 hover:bg-emerald-600 text-white border border-emerald-500 rounded-xl py-2.5 text-center transition cursor-pointer ring-2 ring-emerald-500/50">
+            <div class="text-lg font-black leading-none">#</div>
+            <div class="text-[9px] text-emerald-200 uppercase mt-0.5 font-bold">SUBMIT</div>
+          </button>
+        </div>
+
+        <!-- Recording Banner -->
+        <div id="mic-indicator" class="hidden mt-4 bg-rose-950/70 border border-rose-500/60 rounded-xl p-2.5 text-center text-xs text-rose-300 animate-pulse font-semibold">
+          🎙️ Recording Voice... Speak & Press <span class="px-1.5 py-0.5 bg-rose-900 border border-rose-400 rounded font-black text-white">#</span> to Submit
+        </div>
+      </div>
     </div>
 
-    <!-- ───── NUMERIC KEYPAD (1-9, *, 0, #) ───── -->
-    <div class="grid grid-cols-3 gap-2.5">
-      <button onclick="pressDigit('1')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">1</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Hindi</div>
-      </button>
-      <button onclick="pressDigit('2')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">2</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Water</div>
-      </button>
-      <button onclick="pressDigit('3')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">3</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Power</div>
-      </button>
+    <!-- =============================================================== -->
+    <!-- RIGHT COLUMN: REALTIME DISTRICT ADMIN INTAKE MONITOR            -->
+    <!-- =============================================================== -->
+    <div class="lg:col-span-7 space-y-5">
+      
+      <!-- Live Sync Status Banner -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-xs">
+        <div class="flex items-center gap-3">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+          </span>
+          <div>
+            <div class="text-sm font-bold text-white">Live Realtime BroadcastChannel Active</div>
+            <div class="text-[11px] text-slate-400">Pressing <strong class="text-emerald-400">#</strong> automatically broadcasts and renders the ticket here instantly!</div>
+          </div>
+        </div>
+        <button onclick="loadAdminStream()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 transition cursor-pointer">
+          🔄 Refresh
+        </button>
+      </div>
 
-      <button onclick="pressDigit('4')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">4</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">GHI</div>
-      </button>
-      <button onclick="pressDigit('5')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">5</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">JKL</div>
-      </button>
-      <button onclick="pressDigit('6')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">6</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">MNO</div>
-      </button>
+      <!-- Realtime Ingest Alert Card (Pops up when user submits) -->
+      <div id="live-alert-card" class="hidden bg-gradient-to-r from-emerald-950/80 via-slate-900 to-slate-900 border-2 border-emerald-500/80 rounded-2xl p-5 shadow-[0_0_35px_rgba(16,185,129,0.25)] transition-all animate-bounce">
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              ⚡ Call Successfully Ingested Just Now!
+            </span>
+            <h3 id="alert-phone" class="text-lg font-extrabold text-white mt-2">+91 8926160600</h3>
+            <p id="alert-category" class="text-xs text-slate-300 mt-0.5">Category: Water / Irrigation</p>
+          </div>
+          <a href="/admin" target="_blank" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition">
+            View in Admin →
+          </a>
+        </div>
+        <div class="mt-3 pt-3 border-t border-slate-800">
+          <audio id="alert-audio-player" controls class="w-full rounded-xl" src=""></audio>
+        </div>
+      </div>
 
-      <button onclick="pressDigit('7')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">7</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">PQRS</div>
-      </button>
-      <button onclick="pressDigit('8')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">8</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">TUV</div>
-      </button>
-      <button onclick="pressDigit('9')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">9</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">WXYZ</div>
-      </button>
+      <!-- Recent IVR Calls Stream List -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-xs">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+            📋 Recent Ingested IVR Grievances (<span id="stream-count">0</span>)
+          </h2>
+          <span class="text-[11px] font-mono text-emerald-400">Caller: +91 8926160600</span>
+        </div>
 
-      <button onclick="pressDigit('*')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">*</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Repeat</div>
-      </button>
-      <button onclick="pressDigit('0')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">0</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">+</div>
-      </button>
-      <button onclick="pressDigit('#')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
-        <div class="text-lg font-bold leading-none">#</div>
-        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Submit</div>
-      </button>
+        <div id="stream-list" class="space-y-3 max-h-[520px] overflow-y-auto pr-1">
+          <!-- Populated by JS -->
+          <div class="text-center py-12 text-slate-500 text-xs font-medium">Loading call stream…</div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Microphone input indicator -->
-    <div id="mic-indicator" class="hidden mt-4 bg-red-950/60 border border-red-500/50 rounded-xl p-2 text-center text-xs text-red-400 animate-pulse font-semibold">
-      🎙️ Recording Voice (Speak now, press # when done)...
-    </div>
-  </div>
+  </main>
 
   <script>
-    // Audio Context for realistic DTMF keypress beeps
+    // Audio Context for DTMF & Chime sounds
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     function playBeep(freq = 440, duration = 0.12) {
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
     }
 
     // Call State Machine
@@ -160,6 +257,7 @@
     let audioChunks = [];
     let chosenLang = 'hi';
     let chosenCat = 'water';
+    let recordedBlobUrl = null;
 
     const screenStatus = document.getElementById('screen-status');
     const screenNumber = document.getElementById('screen-number');
@@ -167,24 +265,23 @@
     const callBadge = document.getElementById('call-badge');
     const callTimer = document.getElementById('call-timer');
     const micIndicator = document.getElementById('mic-indicator');
+    const screenWaveform = document.getElementById('screen-waveform');
 
-    // Text-to-Speech playback
+    // Speech Synthesis
     function speakHindi(text, onEnd) {
       window.speechSynthesis.cancel();
       const utter = new SpeechSynthesisUtterance(text);
       utter.lang = 'hi-IN';
       utter.rate = 0.95;
       utter.pitch = 1.05;
-      
-      // Try to find a Hindi voice
       const voices = window.speechSynthesis.getVoices();
       const hiVoice = voices.find(v => v.lang.includes('hi') || v.name.includes('Hindi') || v.name.includes('Aditi'));
       if (hiVoice) utter.voice = hiVoice;
-
       if (onEnd) utter.onend = onEnd;
       window.speechSynthesis.speak(utter);
     }
 
+    // Start Call Flow
     function startCall() {
       if (callState !== 'IDLE') return;
       playBeep(800, 0.2);
@@ -194,16 +291,14 @@
       screenSubtext.textContent = 'Connecting to Lok Swar...';
       callBadge.textContent = 'DIALING';
 
-      // Ringing tone
       playBeep(425, 0.8);
       setTimeout(() => playBeep(425, 0.8), 1200);
 
       setTimeout(() => {
-        // Connected!
         callState = 'WELCOME';
         callBadge.textContent = 'CONNECTED';
         screenStatus.textContent = 'Call Connected';
-        screenSubtext.textContent = 'Listening to Lok Swar...';
+        screenSubtext.textContent = '1: Hindi, 2: English';
 
         seconds = 0;
         timerInterval = setInterval(() => {
@@ -213,13 +308,12 @@
           callTimer.textContent = `${mins}:${secs}`;
         }, 1000);
 
-        // Play Welcome in Hindi
         const welcomeText = "नमस्ते। लोक स्वर ग्राहक सेवा में आपका स्वागत है। हिंदी के लिए 1 दबाएँ।";
-        screenSubtext.textContent = 'Press 1 for Hindi';
         speakHindi(welcomeText);
-      }, 2500);
+      }, 2400);
     }
 
+    // Keypad press handler
     function pressDigit(digit) {
       playBeep(350 + parseInt(digit || 5) * 50, 0.15);
 
@@ -228,8 +322,8 @@
           chosenLang = 'hi';
           callState = 'CATEGORY';
           screenStatus.textContent = 'Language: HINDI';
-          screenSubtext.textContent = 'Press 1: Bijli, 2: Paani';
-          const catText = "अपनी समस्या की श्रेणी चुनें। बिजली के लिए 1 दबाएँ। पानी की समस्या के लिए 2 दबाएँ। अन्य के लिए 3 दबाएँ।";
+          screenSubtext.textContent = '1: Bijli, 2: Paani, 3: Sadak';
+          const catText = "अपनी समस्या की श्रेणी चुनें। बिजली के लिए 1 दबाएँ। पानी की समस्या के लिए 2 दबाएँ। सड़क के लिए 3 दबाएँ।";
           speakHindi(catText);
         }
       } else if (callState === 'CATEGORY') {
@@ -241,11 +335,11 @@
         screenStatus.textContent = `Category: ${chosenCat.toUpperCase()}`;
         screenSubtext.textContent = 'Speak after BEEP... Press #';
 
-        const recordPrompt = "कृपया बीप के बाद अपनी समस्या संक्षेप में बताएं और समाप्त होने पर हैश दबाएँ।";
+        const recordPrompt = "कृपया बीp के बाद अपनी समस्या बताएं और समाप्त होने पर हैश दबाएँ।";
         speakHindi(recordPrompt, () => {
-          // Long Beep to start recording
-          playBeep(1000, 0.4);
+          playBeep(1000, 0.4); // Long beep
           micIndicator.classList.remove('hidden');
+          screenWaveform.classList.remove('hidden');
           startMicRecording();
         });
       } else if (callState === 'RECORDING') {
@@ -264,49 +358,95 @@
         mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
         mediaRecorder.start();
       } catch (err) {
-        console.log('Mic access not available, using simulated audio', err);
+        console.log('Mic not accessible, fallback mode', err);
       }
     }
 
+    // Submit and instant sync
     async function stopAndSaveRecording() {
       micIndicator.classList.add('hidden');
+      screenWaveform.classList.add('hidden');
+
       if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
       }
 
       callState = 'ENDED';
-      screenStatus.textContent = 'Submitting...';
-      screenSubtext.textContent = 'Saving to Admin Dashboard';
+      screenStatus.textContent = 'SUBMITTING...';
+      screenSubtext.textContent = 'Pushing to Admin Console';
 
       // Send to FastAPI IVR backend
+      let newTicket = null;
       try {
         const params = new URLSearchParams({
           lang: chosenLang,
           cat: chosenCat,
           From: '+91 8926160600',
-          RecordingDuration: '15',
-          RecordingUrl: 'https://api.twilio.com/cowbell.mp3'
+          RecordingDuration: String(Math.max(seconds, 8)),
+          RecordingUrl: 'https://api.twilio.com/cowbell.mp3',
+          format: 'json'
         });
-        await fetch(`/ivr/save-recording?${params}`, { method: 'POST' });
+        const res = await fetch(`/ivr/save-recording?${params}`, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' }
+        });
+        const json = await res.json();
+        newTicket = json.ticket;
       } catch (e) {
-        console.error(e);
+        console.error('Save error', e);
       }
 
+      // ── Realtime Broadcast to other tabs & local monitor ───────────────
+      try {
+        const syncChannel = new BroadcastChannel('lok_swar_ivr_sync');
+        syncChannel.postMessage({
+          type: 'NEW_CALL_TICKET',
+          phone: '+91 8926160600',
+          ticket: newTicket
+        });
+      } catch(e) {}
+
+      // Trigger Alert Card on this screen
+      showLiveAlert(newTicket || {
+        caller_phone: '+91 8926160600',
+        category: chosenCat,
+        recording_url: 'https://api.twilio.com/cowbell.mp3'
+      });
+
+      // Reload Right Column Stream
+      loadAdminStream();
+
+      // Farewell voice
       const thanksText = "धन्यवाद। आपकी शिकायत दर्ज कर ली गई है। प्रशासनिक टीम शीघ्र कार्रवाई करेगी।";
       speakHindi(thanksText, () => {
         endCall();
       });
     }
 
+    function showLiveAlert(ticket) {
+      const card = document.getElementById('live-alert-card');
+      document.getElementById('alert-phone').textContent = ticket.caller_phone || '+91 8926160600';
+      document.getElementById('alert-category').textContent = `Category: ${ticket.category.toUpperCase()} • Language: HINDI`;
+      
+      const audioPlayer = document.getElementById('alert-audio-player');
+      audioPlayer.src = ticket.recording_url || 'https://api.twilio.com/cowbell.mp3';
+      card.classList.remove('hidden');
+
+      setTimeout(() => {
+        card.classList.remove('animate-bounce');
+      }, 2000);
+    }
+
     function endCall() {
       window.speechSynthesis.cancel();
-      playBeep(400, 0.3);
+      playBeep(400, 0.25);
       if (timerInterval) clearInterval(timerInterval);
       if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
 
       callState = 'IDLE';
       micIndicator.classList.add('hidden');
-      callBadge.textContent = 'IDLE';
+      screenWaveform.classList.add('hidden');
+      callBadge.textContent = 'STANDBY';
       screenStatus.textContent = 'Call Ended';
       screenSubtext.textContent = 'Ticket logged in Admin!';
       callTimer.textContent = '00:00';
@@ -317,7 +457,57 @@
       }, 3000);
     }
 
-    // Preload voices
+    // Load recent tickets into Right Column Stream
+    async function loadAdminStream() {
+      try {
+        const res = await fetch('/admin/tickets?limit=10');
+        const data = await res.json();
+        const tickets = data.tickets || [];
+        document.getElementById('stream-count').textContent = data.total || tickets.length;
+
+        const list = document.getElementById('stream-list');
+        if (tickets.length === 0) {
+          list.innerHTML = '<div class="text-center py-10 text-slate-500 text-xs">No calls recorded yet. Use the phone on the left to make a call!</div>';
+          return;
+        }
+
+        list.innerHTML = tickets.map((t, i) => `
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 transition hover:border-emerald-500/50 ${i === 0 ? 'ring-2 ring-emerald-500/40 bg-slate-800' : ''}">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="font-extrabold text-sm text-white flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full ${i === 0 ? 'bg-emerald-400 animate-pulse' : 'bg-slate-500'}"></span>
+                  ${t.caller_phone || '+91 8926160600'}
+                </div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Ticket #${(t.id || '').slice(-6).toUpperCase()} · ${new Date(t.created_at).toLocaleTimeString()}</div>
+              </div>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                t.status === 'new' ? 'bg-red-500/20 text-red-300 border border-red-500/40' : 'bg-emerald-500/20 text-emerald-300'
+              }">${t.status}</span>
+            </div>
+
+            <div class="flex items-center gap-2 text-[11px] text-slate-300 font-medium mt-2">
+              <span class="px-2 py-0.5 rounded bg-slate-700 text-slate-200">Category: <strong>${t.category}</strong></span>
+              <span class="px-2 py-0.5 rounded bg-slate-700 text-slate-200">⏱️ ${t.duration || 12}s</span>
+            </div>
+
+            <div class="mt-2.5">
+              <audio controls preload="none" class="w-full h-8 rounded-lg" src="${t.recording_url || 'https://api.twilio.com/cowbell.mp3'}"></audio>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // Auto-load stream on start
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAdminStream();
+      setInterval(loadAdminStream, 4000);
+    });
+
+    // Voice preload
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
   </script>
 </body>
