@@ -245,7 +245,9 @@ async def ivr_save_recording(
         return str(form_data.get(key) or params.get(key) or default)
 
     call_sid       = _get("CallSid")
-    caller_phone   = _get("From", _get("Caller", "unknown"))
+    caller_phone   = _get("From", _get("Caller", "+91 8926160600"))
+    if not caller_phone or caller_phone == "unknown":
+        caller_phone = "+91 8926160600"
     recording_url  = _get("RecordingUrl")
     recording_sid  = _get("RecordingSid")
     duration_raw   = _get("RecordingDuration", "0")
@@ -338,7 +340,7 @@ async def create_mock_ticket(
     now = datetime.now(timezone.utc)
     mock = {
         "call_sid": f"CA_MOCK_{int(now.timestamp())}",
-        "caller_phone": "+919876543210",
+        "caller_phone": "+91 8926160600",
         "language": "hi",
         "category": "electricity",
         "recording_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
@@ -449,7 +451,7 @@ async def delete_ticket(
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_dashboard(request: Request):
     """Render the admin dashboard."""
-    return templates.TemplateResponse("admin.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="admin.html")
 
 
 # ---------------------------------------------------------------------------

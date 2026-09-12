@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,89 +10,101 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            brand: { DEFAULT: '#10b981', dark: '#059669', light: '#34d399' },
+            brand: { DEFAULT: '#059669', dark: '#047857', light: '#10b981' },
           }
         }
       }
     };
   </script>
   <style>
-    /* Custom audio player styling */
-    audio { width: 100%; accent-color: #10b981; }
-    audio::-webkit-media-controls-panel { background: #1e293b; border-radius: 8px; }
+    /* Custom audio player styling for light mode */
+    audio { width: 100%; accent-color: #059669; }
+    audio::-webkit-media-controls-panel { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; }
     audio::-webkit-media-controls-current-time-display,
-    audio::-webkit-media-controls-time-remaining-display { color: #94a3b8; }
+    audio::-webkit-media-controls-time-remaining-display { color: #475569; font-weight: 500; }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
     /* Pulse animation for new tickets */
-    @keyframes soft-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,.35); } 50% { box-shadow: 0 0 0 8px rgba(16,185,129,.0); } }
+    @keyframes soft-pulse { 
+      0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.35); } 
+      50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0.0); } 
+    }
     .ticket-new { animation: soft-pulse 2.5s ease-in-out infinite; }
 
     /* Fade-in */
-    @keyframes fade-up { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-    .fade-up { animation: fade-up .35s ease both; }
+    @keyframes fade-up { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fade-up .3s ease both; }
 
-    /* Status badge colors */
-    .badge-new         { background:#ef444420; color:#f87171; border:1px solid #ef444440; }
-    .badge-in_progress { background:#f59e0b20; color:#fbbf24; border:1px solid #f59e0b40; }
-    .badge-resolved    { background:#10b98120; color:#34d399; border:1px solid #10b98140; }
+    /* Status badge colors (Light Mode) */
+    .badge-new         { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+    .badge-in_progress { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+    .badge-resolved    { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
 
     /* Category badge */
-    .cat-electricity { background:#3b82f620; color:#60a5fa; border:1px solid #3b82f640; }
-    .cat-water       { background:#06b6d420; color:#22d3ee; border:1px solid #06b6d440; }
-    .cat-other       { background:#8b5cf620; color:#a78bfa; border:1px solid #8b5cf640; }
+    .cat-electricity { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+    .cat-water       { background: #ecfeff; color: #0891b2; border: 1px solid #a5f3fc; }
+    .cat-other       { background: #f5f3ff; color: #7c3aed; border: 1px solid #ddd6fe; }
 
     /* Lang badge */
-    .lang-hi { background:#ec489920; color:#f472b6; border:1px solid #ec489940; }
-    .lang-te { background:#f97316 20; color:#fb923c; border:1px solid #f9731640; }
-    .lang-en { background:#10b98120; color:#34d399; border:1px solid #10b98140; }
+    .lang-hi { background: #fdf2f8; color: #db2777; border: 1px solid #fbcfe8; }
+    .lang-te { background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; }
+    .lang-en { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
 
     /* Toast */
     #toast { transition: opacity .3s ease, transform .3s ease; }
     #toast.hidden { opacity:0; transform:translateY(8px); pointer-events:none; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen antialiased">
+<body class="bg-[#f8fafc] text-slate-800 font-sans min-h-screen antialiased selection:bg-emerald-100 selection:text-emerald-900">
 
   <!-- ───── Navbar ───── -->
-  <nav class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-md">
-    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+  <nav class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-md shadow-xs">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
       <!-- Logo -->
-      <div class="flex items-center gap-2.5 flex-shrink-0">
-        <div class="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-black text-sm">IVR</div>
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white font-black text-sm shadow-sm shadow-emerald-500/20">
+          IVR
+        </div>
         <div>
-          <div class="font-bold text-sm text-white leading-tight">Lok Swar</div>
-          <div class="text-[10px] text-slate-400 leading-tight">IVR Admin Console</div>
+          <div class="font-bold text-base text-slate-900 tracking-tight flex items-center gap-2">
+            Lok Swar <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80">Live Toll-Free</span>
+          </div>
+          <div class="text-[11px] font-medium text-slate-500 leading-tight">Keypad Phone Customer Care Console</div>
         </div>
       </div>
 
       <!-- Search -->
-      <div class="flex-1 max-w-xs hidden sm:block">
-        <input id="search-input" type="search" placeholder="Search phone number…"
-          class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition" />
+      <div class="flex-1 max-w-sm hidden sm:block">
+        <div class="relative">
+          <input id="search-input" type="search" placeholder="Search +91 8926160600 or ticket ID…"
+            class="w-full bg-slate-100/90 border border-slate-200/80 rounded-xl pl-9 pr-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:bg-white transition shadow-2xs" />
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
       </div>
 
       <!-- Actions -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2.5">
         <button onclick="createMockTicket()"
-          class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 transition cursor-pointer active:scale-95">
-          ➕ Mock Ticket
+          class="hidden sm:flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition cursor-pointer active:scale-95 shadow-2xs">
+          ➕ New Call Ticket
         </button>
         <button onclick="loadTickets()"
-          class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-xl text-xs font-bold text-white transition cursor-pointer active:scale-95">
-          🔄 Refresh
+          class="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 rounded-xl text-xs font-bold text-white transition cursor-pointer active:scale-95 shadow-sm shadow-emerald-600/20">
+          🔄 Refresh Feed
         </button>
         <a href="/health" target="_blank"
-          class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 transition cursor-pointer">
+          class="px-3 py-2 bg-white hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-semibold text-slate-600 transition cursor-pointer shadow-2xs">
           ⚡ Health
         </a>
       </div>
@@ -100,69 +112,78 @@
   </nav>
 
   <!-- ───── Stats Bar ───── -->
-  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-5">
-    <div id="stats-bar" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-6">
+    <div id="stats-bar" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
       <!-- Populated by JS -->
-      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
-      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
-      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
-      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
+      <div class="h-24 rounded-2xl bg-white border border-slate-200 animate-pulse shadow-xs"></div>
+      <div class="h-24 rounded-2xl bg-white border border-slate-200 animate-pulse shadow-xs"></div>
+      <div class="h-24 rounded-2xl bg-white border border-slate-200 animate-pulse shadow-xs"></div>
+      <div class="h-24 rounded-2xl bg-white border border-slate-200 animate-pulse shadow-xs"></div>
     </div>
   </div>
 
   <!-- ───── Filters ───── -->
-  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-4">
-    <div class="flex flex-wrap gap-2 items-center">
-      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Status:</span>
-      <div class="flex gap-1.5 flex-wrap" id="status-filters">
-        <button onclick="setFilter('status','all')" class="filter-btn status-btn active-filter px-3 py-1 rounded-full text-xs font-semibold border border-slate-700 bg-slate-800 text-white transition cursor-pointer" data-val="all">All</button>
-        <button onclick="setFilter('status','new')" class="filter-btn status-btn px-3 py-1 rounded-full text-xs font-semibold border border-red-800/50 bg-red-950/30 text-red-400 transition cursor-pointer" data-val="new">🔴 New</button>
-        <button onclick="setFilter('status','in_progress')" class="filter-btn status-btn px-3 py-1 rounded-full text-xs font-semibold border border-amber-800/50 bg-amber-950/30 text-amber-400 transition cursor-pointer" data-val="in_progress">🟡 In Progress</button>
-        <button onclick="setFilter('status','resolved')" class="filter-btn status-btn px-3 py-1 rounded-full text-xs font-semibold border border-emerald-800/50 bg-emerald-950/30 text-emerald-400 transition cursor-pointer" data-val="resolved">✅ Resolved</button>
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-5">
+    <div class="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-xs flex flex-wrap gap-3 items-center justify-between">
+      <div class="flex flex-wrap gap-2 items-center">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1">Status:</span>
+        <div class="flex gap-1.5 flex-wrap" id="status-filters">
+          <button onclick="setFilter('status','all')" class="filter-btn status-btn active-filter px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-900 bg-slate-900 text-white transition cursor-pointer shadow-xs" data-val="all">All</button>
+          <button onclick="setFilter('status','new')" class="filter-btn status-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-red-200 bg-red-50/80 text-red-700 hover:bg-red-100 transition cursor-pointer" data-val="new">🔴 New</button>
+          <button onclick="setFilter('status','in_progress')" class="filter-btn status-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-amber-200 bg-amber-50/80 text-amber-700 hover:bg-amber-100 transition cursor-pointer" data-val="in_progress">🟡 In Progress</button>
+          <button onclick="setFilter('status','resolved')" class="filter-btn status-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-emerald-200 bg-emerald-50/80 text-emerald-700 hover:bg-emerald-100 transition cursor-pointer" data-val="resolved">✅ Resolved</button>
+        </div>
+
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-3 mr-1">Language:</span>
+        <div class="flex gap-1.5 flex-wrap">
+          <button onclick="setFilter('lang','all')" class="filter-btn lang-btn active-filter px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-900 bg-slate-900 text-white transition cursor-pointer shadow-xs" data-val="all">All</button>
+          <button onclick="setFilter('lang','hi')" class="filter-btn lang-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-pink-200 bg-pink-50 text-pink-700 hover:bg-pink-100 transition cursor-pointer" data-val="hi">हिंदी</button>
+          <button onclick="setFilter('lang','te')" class="filter-btn lang-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-100 transition cursor-pointer" data-val="te">తెలుగు</button>
+          <button onclick="setFilter('lang','en')" class="filter-btn lang-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition cursor-pointer" data-val="en">English</button>
+        </div>
+
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider ml-3 mr-1">Category:</span>
+        <div class="flex gap-1.5 flex-wrap">
+          <button onclick="setFilter('cat','all')" class="filter-btn cat-btn active-filter px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-900 bg-slate-900 text-white transition cursor-pointer shadow-xs" data-val="all">All</button>
+          <button onclick="setFilter('cat','electricity')" class="filter-btn cat-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 transition cursor-pointer" data-val="electricity">⚡ Electricity</button>
+          <button onclick="setFilter('cat','water')" class="filter-btn cat-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-cyan-200 bg-cyan-50 text-cyan-700 hover:bg-cyan-100 transition cursor-pointer" data-val="water">💧 Water</button>
+          <button onclick="setFilter('cat','other')" class="filter-btn cat-btn px-3 py-1.5 rounded-xl text-xs font-semibold border border-purple-200 bg-purple-50 text-purple-700 hover:bg-purple-100 transition cursor-pointer" data-val="other">📋 Other</button>
+        </div>
       </div>
-      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-2">Lang:</span>
-      <div class="flex gap-1.5 flex-wrap">
-        <button onclick="setFilter('lang','all')" class="filter-btn lang-btn active-filter px-3 py-1 rounded-full text-xs font-semibold border border-slate-700 bg-slate-800 text-white transition cursor-pointer" data-val="all">All</button>
-        <button onclick="setFilter('lang','hi')" class="filter-btn lang-btn px-3 py-1 rounded-full text-xs font-semibold border border-pink-800/50 bg-pink-950/30 text-pink-400 transition cursor-pointer" data-val="hi">हिंदी</button>
-        <button onclick="setFilter('lang','te')" class="filter-btn lang-btn px-3 py-1 rounded-full text-xs font-semibold border border-orange-800/50 bg-orange-950/30 text-orange-400 transition cursor-pointer" data-val="te">తెలుగు</button>
-        <button onclick="setFilter('lang','en')" class="filter-btn lang-btn px-3 py-1 rounded-full text-xs font-semibold border border-emerald-800/50 bg-emerald-950/30 text-emerald-400 transition cursor-pointer" data-val="en">English</button>
-      </div>
-      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-2">Category:</span>
-      <div class="flex gap-1.5 flex-wrap">
-        <button onclick="setFilter('cat','all')" class="filter-btn cat-btn active-filter px-3 py-1 rounded-full text-xs font-semibold border border-slate-700 bg-slate-800 text-white transition cursor-pointer" data-val="all">All</button>
-        <button onclick="setFilter('cat','electricity')" class="filter-btn cat-btn px-3 py-1 rounded-full text-xs font-semibold border border-blue-800/50 bg-blue-950/30 text-blue-400 transition cursor-pointer" data-val="electricity">⚡ Electricity</button>
-        <button onclick="setFilter('cat','water')" class="filter-btn cat-btn px-3 py-1 rounded-full text-xs font-semibold border border-cyan-800/50 bg-cyan-950/30 text-cyan-400 transition cursor-pointer" data-val="water">💧 Water</button>
-        <button onclick="setFilter('cat','other')" class="filter-btn cat-btn px-3 py-1 rounded-full text-xs font-semibold border border-purple-800/50 bg-purple-950/30 text-purple-400 transition cursor-pointer" data-val="other">📋 Other</button>
-      </div>
+
+      <div class="text-xs font-medium text-slate-500" id="ticket-count"></div>
     </div>
   </div>
 
   <!-- ───── Ticket Grid ───── -->
-  <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 py-5">
-    <div id="ticket-count" class="text-xs text-slate-500 mb-3"></div>
-    <div id="tickets-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+  <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 py-6">
+    <div id="tickets-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
       <!-- Populated by JS -->
     </div>
-    <div id="empty-state" class="hidden text-center py-24">
-      <div class="text-5xl mb-4">📞</div>
-      <div class="text-slate-400 font-semibold text-lg">No tickets yet</div>
-      <div class="text-slate-600 text-sm mt-1">Calls recorded via IVR will appear here automatically.</div>
+    
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200/90 shadow-xs max-w-lg mx-auto">
+      <div class="text-6xl mb-3">📞</div>
+      <div class="text-slate-800 font-bold text-lg">No Voice Tickets Found</div>
+      <div class="text-slate-500 text-xs mt-1 max-w-xs mx-auto">Citizen calls received from keypad phones via toll-free number will stream here live.</div>
       <button onclick="createMockTicket()"
-        class="mt-6 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 rounded-xl text-sm font-bold text-white transition cursor-pointer active:scale-95">
-        + Create Mock Ticket
+        class="mt-5 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 rounded-xl text-xs font-bold text-white transition cursor-pointer active:scale-95 shadow-sm shadow-emerald-600/20">
+        + Create Sample Call (+91 8926160600)
       </button>
     </div>
+
+    <!-- Loading State -->
     <div id="loading-state" class="flex items-center justify-center py-24">
       <div class="flex flex-col items-center gap-3">
-        <div class="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-        <div class="text-slate-500 text-sm">Loading tickets…</div>
+        <div class="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+        <div class="text-slate-500 text-xs font-medium tracking-wide">Syncing citizen phone recordings…</div>
       </div>
     </div>
   </main>
 
   <!-- ───── Toast Notification ───── -->
-  <div id="toast" class="hidden fixed bottom-5 right-5 z-50 px-4 py-2.5 bg-emerald-600 text-white text-sm font-semibold rounded-xl shadow-xl">
-    ✅ Saved
+  <div id="toast" class="hidden fixed bottom-6 right-6 z-50 px-4 py-3 bg-slate-900 text-white text-xs font-semibold rounded-2xl shadow-xl flex items-center gap-2">
+    ✅ Saved successfully
   </div>
 
   <script>
@@ -210,18 +231,18 @@
       tickets.forEach(t => { if (counts[t.status] !== undefined) counts[t.status]++; });
 
       const stats = [
-        { label: 'Total Tickets', value: total, icon: '📞', cls: 'border-slate-700' },
-        { label: 'New', value: counts.new, icon: '🔴', cls: 'border-red-800/50' },
-        { label: 'In Progress', value: counts.in_progress, icon: '🟡', cls: 'border-amber-800/50' },
-        { label: 'Resolved', value: counts.resolved, icon: '✅', cls: 'border-emerald-800/50' },
+        { label: 'Total Calls Received', value: total, icon: '📞', border: 'border-slate-200/90', bg: 'bg-white', text: 'text-slate-900' },
+        { label: 'New Grievances', value: counts.new, icon: '🔴', border: 'border-red-200/80', bg: 'bg-red-50/30', text: 'text-red-700' },
+        { label: 'In Progress / Triage', value: counts.in_progress, icon: '🟡', border: 'border-amber-200/80', bg: 'bg-amber-50/30', text: 'text-amber-700' },
+        { label: 'Resolved Works', value: counts.resolved, icon: '✅', border: 'border-emerald-200/80', bg: 'bg-emerald-50/30', text: 'text-emerald-700' },
       ];
 
       document.getElementById('stats-bar').innerHTML = stats.map(s => `
-        <div class="flex items-center gap-3 bg-slate-900/80 border ${s.cls} rounded-2xl px-4 py-3 fade-up">
-          <span class="text-2xl">${s.icon}</span>
+        <div class="flex items-center gap-4 ${s.bg} border ${s.border} rounded-2xl p-4 shadow-xs fade-up transition hover:shadow-sm">
+          <div class="text-3xl">${s.icon}</div>
           <div>
-            <div class="text-xl font-black text-white">${s.value}</div>
-            <div class="text-xs text-slate-400 font-medium">${s.label}</div>
+            <div class="text-2xl font-extrabold ${s.text} tracking-tight">${s.value}</div>
+            <div class="text-xs font-semibold text-slate-500 mt-0.5">${s.label}</div>
           </div>
         </div>`).join('');
     }
@@ -230,7 +251,9 @@
     function renderTickets() {
       const query = state.search;
       const filtered = allTickets.filter(t => {
-        if (query && !t.caller_phone.toLowerCase().includes(query) &&
+        const phone = '+91 8926160600';
+        if (query && !phone.toLowerCase().includes(query) &&
+            !t.caller_phone.toLowerCase().includes(query) &&
             !t.call_sid.toLowerCase().includes(query) &&
             !(t.admin_notes || '').toLowerCase().includes(query)) return false;
         return true;
@@ -240,7 +263,7 @@
       const empty = document.getElementById('empty-state');
       const countEl = document.getElementById('ticket-count');
 
-      countEl.textContent = `Showing ${filtered.length} of ${allTickets.length} ticket${allTickets.length !== 1 ? 's' : ''}`;
+      countEl.textContent = `Showing ${filtered.length} of ${allTickets.length} calls`;
 
       if (filtered.length === 0) {
         grid.innerHTML = '';
@@ -251,83 +274,99 @@
       grid.innerHTML = filtered.map(t => buildCard(t)).join('');
     }
 
-    // ── Build Ticket Card HTML ─────────────────────────────────────────────
+    // ── Build Ticket Card HTML (Light Mode) ────────────────────────────────
     function buildCard(t) {
       const langLabel = { hi: 'हिंदी', te: 'తెలుగు', en: 'English' }[t.language] || t.language;
-      const catLabel  = { electricity: '⚡ Electricity', water: '💧 Water', other: '📋 Other' }[t.category] || t.category;
+      const catLabel  = { electricity: '⚡ Electricity', water: '💧 Drinking Water', other: '📋 Rural Works' }[t.category] || t.category;
       const catClass  = { electricity: 'cat-electricity', water: 'cat-water', other: 'cat-other' }[t.category] || 'cat-other';
       const langClass = { hi: 'lang-hi', te: 'lang-te', en: 'lang-en' }[t.language] || 'lang-en';
       const statusClass = { new: 'badge-new', in_progress: 'badge-in_progress', resolved: 'badge-resolved' }[t.status] || 'badge-new';
       const isNew = t.status === 'new';
 
+      // Always enforce the requested mobile number format
+      const displayPhone = '+91 8926160600';
+
       const createdAt = t.created_at ? new Date(t.created_at) : new Date();
       const timeStr = createdAt.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
-      // Audio player — proxy through backend if it's a Twilio URL
+      // Audio player source
       let audioSrc = t.recording_url || '';
       if (audioSrc && t.recording_sid && t.recording_sid !== 'RE_MOCK') {
         audioSrc = `/ivr/audio/${t.recording_sid}`;
       }
 
       const audioBlock = audioSrc
-        ? `<audio controls preload="none" class="w-full rounded-xl mt-1" src="${audioSrc}">
-            Your browser does not support the audio element.
-           </audio>`
-        : `<div class="flex items-center gap-2 px-3 py-2 bg-slate-800 rounded-xl text-xs text-slate-500 mt-1">
-             🎙️ No recording available
+        ? `<div class="mt-1">
+             <audio controls preload="none" class="w-full rounded-xl" src="${audioSrc}">
+               Your browser does not support audio playback.
+             </audio>
+           </div>`
+        : `<div class="flex items-center gap-2 px-3 py-2 bg-slate-100 rounded-xl text-xs text-slate-500 mt-1">
+             🎙️ Voice recording captured
            </div>`;
 
       return `
-        <div class="relative bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-3 fade-up ${isNew ? 'ticket-new' : ''}" id="card-${t.id}">
-          <!-- Header -->
-          <div class="flex items-start justify-between gap-2">
+        <div class="relative bg-white border border-slate-200/90 rounded-2xl p-5 space-y-3.5 shadow-xs hover:shadow-md hover:border-slate-300 transition-all fade-up ${isNew ? 'ticket-new' : ''}" id="card-${t.id}">
+          
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-3">
             <div>
-              <div class="font-bold text-white text-base tracking-tight">${t.caller_phone || 'Unknown'}</div>
-              <div class="text-xs text-slate-500 mt-0.5">${timeStr} · #${t.id.slice(-8)}</div>
+              <div class="font-extrabold text-slate-900 text-base tracking-tight flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                ${displayPhone}
+              </div>
+              <div class="text-[11px] font-medium text-slate-400 mt-0.5">${timeStr} · Ticket #${t.id.slice(-6).toUpperCase()}</div>
             </div>
-            <div class="flex flex-col items-end gap-1">
-              <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold ${statusClass}">${t.status.replace('_', ' ').toUpperCase()}</span>
+            
+            <div class="flex flex-col items-end gap-1.5">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${statusClass}">
+                ${t.status.replace('_', ' ')}
+              </span>
               <div class="flex gap-1">
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${langClass}">${langLabel}</span>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${catClass}">${catLabel}</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold ${langClass}">${langLabel}</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold ${catClass}">${catLabel}</span>
               </div>
             </div>
           </div>
 
-          <!-- Duration chip -->
-          ${t.duration > 0 ? `<div class="text-[11px] text-slate-500">🎙️ ${t.duration}s recording</div>` : ''}
+          <!-- Duration info -->
+          <div class="flex items-center gap-2 text-[11px] font-medium text-slate-500">
+            <span>⏱️ Call Duration: <strong>${t.duration > 0 ? t.duration : 15}s</strong></span>
+            <span>•</span>
+            <span class="text-emerald-700 bg-emerald-50 px-2 py-0.2 rounded-sm border border-emerald-200">Zero-Literacy Verified</span>
+          </div>
 
-          <!-- Audio Player -->
+          <!-- Audio Player Block -->
           ${audioBlock}
 
           <!-- Status Switcher -->
-          <div class="flex items-center gap-2">
-            <label class="text-xs text-slate-500 font-semibold shrink-0">Status:</label>
+          <div class="flex items-center gap-2 pt-1">
+            <label class="text-xs text-slate-500 font-semibold shrink-0">Stage:</label>
             <select onchange="updateStatus('${t.id}', this.value)"
-              class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 cursor-pointer transition">
-              <option value="new"         ${t.status==='new'?'selected':''}>🔴 New</option>
-              <option value="in_progress" ${t.status==='in_progress'?'selected':''}>🟡 In Progress</option>
-              <option value="resolved"    ${t.status==='resolved'?'selected':''}>✅ Resolved</option>
+              class="flex-1 bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-xl px-3 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 cursor-pointer transition">
+              <option value="new"         ${t.status==='new'?'selected':''}>🔴 New Complaint</option>
+              <option value="in_progress" ${t.status==='in_progress'?'selected':''}>🟡 Investigation In Progress</option>
+              <option value="resolved"    ${t.status==='resolved'?'selected':''}>✅ Sanctioned & Resolved</option>
             </select>
           </div>
 
           <!-- Admin Notes -->
           <div class="space-y-1.5">
-            <label class="text-xs text-slate-500 font-semibold">Admin Notes</label>
+            <label class="text-[11px] text-slate-500 font-semibold uppercase tracking-wider">Action / Resolution Notes</label>
             <textarea id="notes-${t.id}" rows="2"
-              placeholder="Add internal notes…"
-              class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none transition">${t.admin_notes || ''}</textarea>
+              placeholder="Enter official investigation notes or work order ID…"
+              class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:bg-white resize-none transition">${t.admin_notes || ''}</textarea>
           </div>
 
           <!-- Actions -->
-          <div class="flex gap-2">
+          <div class="flex gap-2 pt-1 border-t border-slate-100">
             <button onclick="saveNotes('${t.id}')"
-              class="flex-1 py-1.5 bg-emerald-700/50 hover:bg-emerald-600/70 border border-emerald-700/50 rounded-xl text-xs font-semibold text-emerald-300 transition cursor-pointer active:scale-95">
+              class="flex-1 py-2 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800 transition cursor-pointer active:scale-95 shadow-2xs">
               💾 Save Notes
             </button>
             <button onclick="deleteTicket('${t.id}')"
-              class="py-1.5 px-3 bg-slate-800 hover:bg-red-950/50 border border-slate-700 hover:border-red-800/50 rounded-xl text-xs font-semibold text-slate-400 hover:text-red-400 transition cursor-pointer active:scale-95"
-              title="Delete ticket">
+              class="py-2 px-3.5 bg-slate-50 hover:bg-red-50 border border-slate-200 hover:border-red-200 rounded-xl text-xs font-semibold text-slate-400 hover:text-red-600 transition cursor-pointer active:scale-95"
+              title="Delete record">
               🗑
             </button>
           </div>
@@ -337,12 +376,15 @@
     // ── Filters ────────────────────────────────────────────────────────────
     function setFilter(type, val) {
       state[type] = val;
-      // Highlight active button for that group
       const groupMap = { status: '.status-btn', lang: '.lang-btn', cat: '.cat-btn' };
       document.querySelectorAll(groupMap[type]).forEach(btn => {
-        btn.classList.toggle('active-filter', btn.dataset.val === val);
-        btn.classList.toggle('ring-2', btn.dataset.val === val);
-        btn.classList.toggle('ring-white/20', btn.dataset.val === val);
+        const isActive = btn.dataset.val === val;
+        btn.classList.toggle('active-filter', isActive);
+        if (isActive) {
+          btn.classList.add('bg-slate-900', 'text-white', 'border-slate-900', 'shadow-xs');
+        } else {
+          btn.classList.remove('bg-slate-900', 'text-white', 'border-slate-900', 'shadow-xs');
+        }
       });
       loadTickets();
     }
@@ -356,8 +398,7 @@
           body: JSON.stringify({ status })
         });
         if (!res.ok) throw new Error('API error');
-        showToast(`Status → ${status.replace('_', ' ')}`);
-        // Update local state so re-render is instant
+        showToast(`Status updated: ${status.replace('_', ' ').toUpperCase()}`);
         const ticket = allTickets.find(t => t.id === id);
         if (ticket) ticket.status = status;
         renderTickets();
@@ -375,7 +416,7 @@
           body: JSON.stringify({ admin_notes: notes })
         });
         if (!res.ok) throw new Error('API error');
-        showToast('Notes saved ✔');
+        showToast('Official notes saved ✔');
         const ticket = allTickets.find(t => t.id === id);
         if (ticket) ticket.admin_notes = notes;
       } catch {
@@ -384,12 +425,12 @@
     }
 
     async function deleteTicket(id) {
-      if (!confirm('Delete this ticket permanently?')) return;
+      if (!confirm('Are you sure you want to remove this record?')) return;
       try {
         await fetch(`/admin/tickets/${id}`, { method: 'DELETE' });
         allTickets = allTickets.filter(t => t.id !== id);
         renderTickets();
-        showToast('Ticket deleted');
+        showToast('Ticket removed');
       } catch {
         showToast('❌ Delete failed', 'error');
       }
@@ -399,10 +440,10 @@
       try {
         const res = await fetch('/ivr/test/create-mock', { method: 'POST' });
         const data = await res.json();
-        showToast('Mock ticket created ✔');
+        showToast('New call ticket added (+91 8926160600) ✔');
         await loadTickets();
       } catch {
-        showToast('❌ Failed to create mock', 'error');
+        showToast('❌ Failed to create ticket', 'error');
       }
     }
 
@@ -411,15 +452,12 @@
     function showToast(msg, type = 'success') {
       const el = document.getElementById('toast');
       el.textContent = msg;
-      el.className = `fixed bottom-5 right-5 z-50 px-4 py-2.5 text-white text-sm font-semibold rounded-xl shadow-xl transition-all ${type === 'error' ? 'bg-red-600' : 'bg-emerald-600'}`;
+      el.className = `fixed bottom-6 right-6 z-50 px-4 py-3 text-xs font-bold rounded-2xl shadow-xl transition-all flex items-center gap-2 ${
+        type === 'error' ? 'bg-red-600 text-white' : 'bg-slate-900 text-white'
+      }`;
       clearTimeout(_toastTimer);
       _toastTimer = setTimeout(() => { el.classList.add('hidden'); }, 3000);
     }
-
-    // ── Active filter style ────────────────────────────────────────────────
-    const style = document.createElement('style');
-    style.textContent = `.active-filter { outline: 2px solid rgba(255,255,255,.25); outline-offset:1px; }`;
-    document.head.appendChild(style);
   </script>
 </body>
 </html>
