@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Interactive End-to-End Guided Demo Walkthrough
  * 1-Click step-by-step interactive demonstration of the core civic intelligence pipeline:
  * Voice Input -> AI Clustering -> GIS Hotspot -> Discrepancy Alert -> Drone Mission -> Verification -> Score Recalculation -> ₹10 Cr Portfolio Optimization.
@@ -10,7 +10,7 @@ export const DEMO_STEPS = [
     id: "step-voice",
     title: "1. Multilingual Citizen Voice Intake",
     target_view: "citizen",
-    desc: "A rural citizen from Kalyanpur speaks in Odia reporting an impassable flooded road cutting off the primary healthcare clinic. The AI voice engine transcribes, translates, and normalizes the request without requiring technical jargon.",
+    desc: "A rural citizen from  speaks in Odia reporting an impassable flooded road cutting off the primary healthcare clinic. The AI voice engine transcribes, translates, and normalizes the request without requiring technical jargon.",
     action_label: "Simulate Odia Voice Input 🎙️",
     badge: "Input Layer"
   },
@@ -28,7 +28,7 @@ export const DEMO_STEPS = [
     id: "step-hotspot",
     title: "3. Spatial GIS Hotspot Detection",
     target_view: "gis_map",
-    desc: "GIS engine identifies a critical demand density hotspot in Kalyanpur affecting 18,400 citizens with a 24 km detour to tertiary care.",
+    desc: "GIS engine identifies a critical demand density hotspot in  affecting 18,400 citizens with a 24 km detour to tertiary care.",
     action_label: "Inspect GIS Hotspot 🗺️",
     badge: "Spatial Analytics"
   },
@@ -55,7 +55,7 @@ export const DEMO_STEPS = [
     id: "step-ranking",
     title: "6. Transparent Priority Recalculation (Score: 92.4)",
     target_view: "priority_ranking",
-    desc: "With verified evidence and high life-safety impact, the transparent scoring formula recalculates the Kalyanpur All-Weather Road & Bridge project to Rank #1 with a score of 92.4/100.",
+    desc: "With verified evidence and high life-safety impact, the transparent scoring formula recalculates the  All-Weather Road & Bridge project to Rank #1 with a score of 92.4/100.",
     action_label: "Inspect Score Breakdown ⚖️",
     badge: "Scoring Engine"
   },
@@ -84,7 +84,7 @@ export function renderGuidedDemoView(state) {
               End-to-End Showcase Tour • 7 Steps
             </div>
             <h2 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: white;">
-              Scenario: From Kalyanpur Citizen Voice to ₹10 Cr Approved Plan
+              Scenario: From  Citizen Voice to ₹10 Cr Approved Plan
             </h2>
           </div>
 

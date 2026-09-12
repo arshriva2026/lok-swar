@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Menu,
   Volume2,
@@ -573,7 +573,7 @@ export default function CivicSearchHome({ onAdminPortalClick, onPublicBulletinsC
             National Citizen Grievance & Public Priority Engine
           </h2>
           <p className="text-xs text-slate-400 font-medium mt-1">
-            Constituency Intelligence & Scheme Triage • AC-134 Sundargarh
+            Constituency Intelligence & Scheme Triage • 
           </p>
         </div>
 
@@ -737,7 +737,7 @@ export default function CivicSearchHome({ onAdminPortalClick, onPublicBulletinsC
           {isOnline ? (
             <>
               <Wifi className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Lok Swar • Official Citizen Priority System • AC-134 Sundargarh</span>
+              <span>Lok Swar • Official Citizen Priority System • </span>
             </>
           ) : (
             <>

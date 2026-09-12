@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Volume2,
   Mic,
@@ -118,7 +118,7 @@ export default function LokSwarInteractive() {
             <div className="flex items-center justify-center gap-2.5 mb-4">
               <span className="text-3xl">🏛️</span>
               <h1 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900">लोक स्वर</h1>
-              <span className="text-[10px] font-extrabold px-3 py-1 rounded-full bg-white/80 text-blue-700 border border-blue-200">AC-134 SUNDARGARH</span>
+              <span className="text-[10px] font-extrabold px-3 py-1 rounded-full bg-white/80 text-blue-700 border border-blue-200"></span>
             </div>
 
             <div className="w-full rounded-full p-2 pl-3.5 flex items-center gap-2.5 backdrop-blur-2xl bg-white/85 border border-white shadow-xl">

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Interactive GIS Demand Hotspot Map Component
  * Powered by Leaflet GIS with layer controls (Citizen Reports, Density Heatmap, Facilities, Gaps & Drone Paths)
  */
@@ -65,7 +65,7 @@ export function renderGISMapView(state) {
               Critical Hotspot Selected
             </div>
             <div style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--neutral-900); margin-bottom: 0.5rem;">
-              ${selectedHotspot ? selectedHotspot.title : 'Kalyanpur-Lathikata Corridor'}
+              ${selectedHotspot ? selectedHotspot.title : '- Corridor'}
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.82rem;">
@@ -93,7 +93,7 @@ export function renderGISMapView(state) {
               <div>
                 <strong>Nearest Govt Facility:</strong>
                 <div style="color: var(--neutral-600); margin-top: 0.15rem;">
-                  ${selectedHotspot ? selectedHotspot.nearest_facility : 'Kalyanpur PHC (4.2 km) / Hospital (24 km)'}
+                  ${selectedHotspot ? selectedHotspot.nearest_facility : ' PHC (4.2 km) / Hospital (24 km)'}
                 </div>
               </div>
 

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities / लोक स्वर - Clean, Simplified Navigation Header & Drawer
  * 1. Top-left has ONLY the clean [≡] Hamburger button (removed 3-dots from top-left).
  * 2. Simplified, easy-to-understand feature names in the sidebar drawer.
@@ -78,7 +78,7 @@ export function renderHeader(state) {
               <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem;">
                 <div style="padding: 0.5rem; border-radius: 8px; background: var(--neutral-50); border: 1px solid var(--border-subtle);">
                   <div style="font-weight: 700; color: var(--neutral-900);">Drone Photo Check Done</div>
-                  <div style="color: var(--neutral-600);">Kalyanpur Bridge area surveyed with photos.</div>
+                  <div style="color: var(--neutral-600);"> Bridge area surveyed with photos.</div>
                   <div style="color: var(--neutral-400); font-size: 0.68rem; margin-top: 2px;">10m ago</div>
                 </div>
                 <div style="padding: 0.5rem; border-radius: 8px; background: var(--neutral-50); border: 1px solid var(--border-subtle);">

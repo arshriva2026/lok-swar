@@ -40,7 +40,7 @@ def run_tests():
     assert code == 404, f"Expected 404, got {code}"
     
     # 2. Reject wrong password for existing user
-    code, res = post("/api/auth/citizen/login", {"identifier": "9861234567", "password": "wrongpassword999"})
+    code, res = post("/api/auth/citizen/login", {"identifier": "", "password": "wrongpassword999"})
     print(f"[TEST 2] Wrong password for existing user: HTTP {code}, Result: {res}")
     assert code == 401, f"Expected 401, got {code}"
 
@@ -78,13 +78,13 @@ def run_tests():
     assert code == 201, f"Failed grievance submit: {res_g1}"
 
     code, res_g2 = post("/api/grievances/submit", {
-        "text": "Kalyanpur electric wire collapsed near school",
-        "author": "Rishav Yadav",
-        "citizenMobile": "9861234567",
-        "village": "Kalyanpur Gram Panchayat",
+        "text": " electric wire collapsed near school",
+        "author": "",
+        "citizenMobile": "",
+        "village": "",
         "gps": "22.1245° N, 84.0321° E"
     })
-    print(f"[TEST 5B] Rishav Yadav grievance submit: HTTP {code}, ID: {res_g2.get('grievance', {}).get('id')}")
+    print(f"[TEST 5B]  grievance submit: HTTP {code}, ID: {res_g2.get('grievance', {}).get('id')}")
     assert code == 201, f"Failed grievance submit: {res_g2}"
 
     # 6. Verify User Grievance Isolation (Filtering by unique userId/mobile)
@@ -94,10 +94,10 @@ def run_tests():
     for item in arun_list.get('data', []):
         assert item.get('citizenMobile') == unique_mobile or item.get('userId') == unique_mobile, "Data leak from other users!"
 
-    code, rishav_list = get(f"/api/grievances/list?userId=9861234567")
-    print(f"[TEST 6B] Rishav Yadav grievances count: {rishav_list.get('count')}")
-    for item in rishav_list.get('data', []):
-        assert item.get('citizenMobile') == "9861234567" or item.get('userId') == "9861234567", "Data leak from other users!"
+    code, citizen_list = get(f"/api/grievances/list?userId=")
+    print(f"[TEST 6B] citizen grievances count: {citizen_list.get('count')}")
+    for item in citizen_list.get('data', []):
+        assert item.get('citizenMobile') == "" or item.get('userId') == "", "Data leak from other users!"
 
     # 7. Officer Authentication Tests
     code, res = post("/api/auth/admin/login", {"aadhaar": "999999999999", "password": "wrongpassword"})

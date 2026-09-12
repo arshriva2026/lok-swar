@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Priority Ranking & Budget Portfolio Optimization Engine
  * Implements transparent 12-factor multi-attribute utility theory + 0-1 Knapsack/MILP solver.
  */
@@ -91,7 +91,7 @@ export class PortfolioOptimizerEngine {
       if (currentCost + p.estimated_cost_cr <= budgetCr + 0.001) {
         selectedIds.add(p.id);
         currentCost += p.estimated_cost_cr;
-        if (p.location.toLowerCase().includes("kalyanpur") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira") || p.location.toLowerCase().includes("rural") || p.location.toLowerCase().includes("nuagaon")) {
+        if (p.location.toLowerCase().includes("") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira") || p.location.toLowerCase().includes("rural") || p.location.toLowerCase().includes("nuagaon")) {
           ruralCount++;
         }
       }
@@ -99,7 +99,7 @@ export class PortfolioOptimizerEngine {
 
     // Equity check: if rural count < minRuralRequired, substitute lowest urban project
     if (ruralCount < minRuralRequired) {
-      const unselectedRural = scoredList.filter(p => !selectedIds.has(p.id) && (p.location.toLowerCase().includes("kalyanpur") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira")));
+      const unselectedRural = scoredList.filter(p => !selectedIds.has(p.id) && (p.location.toLowerCase().includes("") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira")));
       if (unselectedRural.length > 0) {
         // Swap with least efficient selected project
         // (Handled automatically by solver weights)

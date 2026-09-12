@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Multi-Source Data Fusion & Evidence Engine Component
  * Connects Citizen Demand with Objective Registries and Flags Conflicting Realities.
  */
@@ -68,7 +68,7 @@ export function renderDataFusionView(state) {
           <div style="background: white; border: 1px solid #fef08a; border-radius: var(--radius-md); padding: 1rem;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
               <div style="font-weight: 700; color: #854d0e; font-size: 0.95rem;">
-                🚨 Discrepancy #1: Kalyanpur Healthcare Access Route (Hotspot #1)
+                🚨 Discrepancy #1:  Healthcare Access Route (Hotspot #1)
               </div>
               <span class="badge badge-critical">Severe Severance</span>
             </div>
@@ -78,7 +78,7 @@ export function renderDataFusionView(state) {
                 <strong>Citizen Perception:</strong> "Nearest hospital is 24 km away; road completely blocked in rain."
               </div>
               <div style="background: #e0f2fe; padding: 0.6rem; border-radius: var(--radius-sm); border: 1px solid #bae6fd;">
-                <strong>Official GIS Record:</strong> "PMGSY Master Plan records operational all-weather BT road to Kalyanpur PHC within 4.2 km."
+                <strong>Official GIS Record:</strong> "PMGSY Master Plan records operational all-weather BT road to  PHC within 4.2 km."
               </div>
             </div>
 

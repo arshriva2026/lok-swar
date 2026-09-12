@@ -189,11 +189,39 @@ def detect_language(text):
     if re.search(r'[\u0B00-\u0B7F]', text):
         return "Odia"
     
-    # Bengali Unicode range: \u0980-\u09FF
+    # Bengali / Assamese Unicode range: \u0980-\u09FF
     if re.search(r'[\u0980-\u09FF]', text):
         return "Bengali"
     
-    # Devanagari (Hindi) Unicode range: \u0900-\u097F
+    # Gurmukhi (Punjabi) Unicode range: \u0A00-\u0A7F
+    if re.search(r'[\u0A00-\u0A7F]', text):
+        return "Punjabi"
+
+    # Gujarati Unicode range: \u0A80-\u0AFF
+    if re.search(r'[\u0A80-\u0AFF]', text):
+        return "Gujarati"
+
+    # Tamil Unicode range: \u0B80-\u0BFF
+    if re.search(r'[\u0B80-\u0BFF]', text):
+        return "Tamil"
+
+    # Telugu Unicode range: \u0C00-\u0C7F
+    if re.search(r'[\u0C00-\u0C7F]', text):
+        return "Telugu"
+
+    # Kannada Unicode range: \u0C80-\u0CFF
+    if re.search(r'[\u0C80-\u0CFF]', text):
+        return "Kannada"
+
+    # Malayalam Unicode range: \u0D00-\u0D7F
+    if re.search(r'[\u0D00-\u0D7F]', text):
+        return "Malayalam"
+
+    # Arabic / Urdu Unicode range: \u0600-\u06FF
+    if re.search(r'[\u0600-\u06FF]', text):
+        return "Urdu"
+    
+    # Devanagari (Hindi, Marathi, Bhojpuri) Unicode range: \u0900-\u097F
     if re.search(r'[\u0900-\u097F]', text):
         return "Hindi"
     
@@ -331,7 +359,13 @@ def fetch_live_translation_to_english(raw_text):
 
     # Tier 3: MyMemory Translation API with ISO Language Pair
     try:
-        lang_code = "hi" if det_lang in ["Hindi", "Bihari / Bhojpuri", "Bhojpuri"] else ("or" if det_lang == "Odia" else ("bn" if det_lang == "Bengali" else "hi"))
+        iso_map = {
+            "Hindi": "hi", "Bihari / Bhojpuri": "hi", "Bhojpuri": "hi",
+            "Odia": "or", "Bengali": "bn", "Tamil": "ta", "Telugu": "te",
+            "Punjabi": "pa", "Gujarati": "gu", "Kannada": "kn",
+            "Malayalam": "ml", "Urdu": "ur"
+        }
+        lang_code = iso_map.get(det_lang, "hi")
         url_mm = f"https://api.mymemory.translated.net/get?q={urllib.parse.quote(processed_text)}&langpair={lang_code}|en"
         req_mm = urllib.request.Request(url_mm, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req_mm, timeout=4) as response:

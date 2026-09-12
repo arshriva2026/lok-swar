@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Main Application Controller & State Orchestrator
  * "From People's Voices to Evidence-Based Development Decisions"
  */
@@ -411,7 +411,7 @@ class App {
           category: this.state.currentExtractedNLP?.category || "Roads",
           sub_category: this.state.currentExtractedNLP?.sub_category || "Rural Road Connectivity",
           issue_description: textVal || "Citizen reported development priority.",
-          administrative_area: "Kalyanpur Gram Panchayat",
+          administrative_area: "",
           severity: "Critical",
           language: this.state.currentLang,
           is_assisted: false,
@@ -496,7 +496,7 @@ class App {
     const btnStartDrone = document.getElementById('btn-start-drone-mission');
     if (btnStartDrone) {
       btnStartDrone.onclick = () => {
-        this.showToast("🚁 Garuda-V MAVLink drone survey launched over Kalyanpur corridor!");
+        this.showToast("🚁 Garuda-V MAVLink drone survey launched over  corridor!");
         let alt = 45;
         let bat = 94;
         const interval = setInterval(() => {
@@ -595,7 +595,7 @@ class App {
               category: "Roads",
               sub_category: "Healthcare Access & Road Connectivity",
               severity: "Critical",
-              location: "Kalyanpur Gram Panchayat",
+              location: "",
               affected_population_estimate: 18400,
               potential_impact: sample.impact,
               confidence: 0.94,

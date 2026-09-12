@@ -43,24 +43,37 @@
       });
 
       useEffect(() => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(async (pos) => {
+        const detectUserLoc = async () => {
+          let lat = 22.1245, lng = 84.0321;
+          if (navigator.geolocation) {
             try {
-              const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&zoom=18&addressdetails=1`);
+              const pos = await new Promise((res, rej) => {
+                navigator.geolocation.getCurrentPosition(res, rej, { enableHighAccuracy: false, timeout: 5000 });
+              });
+              lat = pos.coords.latitude;
+              lng = pos.coords.longitude;
+            } catch (e) {}
+          }
+          try {
+            const res = await fetch(`/api/geo/reverse?lat=${lat}&lon=${lng}`);
+            if (res.ok) {
               const data = await res.json();
-              if (data && data.address) {
-                const addr = data.address;
-                const state = (addr.state || '');
-                const district = addr.state_district || addr.county || addr.district || addr.city || addr.town || '';
-                const village = addr.village || addr.suburb || addr.neighbourhood || addr.residential || addr.hamlet || addr.town || addr.city || '';
-                const locParts = [village, district, state].filter(Boolean);
-                const loc = locParts.join(', ') || addr.display_name;
-                setCurrentLocationName(loc);
-                localStorage.setItem('lok_swar_user_location_name', loc);
+              if (data && data.display_name) {
+                setCurrentLocationName(data.display_name);
+                localStorage.setItem('lok_swar_user_location_name', data.display_name);
+                return;
               }
-            } catch(e) {}
-          });
-        }
+            }
+          } catch(e) {}
+          try {
+            const bdc = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
+            const bdata = await bdc.json();
+            const loc = `${bdata.locality || bdata.city || 'Sundargarh'}, ${bdata.principalSubdivision || 'Odisha'}`;
+            setCurrentLocationName(loc);
+            localStorage.setItem('lok_swar_user_location_name', loc);
+          } catch(e2) {}
+        };
+        detectUserLoc();
       }, []);
 
       const mediaRecorderRef = useRef(null);

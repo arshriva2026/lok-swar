@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Audio & Multilingual NLP Intelligence Engine
  * Features Gemini Pegasus Neural Voice Synthesizer & Multilingual Entity Extraction (Odia, Hindi, Bengali, English)
  */
@@ -154,7 +154,7 @@ export class AudioAIEngine {
         category: "Roads",
         sub_category: "Healthcare Access & All-Weather Road Connectivity",
         severity: "Critical",
-        location: "Kalyanpur Gram Panchayat (Lathikata Block)",
+        location: " ()",
         affected_population_estimate: 18400,
         potential_impact: "Emergency medical access cutoff for 18,400 citizens; 24 km detour required to reach district hospital.",
         confidence: 0.94,
@@ -202,7 +202,7 @@ export class AudioAIEngine {
       category: "Public Infrastructure",
       sub_category: "Civic Amenity Upgrade",
       severity: "Medium",
-      location: "Sundargarh Local Ward",
+      location: " Local Ward",
       affected_population_estimate: 2400,
       potential_impact: "General quality of life and accessibility constraints for local residents.",
       confidence: 0.85,

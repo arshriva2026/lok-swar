@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Government & Administrator Overview Component
  * Shows Constituency KPIs, Thematic Breakdown, Evidence Health & Action Center.
  */
@@ -144,7 +144,7 @@ export function renderAdminOverview(state) {
               <div style="font-weight: 700; font-size: 0.95rem; color: #38bdf8;">Drone Verification Flight</div>
             </div>
             <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 1rem;">
-              Garuda-V MAVLink autonomous surveyor is primed on standby at Kalyanpur Corridor.
+              Garuda-V MAVLink autonomous surveyor is primed on standby at  Corridor.
             </div>
             <button class="btn btn-primary nav-tab" data-view="drone_simulator" style="width: 100%; font-size: 0.85rem;">
               Launch Autonomous Drone Survey →

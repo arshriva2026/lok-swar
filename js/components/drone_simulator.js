@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Drone Verification Mission & MAVLink Telemetry HUD Simulator
  * Simulates autonomous survey flight, live video feed, AI CV bounding boxes & cryptographic hash generation.
  */
@@ -74,7 +74,7 @@ export function renderDroneSimulatorView(state) {
           </div>
 
           <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: #94a3b8;">
-            <div>Target: <strong>Kalyanpur to Brahmani Bridge Corridor</strong></div>
+            <div>Target: <strong> to Brahmani Bridge Corridor</strong></div>
             <div style="color: #4ade80;">● AI Inference Engine: YOLO-Infrastructure-v8 Active</div>
           </div>
         </div>
@@ -88,7 +88,7 @@ export function renderDroneSimulatorView(state) {
 
             <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.82rem;">
               <div><strong>Mission ID:</strong> MSN-DRONE-882</div>
-              <div><strong>Target Hotspot:</strong> HOT-01 (Kalyanpur Healthcare Access)</div>
+              <div><strong>Target Hotspot:</strong> HOT-01 ( Healthcare Access)</div>
               <div><strong>Created By:</strong> District Collector / Planning Officer</div>
               <div><strong>Verification Type:</strong> Multispectral Photogrammetry</div>
               <div><strong>Flight Path:</strong> 8 Pre-programmed Waypoints</div>

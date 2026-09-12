@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lok Swar — IVR Admin Dashboard</title>
+  <meta name="description" content="IVR Customer Care Admin — Listen, triage and resolve citizen complaints collected via voice." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: {
+            brand: { DEFAULT: '#10b981', dark: '#059669', light: '#34d399' },
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Custom audio player styling */
+    audio { width: 100%; accent-color: #10b981; }
+    audio::-webkit-media-controls-panel { background: #1e293b; border-radius: 8px; }
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display { color: #94a3b8; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+
+    /* Pulse animation for new tickets */
+    @keyframes soft-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,.35); } 50% { box-shadow: 0 0 0 8px rgba(16,185,129,.0); } }
+    .ticket-new { animation: soft-pulse 2.5s ease-in-out infinite; }
+
+    /* Fade-in */
+    @keyframes fade-up { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fade-up .35s ease both; }
+
+    /* Status badge colors */
+    .badge-new         { background:#ef444420; color:#f87171; border:1px solid #ef444440; }
+    .badge-in_progress { background:#f59e0b20; color:#fbbf24; border:1px solid #f59e0b40; }
+    .badge-resolved    { background:#10b98120; color:#34d399; border:1px solid #10b98140; }
+
+    /* Category badge */
+    .cat-electricity { background:#3b82f620; color:#60a5fa; border:1px solid #3b82f640; }
+    .cat-water       { background:#06b6d420; color:#22d3ee; border:1px solid #06b6d440; }
+    .cat-other       { background:#8b5cf620; color:#a78bfa; border:1px solid #8b5cf640; }
+
+    /* Lang badge */
+    .lang-hi { background:#ec489920; color:#f472b6; border:1px solid #ec489940; }
+    .lang-te { background:#f97316 20; color:#fb923c; border:1px solid #f9731640; }
+    .lang-en { background:#10b98120; color:#34d399; border:1px solid #10b98140; }
+
+    /* Toast */
+    #toast { transition: opacity .3s ease, transform .3s ease; }
+    #toast.hidden { opacity:0; transform:translateY(8px); pointer-events:none; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen antialiased">
+
+  <!-- ───── Navbar ───── -->
+  <nav class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-md">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-2.5 flex-shrink-0">
+        <div class="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-black text-sm">IVR</div>
+        <div>
+          <div class="font-bold text-sm text-white leading-tight">Lok Swar</div>
+          <div class="text-[10px] text-slate-400 leading-tight">IVR Admin Console</div>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="flex-1 max-w-xs hidden sm:block">
+        <input id="search-input" type="search" placeholder="Search phone number…"
+          class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-1.5 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition" />
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2">
+        <button onclick="createMockTicket()"
+          class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 transition cursor-pointer active:scale-95">
+          ➕ Mock Ticket
+        </button>
+        <button onclick="loadTickets()"
+          class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 rounded-xl text-xs font-bold text-white transition cursor-pointer active:scale-95">
+          🔄 Refresh
+        </button>
+        <a href="/health" target="_blank"
+          class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-slate-300 transition cursor-pointer">
+          ⚡ Health
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ───── Stats Bar ───── -->
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-5">
+    <div id="stats-bar" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <!-- Populated by JS -->
+      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
+      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
+      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
+      <div class="h-20 rounded-2xl bg-slate-900 border border-slate-800 animate-pulse"></div>
+    </div>
+  </div>
+
+  <!-- ───── Filters ───── -->
+  <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 pt-4">
+    <div class="flex flex-wrap gap-2 items-center">
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Status:</span>
+      <div class="flex gap-1.5 flex-wrap" id="status-filters">
+        <button onclick="setFilter('status','all')" class="filter-btn status-btn active-filter px-3 py-1 rounded-full text-xs font-semibold border border-slate-700 bg-slate-800 text-white transition cursor-pointer" data-val="all">All</button>
+        <button onclick="setFilter('status','new')" class="filter-btn status-btn px-3 py-1 rounded-full text-xs font-semibold border border-red-800/50 bg-red-950/30 text-red-400 transition cursor-pointer" data-val="new">🔴 New</button>
+        <button onclick="setFilter('status','in_progress')" class="filter-btn status-btn px-3 py-1 rounded-full text-xs font-semibold border border-amber-800/50 bg-amber-950/30 text-amber-400 transition cursor-pointer" data-val="in_progress">🟡 In Progress</button>
+        <button onclick="setFilter('status','resolved')" class="filter-btn status-btn px-3 py-1 rounded-full text-xs font-semibold border border-emerald-800/50 bg-emerald-950/30 text-emerald-400 transition cursor-pointer" data-val="resolved">✅ Resolved</button>
+      </div>
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-2">Lang:</span>
+      <div class="flex gap-1.5 flex-wrap">
+        <button onclick="setFilter('lang','all')" class="filter-btn lang-btn active-filter px-3 py-1 rounded-full text-xs font-semibold border border-slate-700 bg-slate-800 text-white transition cursor-pointer" data-val="all">All</button>
+        <button onclick="setFilter('lang','hi')" class="filter-btn lang-btn px-3 py-1 rounded-full text-xs font-semibold border border-pink-800/50 bg-pink-950/30 text-pink-400 transition cursor-pointer" data-val="hi">हिंदी</button>
+        <button onclick="setFilter('lang','te')" class="filter-btn lang-btn px-3 py-1 rounded-full text-xs font-semibold border border-orange-800/50 bg-orange-950/30 text-orange-400 transition cursor-pointer" data-val="te">తెలుగు</button>
+        <button onclick="setFilter('lang','en')" class="filter-btn lang-btn px-3 py-1 rounded-full text-xs font-semibold border border-emerald-800/50 bg-emerald-950/30 text-emerald-400 transition cursor-pointer" data-val="en">English</button>
+      </div>
+      <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider ml-2">Category:</span>
+      <div class="flex gap-1.5 flex-wrap">
+        <button onclick="setFilter('cat','all')" class="filter-btn cat-btn active-filter px-3 py-1 rounded-full text-xs font-semibold border border-slate-700 bg-slate-800 text-white transition cursor-pointer" data-val="all">All</button>
+        <button onclick="setFilter('cat','electricity')" class="filter-btn cat-btn px-3 py-1 rounded-full text-xs font-semibold border border-blue-800/50 bg-blue-950/30 text-blue-400 transition cursor-pointer" data-val="electricity">⚡ Electricity</button>
+        <button onclick="setFilter('cat','water')" class="filter-btn cat-btn px-3 py-1 rounded-full text-xs font-semibold border border-cyan-800/50 bg-cyan-950/30 text-cyan-400 transition cursor-pointer" data-val="water">💧 Water</button>
+        <button onclick="setFilter('cat','other')" class="filter-btn cat-btn px-3 py-1 rounded-full text-xs font-semibold border border-purple-800/50 bg-purple-950/30 text-purple-400 transition cursor-pointer" data-val="other">📋 Other</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── Ticket Grid ───── -->
+  <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 py-5">
+    <div id="ticket-count" class="text-xs text-slate-500 mb-3"></div>
+    <div id="tickets-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <!-- Populated by JS -->
+    </div>
+    <div id="empty-state" class="hidden text-center py-24">
+      <div class="text-5xl mb-4">📞</div>
+      <div class="text-slate-400 font-semibold text-lg">No tickets yet</div>
+      <div class="text-slate-600 text-sm mt-1">Calls recorded via IVR will appear here automatically.</div>
+      <button onclick="createMockTicket()"
+        class="mt-6 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 rounded-xl text-sm font-bold text-white transition cursor-pointer active:scale-95">
+        + Create Mock Ticket
+      </button>
+    </div>
+    <div id="loading-state" class="flex items-center justify-center py-24">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+        <div class="text-slate-500 text-sm">Loading tickets…</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ───── Toast Notification ───── -->
+  <div id="toast" class="hidden fixed bottom-5 right-5 z-50 px-4 py-2.5 bg-emerald-600 text-white text-sm font-semibold rounded-xl shadow-xl">
+    ✅ Saved
+  </div>
+
+  <script>
+    // ── State ──────────────────────────────────────────────────────────────
+    const state = { status: 'all', lang: 'all', cat: 'all', search: '' };
+    let allTickets = [];
+
+    // ── Boot ───────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTickets();
+      document.getElementById('search-input')?.addEventListener('input', (e) => {
+        state.search = e.target.value.toLowerCase();
+        renderTickets();
+      });
+    });
+
+    // ── Data fetch ─────────────────────────────────────────────────────────
+    async function loadTickets() {
+      document.getElementById('loading-state').classList.remove('hidden');
+      document.getElementById('tickets-grid').innerHTML = '';
+      document.getElementById('empty-state').classList.add('hidden');
+
+      try {
+        const params = new URLSearchParams({ limit: 200 });
+        if (state.status !== 'all') params.set('status', state.status);
+        if (state.lang !== 'all') params.set('lang', state.lang);
+        if (state.cat !== 'all') params.set('category', state.cat);
+
+        const res = await fetch(`/admin/tickets?${params}`);
+        const data = await res.json();
+        allTickets = data.tickets || [];
+        renderStats(data.total || 0, allTickets);
+        renderTickets();
+      } catch (err) {
+        console.error(err);
+        showToast('❌ Failed to load tickets', 'error');
+      } finally {
+        document.getElementById('loading-state').classList.add('hidden');
+      }
+    }
+
+    // ── Render Stats ───────────────────────────────────────────────────────
+    function renderStats(total, tickets) {
+      const counts = { new: 0, in_progress: 0, resolved: 0 };
+      tickets.forEach(t => { if (counts[t.status] !== undefined) counts[t.status]++; });
+
+      const stats = [
+        { label: 'Total Tickets', value: total, icon: '📞', cls: 'border-slate-700' },
+        { label: 'New', value: counts.new, icon: '🔴', cls: 'border-red-800/50' },
+        { label: 'In Progress', value: counts.in_progress, icon: '🟡', cls: 'border-amber-800/50' },
+        { label: 'Resolved', value: counts.resolved, icon: '✅', cls: 'border-emerald-800/50' },
+      ];
+
+      document.getElementById('stats-bar').innerHTML = stats.map(s => `
+        <div class="flex items-center gap-3 bg-slate-900/80 border ${s.cls} rounded-2xl px-4 py-3 fade-up">
+          <span class="text-2xl">${s.icon}</span>
+          <div>
+            <div class="text-xl font-black text-white">${s.value}</div>
+            <div class="text-xs text-slate-400 font-medium">${s.label}</div>
+          </div>
+        </div>`).join('');
+    }
+
+    // ── Render Ticket Cards ────────────────────────────────────────────────
+    function renderTickets() {
+      const query = state.search;
+      const filtered = allTickets.filter(t => {
+        if (query && !t.caller_phone.toLowerCase().includes(query) &&
+            !t.call_sid.toLowerCase().includes(query) &&
+            !(t.admin_notes || '').toLowerCase().includes(query)) return false;
+        return true;
+      });
+
+      const grid = document.getElementById('tickets-grid');
+      const empty = document.getElementById('empty-state');
+      const countEl = document.getElementById('ticket-count');
+
+      countEl.textContent = `Showing ${filtered.length} of ${allTickets.length} ticket${allTickets.length !== 1 ? 's' : ''}`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+      grid.innerHTML = filtered.map(t => buildCard(t)).join('');
+    }
+
+    // ── Build Ticket Card HTML ─────────────────────────────────────────────
+    function buildCard(t) {
+      const langLabel = { hi: 'हिंदी', te: 'తెలుగు', en: 'English' }[t.language] || t.language;
+      const catLabel  = { electricity: '⚡ Electricity', water: '💧 Water', other: '📋 Other' }[t.category] || t.category;
+      const catClass  = { electricity: 'cat-electricity', water: 'cat-water', other: 'cat-other' }[t.category] || 'cat-other';
+      const langClass = { hi: 'lang-hi', te: 'lang-te', en: 'lang-en' }[t.language] || 'lang-en';
+      const statusClass = { new: 'badge-new', in_progress: 'badge-in_progress', resolved: 'badge-resolved' }[t.status] || 'badge-new';
+      const isNew = t.status === 'new';
+
+      const createdAt = t.created_at ? new Date(t.created_at) : new Date();
+      const timeStr = createdAt.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
+
+      // Audio player — proxy through backend if it's a Twilio URL
+      let audioSrc = t.recording_url || '';
+      if (audioSrc && t.recording_sid && t.recording_sid !== 'RE_MOCK') {
+        audioSrc = `/ivr/audio/${t.recording_sid}`;
+      }
+
+      const audioBlock = audioSrc
+        ? `<audio controls preload="none" class="w-full rounded-xl mt-1" src="${audioSrc}">
+            Your browser does not support the audio element.
+           </audio>`
+        : `<div class="flex items-center gap-2 px-3 py-2 bg-slate-800 rounded-xl text-xs text-slate-500 mt-1">
+             🎙️ No recording available
+           </div>`;
+
+      return `
+        <div class="relative bg-slate-900/80 border border-slate-800 rounded-2xl p-4 space-y-3 fade-up ${isNew ? 'ticket-new' : ''}" id="card-${t.id}">
+          <!-- Header -->
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="font-bold text-white text-base tracking-tight">${t.caller_phone || 'Unknown'}</div>
+              <div class="text-xs text-slate-500 mt-0.5">${timeStr} · #${t.id.slice(-8)}</div>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="px-2 py-0.5 rounded-full text-[11px] font-semibold ${statusClass}">${t.status.replace('_', ' ').toUpperCase()}</span>
+              <div class="flex gap-1">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${langClass}">${langLabel}</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${catClass}">${catLabel}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duration chip -->
+          ${t.duration > 0 ? `<div class="text-[11px] text-slate-500">🎙️ ${t.duration}s recording</div>` : ''}
+
+          <!-- Audio Player -->
+          ${audioBlock}
+
+          <!-- Status Switcher -->
+          <div class="flex items-center gap-2">
+            <label class="text-xs text-slate-500 font-semibold shrink-0">Status:</label>
+            <select onchange="updateStatus('${t.id}', this.value)"
+              class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 cursor-pointer transition">
+              <option value="new"         ${t.status==='new'?'selected':''}>🔴 New</option>
+              <option value="in_progress" ${t.status==='in_progress'?'selected':''}>🟡 In Progress</option>
+              <option value="resolved"    ${t.status==='resolved'?'selected':''}>✅ Resolved</option>
+            </select>
+          </div>
+
+          <!-- Admin Notes -->
+          <div class="space-y-1.5">
+            <label class="text-xs text-slate-500 font-semibold">Admin Notes</label>
+            <textarea id="notes-${t.id}" rows="2"
+              placeholder="Add internal notes…"
+              class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-none transition">${t.admin_notes || ''}</textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex gap-2">
+            <button onclick="saveNotes('${t.id}')"
+              class="flex-1 py-1.5 bg-emerald-700/50 hover:bg-emerald-600/70 border border-emerald-700/50 rounded-xl text-xs font-semibold text-emerald-300 transition cursor-pointer active:scale-95">
+              💾 Save Notes
+            </button>
+            <button onclick="deleteTicket('${t.id}')"
+              class="py-1.5 px-3 bg-slate-800 hover:bg-red-950/50 border border-slate-700 hover:border-red-800/50 rounded-xl text-xs font-semibold text-slate-400 hover:text-red-400 transition cursor-pointer active:scale-95"
+              title="Delete ticket">
+              🗑
+            </button>
+          </div>
+        </div>`;
+    }
+
+    // ── Filters ────────────────────────────────────────────────────────────
+    function setFilter(type, val) {
+      state[type] = val;
+      // Highlight active button for that group
+      const groupMap = { status: '.status-btn', lang: '.lang-btn', cat: '.cat-btn' };
+      document.querySelectorAll(groupMap[type]).forEach(btn => {
+        btn.classList.toggle('active-filter', btn.dataset.val === val);
+        btn.classList.toggle('ring-2', btn.dataset.val === val);
+        btn.classList.toggle('ring-white/20', btn.dataset.val === val);
+      });
+      loadTickets();
+    }
+
+    // ── API Actions ────────────────────────────────────────────────────────
+    async function updateStatus(id, status) {
+      try {
+        const res = await fetch(`/admin/tickets/${id}/status`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status })
+        });
+        if (!res.ok) throw new Error('API error');
+        showToast(`Status → ${status.replace('_', ' ')}`);
+        // Update local state so re-render is instant
+        const ticket = allTickets.find(t => t.id === id);
+        if (ticket) ticket.status = status;
+        renderTickets();
+      } catch {
+        showToast('❌ Update failed', 'error');
+      }
+    }
+
+    async function saveNotes(id) {
+      const notes = document.getElementById(`notes-${id}`)?.value || '';
+      try {
+        const res = await fetch(`/admin/tickets/${id}/notes`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ admin_notes: notes })
+        });
+        if (!res.ok) throw new Error('API error');
+        showToast('Notes saved ✔');
+        const ticket = allTickets.find(t => t.id === id);
+        if (ticket) ticket.admin_notes = notes;
+      } catch {
+        showToast('❌ Save failed', 'error');
+      }
+    }
+
+    async function deleteTicket(id) {
+      if (!confirm('Delete this ticket permanently?')) return;
+      try {
+        await fetch(`/admin/tickets/${id}`, { method: 'DELETE' });
+        allTickets = allTickets.filter(t => t.id !== id);
+        renderTickets();
+        showToast('Ticket deleted');
+      } catch {
+        showToast('❌ Delete failed', 'error');
+      }
+    }
+
+    async function createMockTicket() {
+      try {
+        const res = await fetch('/ivr/test/create-mock', { method: 'POST' });
+        const data = await res.json();
+        showToast('Mock ticket created ✔');
+        await loadTickets();
+      } catch {
+        showToast('❌ Failed to create mock', 'error');
+      }
+    }
+
+    // ── Toast ──────────────────────────────────────────────────────────────
+    let _toastTimer;
+    function showToast(msg, type = 'success') {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.className = `fixed bottom-5 right-5 z-50 px-4 py-2.5 text-white text-sm font-semibold rounded-xl shadow-xl transition-all ${type === 'error' ? 'bg-red-600' : 'bg-emerald-600'}`;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => { el.classList.add('hidden'); }, 3000);
+    }
+
+    // ── Active filter style ────────────────────────────────────────────────
+    const style = document.createElement('style');
+    style.textContent = `.active-filter { outline: 2px solid rgba(255,255,255,.25); outline-offset:1px; }`;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

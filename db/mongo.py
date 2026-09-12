@@ -60,20 +60,62 @@ class LokSwarDB:
     def connect(self):
         if PYMONGO_AVAILABLE:
             try:
-                self.client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=2000)
+                self.client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=10000, connectTimeoutMS=10000, socketTimeoutMS=15000)
                 # Test connection
                 self.client.admin.command('ping')
                 self.db = self.client[DB_NAME]
+                try:
+                    self.alt_db = self.client["citizen_portal_db"]
+                except Exception:
+                    self.alt_db = None
                 self.is_connected = True
-                print(f"[MongoDB] Connected successfully to {DB_NAME} at {MONGODB_URI}")
+                self.use_fallback = False
+                print(f"[MongoDB] Connected successfully to {DB_NAME} (and citizen_portal_db) at {MONGODB_URI}")
                 self.init_indexes_and_seed()
-                return
             except Exception as e:
                 print(f"[MongoDB] Notice: Standalone MongoDB server not reachable ({e}). Switching to high-performance local persistent engine.")
-        
-        self.use_fallback = True
-        self.load_local_cache()
-        self.seed_fallback_data()
+                self.use_fallback = True
+                self.load_local_cache()
+                self.seed_fallback_data()
+                return
+        else:
+            self.use_fallback = True
+            self.load_local_cache()
+            self.seed_fallback_data()
+            return
+
+        # Mirror databases after successful connection (outside try block so failure doesn't trigger fallback)
+        try:
+            self.mirror_databases()
+        except Exception as e:
+            print(f"[MongoDB Mirroring Notice]: {e}")
+
+    def mirror_databases(self):
+        """Mirror collections between lok_swar_db and citizen_portal_db for full cross-database compatibility"""
+        if not self.is_connected or self.alt_db is None:
+            return
+        try:
+            for coll_name in ["citizens", "grievances", "officers", "budget_schemes", "drone_missions"]:
+                # Sync primary -> alt
+                items = list(self.db[coll_name].find())
+                for item in items:
+                    doc = dict(item)
+                    if "_id" in doc: del doc["_id"]
+                    key_field = "mobile" if coll_name == "citizens" else "id"
+                    if key_field in doc:
+                        self.alt_db[coll_name].update_one({key_field: doc[key_field]}, {"$set": doc}, upsert=True)
+            print("[MongoDB] Database mirroring active: lok_swar_db and citizen_portal_db fully synchronized.")
+        except Exception as e:
+            print(f"[MongoDB Mirroring Notice]: {e}")
+
+    def ensure_connected(self):
+        """Self-healing auto-reconnect check before write/read operations"""
+        if not self.is_connected and PYMONGO_AVAILABLE:
+            try:
+                self.connect()
+            except Exception:
+                pass
+        return self.is_connected
 
     def init_indexes_and_seed(self):
         try:
@@ -90,10 +132,10 @@ class LokSwarDB:
 
     def seed_mongodb_data(self):
         print("[MongoDB] Syncing collections in lok_swar_db...")
-        # 1. Officers
+        # 1. Officers (generic — no location-specific data)
         officers = [
             {
-                "id": "admin@sundargarh.gov.in",
+                "id": "admin@lokaswar.gov.in",
                 "aadhaar": "889911223344",
                 "aadhaarFormatted": "8899 1122 3344",
                 "password": "admin123",
@@ -102,22 +144,22 @@ class LokSwarDB:
                 "department": "District Administration & Disaster Management",
                 "badge": "District Head",
                 "avatar": "👨‍💼",
-                "jurisdiction": "AC-134 Sundargarh Entire Constituency"
+                "jurisdiction": "Entire Constituency"
             },
             {
-                "id": "dpc.planner@sundargarh.gov.in",
+                "id": "dpc.planner@lokaswar.gov.in",
                 "aadhaar": "556677889900",
                 "aadhaarFormatted": "5566 7788 9900",
                 "password": "admin123",
-                "name": "Er. Rishav Yadav",
+                "name": "Er. A. Sharma (DPC)",
                 "designation": "District Planning Coordinator (DPC)",
                 "department": "Planning & Coordination Dept",
                 "badge": "Budget Sanction Head",
                 "avatar": "📋",
-                "jurisdiction": "142 Gram Panchayats"
+                "jurisdiction": "All Gram Panchayats"
             },
             {
-                "id": "ee.roads@sundargarh.gov.in",
+                "id": "ee.roads@lokaswar.gov.in",
                 "aadhaar": "123456789012",
                 "aadhaarFormatted": "1234 5678 9012",
                 "password": "admin123",
@@ -126,16 +168,16 @@ class LokSwarDB:
                 "department": "Works & Road Infrastructure Dept",
                 "badge": "Field Ops Lead",
                 "avatar": "👷‍♀️",
-                "jurisdiction": "Lathikata & Bisra Blocks"
+                "jurisdiction": "All Blocks"
             },
             {
-                "id": "drone.commander@sundargarh.gov.in",
+                "id": "drone.commander@lokaswar.gov.in",
                 "aadhaar": "998877665544",
                 "aadhaarFormatted": "9988 7766 5544",
                 "password": "admin123",
                 "name": "Squadron Ldr. S. Patnaik",
                 "designation": "Aerial Drone Telemetry Commander",
-                "department": "Odisha Space Applications Centre (ORSAC) Liaison",
+                "department": "Space Applications Centre Liaison",
                 "badge": "UAV Squad Lead",
                 "avatar": "🛸",
                 "jurisdiction": "Aerial Disaster Survey Grid"
@@ -144,75 +186,49 @@ class LokSwarDB:
         for off in officers:
             self.db.officers.update_one({"id": off["id"]}, {"$set": off}, upsert=True)
 
-        # 2. Citizens
-        citizens = [
-            {
-                "mobile": "9861234567",
-                "name": "Rishav Yadav",
-                "password": "password123",
-                "email": "rishav.yadav.odisha@gmail.com",
-                "village": "Kalyanpur Gram Panchayat (Ward 3)",
-                "aadhaarMasked": "XXXX-XXXX-1940",
-                "isAadhaarVerified": True,
-                "trustScore": 99,
-                "dpUrl": "assets/bg_1_smart_village.jpg",
-                "createdAt": datetime.now().isoformat()
-            },
-            {
-                "mobile": "9437123890",
-                "name": "Sunita Soren",
-                "password": "password123",
-                "email": "sunita.soren@gmail.com",
-                "village": "Jhirpani Tribal Hamlet (Sector 2)",
-                "aadhaarMasked": "XXXX-XXXX-4812",
-                "isAadhaarVerified": True,
-                "trustScore": 99,
-                "dpUrl": "assets/bg_2_smart_odisha.jpg",
-                "createdAt": datetime.now().isoformat()
-            }
-        ]
-        for c in citizens:
-            self.db.citizens.update_one({"mobile": c["mobile"]}, {"$set": c}, upsert=True)
-
-        # 3. Grievances Collection initialized clean for real citizen reports
-        pass
-
-        # 4. Budget Schemes
-        schemes = [
-            { "id": "SCH-1", "name": "SDRF Disaster Relief Fund", "totalPoolCr": 4.50, "sanctionedCr": 4.20, "utilizationPct": 93.3 },
-            { "id": "SCH-2", "name": "Jal Jeevan Mission (RWSS)", "totalPoolCr": 2.50, "sanctionedCr": 2.10, "utilizationPct": 84.0 },
-            { "id": "SCH-3", "name": "5T School Infrastructure Fund", "totalPoolCr": 1.80, "sanctionedCr": 1.48, "utilizationPct": 82.2 },
-            { "id": "SCH-4", "name": "Unallocated Emergency Pool", "totalPoolCr": 1.20, "sanctionedCr": 0.00, "utilizationPct": 0.0 }
-        ]
-        for s in schemes:
-            self.db.budget_schemes.update_one({"id": s["id"]}, {"$set": s}, upsert=True)
-
-        # 5. Drone Missions
-        missions = [
-            {
-                "id": "DRONE-001",
-                "targetGrievanceId": "PROB-101",
-                "droneModel": "Garuda-V4 Quadcopter (Thermal + 4K Optical)",
-                "flightAltitude": "120m AGL",
-                "orthomosaicResolution": "2.1 cm/pixel",
-                "surveyDate": "18 Aug 2026",
-                "status": "Completed (Orthomosaic 3D Surface Ready)",
-                "damageAssessment": "100% culvert pier collapsed. Earthwork required: 14,200 m³. Embankment breach length: 42 meters.",
-                "telemetry": {
-                    "batteryPct": 88,
-                    "gpsLock": "14 Satellites (RTK Fixed)",
-                    "windSpeed": "12 km/h NW",
-                    "flightTimeMinutes": 18
-                }
-            }
-        ]
-        for m in missions:
-            self.db.drone_missions.update_one({"id": m["id"]}, {"$set": m}, upsert=True)
-        print("[MongoDB] Seeding complete with default constituency data.")
+        # Citizens, grievances, budget schemes, drone missions are NOT seeded.
+        # Only real user-submitted data will be stored.
+        # Migrate any locally cached grievances (from local_store.json) into MongoDB Atlas
+        self._migrate_local_grievances_to_mongo()
+        print("[MongoDB] Seeding complete with default data.")
 
     # -------------------------------------------------------------
     # Fallback Local Persistence Engine
     # -------------------------------------------------------------
+
+    def _migrate_local_grievances_to_mongo(self):
+        """Migrate any grievances stored in local_store.json into MongoDB Atlas.
+        Runs once on connect to ensure zero data loss when switching from offline to online."""
+        if not self.is_connected:
+            return
+        try:
+            # Load local cache to inspect stored grievances
+            local_cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "local_store.json")
+            if not os.path.exists(local_cache_file):
+                return
+            with open(local_cache_file, "r", encoding="utf-8") as f:
+                local_data = json.load(f)
+            local_grievances = local_data.get("grievances", {})
+            if not local_grievances:
+                return
+            migrated = 0
+            for gid, grievance in local_grievances.items():
+                if not gid or not isinstance(grievance, dict):
+                    continue
+                # Only upsert if MongoDB Atlas doesn't already have this record
+                existing = self.db.grievances.find_one({"id": gid}, {"_id": 0})
+                if not existing:
+                    if "createdAt" not in grievance:
+                        grievance["createdAt"] = datetime.now().isoformat()
+                    self.db.grievances.update_one({"id": gid}, {"$set": grievance}, upsert=True)
+                    if self.alt_db is not None:
+                        self.alt_db.grievances.update_one({"id": gid}, {"$set": grievance}, upsert=True)
+                    migrated += 1
+            if migrated > 0:
+                print(f"[MongoDB] Migrated {migrated} local grievance(s) to MongoDB Atlas.")
+        except Exception as e:
+            print(f"[MongoDB Migration Notice]: {e}")
+
     def load_local_cache(self):
         if os.path.exists(self.local_cache_file):
             try:
@@ -232,42 +248,33 @@ class LokSwarDB:
     def seed_fallback_data(self):
         # Always ensure officers table in local storage has full aadhaar information
         self.local_data.setdefault("officers", {})
-        self.local_data["officers"]["admin@sundargarh.gov.in"] = {
-            "id": "admin@sundargarh.gov.in", "aadhaar": "889911223344", "aadhaarFormatted": "8899 1122 3344", "password": "admin123",
+        self.local_data["officers"]["admin@lokaswar.gov.in"] = {
+            "id": "admin@lokaswar.gov.in", "aadhaar": "889911223344", "aadhaarFormatted": "8899 1122 3344", "password": "admin123",
             "name": "Dr. K. C. Tripathy (IAS)", "designation": "District Magistrate & Collector",
             "department": "District Administration", "badge": "District Head", "avatar": "👨‍💼",
-            "jurisdiction": "AC-134 Sundargarh"
+            "jurisdiction": "Entire Constituency"
         }
-        self.local_data["officers"]["dpc.planner@sundargarh.gov.in"] = {
-            "id": "dpc.planner@sundargarh.gov.in", "aadhaar": "556677889900", "aadhaarFormatted": "5566 7788 9900", "password": "admin123",
-            "name": "Er. Rishav Yadav", "designation": "District Planning Coordinator (DPC)",
+        self.local_data["officers"]["dpc.planner@lokaswar.gov.in"] = {
+            "id": "dpc.planner@lokaswar.gov.in", "aadhaar": "556677889900", "aadhaarFormatted": "5566 7788 9900", "password": "admin123",
+            "name": "Er. A. Sharma (DPC)", "designation": "District Planning Coordinator (DPC)",
             "department": "Planning Dept", "badge": "Budget Sanction Head", "avatar": "📋",
-            "jurisdiction": "142 Gram Panchayats"
+            "jurisdiction": "All Gram Panchayats"
         }
-        self.local_data["officers"]["ee.roads@sundargarh.gov.in"] = {
-            "id": "ee.roads@sundargarh.gov.in", "aadhaar": "123456789012", "aadhaarFormatted": "1234 5678 9012", "password": "admin123",
+        self.local_data["officers"]["ee.roads@lokaswar.gov.in"] = {
+            "id": "ee.roads@lokaswar.gov.in", "aadhaar": "123456789012", "aadhaarFormatted": "1234 5678 9012", "password": "admin123",
             "name": "Er. Sunita Soren", "designation": "Executive Engineer (R&B)",
             "department": "Works Dept", "badge": "Field Ops Lead", "avatar": "👷‍♀️",
-            "jurisdiction": "Lathikata & Bisra Blocks"
+            "jurisdiction": "All Blocks"
         }
-        self.local_data["officers"]["drone.commander@sundargarh.gov.in"] = {
-            "id": "drone.commander@sundargarh.gov.in", "aadhaar": "998877665544", "aadhaarFormatted": "9988 7766 5544", "password": "admin123",
+        self.local_data["officers"]["drone.commander@lokaswar.gov.in"] = {
+            "id": "drone.commander@lokaswar.gov.in", "aadhaar": "998877665544", "aadhaarFormatted": "9988 7766 5544", "password": "admin123",
             "name": "Squadron Ldr. S. Patnaik", "designation": "Aerial Drone Telemetry Commander",
-            "department": "Odisha Space Applications Centre (ORSAC) Liaison", "badge": "UAV Squad Lead", "avatar": "🛸",
+            "department": "Space Applications Centre Liaison", "badge": "UAV Squad Lead", "avatar": "🛸",
             "jurisdiction": "Aerial Disaster Survey Grid"
         }
 
-        if not self.local_data.get("citizens"):
-            self.local_data["citizens"] = {
-                "9861234567": {
-                    "mobile": "9861234567", "name": "Rishav Yadav", "password": "password123",
-                    "email": "rishav.yadav.odisha@gmail.com",
-                    "village": "Kalyanpur Gram Panchayat (Ward 3)", "aadhaarMasked": "XXXX-XXXX-1940",
-                    "isAadhaarVerified": True, "trustScore": 99, "dpUrl": "assets/bg_1_smart_village.jpg"
-                }
-            }
-        if not self.local_data.get("grievances"):
-            self.local_data["grievances"] = {}
+        self.local_data.setdefault("citizens", {})
+        self.local_data.setdefault("grievances", {})
         self.save_local_cache()
 
     # -------------------------------------------------------------
@@ -319,8 +326,17 @@ class LokSwarDB:
         if "createdAt" not in citizen_dict:
             citizen_dict["createdAt"] = datetime.now().isoformat()
             
+        self.ensure_connected()
         if self.is_connected:
-            self.db.citizens.update_one({"mobile": clean_mobile}, {"$set": citizen_dict}, upsert=True)
+            try:
+                self.db.citizens.update_one({"mobile": clean_mobile}, {"$set": citizen_dict}, upsert=True)
+                if self.alt_db is not None:
+                    self.alt_db.citizens.update_one({"mobile": clean_mobile}, {"$set": citizen_dict}, upsert=True)
+                print(f"[MongoDB Atlas] Successfully persisted citizen {clean_mobile} to MongoDB Atlas ({DB_NAME} & citizen_portal_db)")
+            except Exception as e:
+                print(f"[MongoDB Citizen Save Error]: {e}")
+            self.local_data.setdefault("citizens", {})[clean_mobile] = citizen_dict
+            self.save_local_cache()
             return True
         self.local_data.setdefault("citizens", {})[clean_mobile] = citizen_dict
         self.save_local_cache()
@@ -349,7 +365,15 @@ class LokSwarDB:
 
     def get_grievances(self):
         if self.is_connected:
-            return list(self.db.grievances.find({}, {"_id": 0}).sort([("createdAt", DESCENDING), ("id", DESCENDING)]))
+            mongo_grievances = list(self.db.grievances.find({}, {"_id": 0}).sort([("createdAt", DESCENDING), ("id", DESCENDING)]))
+            # Merge with local cache as a safety net to catch any sync-gap submissions
+            local_grievances = self.local_data.get("grievances", {})
+            if local_grievances:
+                mongo_ids = {g.get("id") for g in mongo_grievances}
+                for gid, grievance in local_grievances.items():
+                    if gid and gid not in mongo_ids and isinstance(grievance, dict):
+                        mongo_grievances.insert(0, grievance)
+            return mongo_grievances
         return sorted(
             list(self.local_data.get("grievances", {}).values()),
             key=lambda x: (x.get("createdAt") or x.get("timestamp") or "", x.get("id") or ""),
@@ -358,8 +382,12 @@ class LokSwarDB:
 
     def get_grievance(self, grievance_id):
         if self.is_connected:
-            return self.db.grievances.find_one({"id": grievance_id}, {"_id": 0})
+            g = self.db.grievances.find_one({"id": grievance_id}, {"_id": 0})
+            if g:
+                return g
+        # Fallback to local cache
         return self.local_data.get("grievances", {}).get(grievance_id)
+
 
     def save_grievance(self, grievance_dict):
         gid = grievance_dict.get("id")
@@ -367,8 +395,17 @@ class LokSwarDB:
             return False
         if "createdAt" not in grievance_dict:
             grievance_dict["createdAt"] = datetime.now().isoformat()
+        self.ensure_connected()
         if self.is_connected:
-            self.db.grievances.update_one({"id": gid}, {"$set": grievance_dict}, upsert=True)
+            try:
+                self.db.grievances.update_one({"id": gid}, {"$set": grievance_dict}, upsert=True)
+                if self.alt_db is not None:
+                    self.alt_db.grievances.update_one({"id": gid}, {"$set": grievance_dict}, upsert=True)
+                print(f"[MongoDB Atlas] Successfully persisted grievance #{gid} to MongoDB Atlas ({DB_NAME} & citizen_portal_db)")
+            except Exception as e:
+                print(f"[MongoDB Grievance Save Error]: {e}")
+            self.local_data.setdefault("grievances", {})[gid] = grievance_dict
+            self.save_local_cache()
             return True
         self.local_data.setdefault("grievances", {})[gid] = grievance_dict
         self.save_local_cache()
@@ -378,11 +415,15 @@ class LokSwarDB:
         if not grievance_id:
             return False
         deleted = False
+        self.ensure_connected()
         if self.is_connected:
             try:
                 res = self.db.grievances.delete_one({"id": grievance_id})
+                if self.alt_db is not None:
+                    self.alt_db.grievances.delete_one({"id": grievance_id})
                 if res.deleted_count > 0:
                     deleted = True
+                print(f"[MongoDB Atlas] Deleted #{grievance_id} from MongoDB Atlas")
             except Exception as e:
                 print(f"[MongoDB Delete Error]: {e}")
         if grievance_id in self.local_data.get("grievances", {}):

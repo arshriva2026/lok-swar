@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Menu,
   Bell,
@@ -24,7 +24,7 @@ import {
 
 /**
  * लोक स्वर (Lok Swar) - Official Civic Intelligence Platform
- * AC-134 Sundargarh
+ * 
  * 
  * Design & Architecture:
  * 1. Clean Top Header: Left [≡] Hamburger, Center is EMPTY, Right has 🔔 Notifications, 🌐 Language, ☀️/🌙 Soft Blue Night Toggle.
@@ -61,13 +61,13 @@ export default function LokSwarHome({ onNavigateTab }) {
   const i18n = {
     hi: {
       brandTitle: "लोक स्वर",
-      brandSub: "OFFICIAL CIVIC INTELLIGENCE • AC-134 SUNDARGARH",
+      brandSub: "OFFICIAL CIVIC INTELLIGENCE • ",
       placeholder: "बोलें, लिखें या अपनी समस्या रिकॉर्ड करें...",
       submitBtn: "🔍 रिपोर्ट जमा करें / SUBMIT REPORT",
       recordingPrompt: "🔴 आपकी आवाज़ रिकॉर्ड हो रही है... बोलें",
       successMsg: "आपकी प्राथमिकता रिपोर्ट सफलतापूर्वक दर्ज कर ली गई है!",
       drawerTitle: "लोक स्वर",
-      constituencyTag: "AC-134 SUNDARGARH",
+      constituencyTag: "",
       systemMode: "Standard Mode",
       navSectionTitle: "सूचना व निर्णय डैशबोर्ड (8 TABS)",
       notifTitle: "अधिसूचनाएं (Notifications)",
@@ -76,13 +76,13 @@ export default function LokSwarHome({ onNavigateTab }) {
     },
     or: {
       brandTitle: "ଲୋକ ସ୍ୱର",
-      brandSub: "OFFICIAL CIVIC INTELLIGENCE • AC-134 SUNDARGARH",
+      brandSub: "OFFICIAL CIVIC INTELLIGENCE • ",
       placeholder: "କୁହନ୍ତୁ, ଲେଖନ୍ତୁ କିମ୍ବା ସମସ୍ୟା ରେକର୍ଡ କରନ୍ତୁ...",
       submitBtn: "🔍 ରିପୋର୍ଟ ଦାଖଲ କରନ୍ତୁ / SUBMIT REPORT",
       recordingPrompt: "🔴 ଆପଣଙ୍କ ସ୍ୱର ରେକର୍ଡ ହେଉଛି... କୁହନ୍ତୁ",
       successMsg: "ଆପଣଙ୍କ ରିପୋର୍ଟ ସଫଳତାର ସହ ଦାଖଲ ହୋଇଛି!",
       drawerTitle: "ଲୋକ ସ୍ୱର",
-      constituencyTag: "AC-134 SUNDARGARH",
+      constituencyTag: "",
       systemMode: "Standard Mode",
       navSectionTitle: "ସୂଚନା ଓ ନିର୍ଣ୍ଣୟ ଡ୍ୟାସବୋର୍ଡ (8 TABS)",
       notifTitle: "ବିଜ୍ଞପ୍ତି (Notifications)",
@@ -91,13 +91,13 @@ export default function LokSwarHome({ onNavigateTab }) {
     },
     en: {
       brandTitle: "Lok Swar",
-      brandSub: "OFFICIAL CIVIC INTELLIGENCE • AC-134 SUNDARGARH",
+      brandSub: "OFFICIAL CIVIC INTELLIGENCE • ",
       placeholder: "Speak, type, or record your problem here...",
       submitBtn: "🔍 SUBMIT REPORT / रिपोर्ट जमा करें",
       recordingPrompt: "🔴 Recording voice... Speak clearly now",
       successMsg: "Your priority report has been officially registered!",
       drawerTitle: "Lok Swar",
-      constituencyTag: "AC-134 SUNDARGARH",
+      constituencyTag: "",
       systemMode: "Standard Mode",
       navSectionTitle: "Executive Information Clusters (8 Tabs)",
       notifTitle: "Civic Notifications",
@@ -106,13 +106,13 @@ export default function LokSwarHome({ onNavigateTab }) {
     },
     bn: {
       brandTitle: "লোক স্বর",
-      brandSub: "OFFICIAL CIVIC INTELLIGENCE • AC-134 SUNDARGARH",
+      brandSub: "OFFICIAL CIVIC INTELLIGENCE • ",
       placeholder: "বলুন, লিখুন বা আপনার সমস্যা রেকর্ড করুন...",
       submitBtn: "🔍 রিপোর্ট জমা দিন / SUBMIT REPORT",
       recordingPrompt: "🔴 আপনার ভয়েস রেকর্ড হচ্ছে... বলুন",
       successMsg: "আপনার রিপোর্ট সফলভাবে নথিভুক্ত করা হয়েছে!",
       drawerTitle: "লোক স্বর",
-      constituencyTag: "AC-134 SUNDARGARH",
+      constituencyTag: "",
       systemMode: "Standard Mode",
       navSectionTitle: "তথ্য ও সিদ্ধান্ত ড্যাশবোর্ড (8 TABS)",
       notifTitle: "বিজ্ঞপ্তি (Notifications)",
@@ -141,7 +141,7 @@ export default function LokSwarHome({ onNavigateTab }) {
       title: "Overview & KPIs",
       titleHi: "क्षेत्रीय प्रगति व सांख्यिकी",
       desc: "Constituency KPIs, resolution metrics, and sector-wise distribution.",
-      badge: "AC-134 Sundargarh"
+      badge: ""
     },
     {
       id: "gis_map",
@@ -203,13 +203,13 @@ export default function LokSwarHome({ onNavigateTab }) {
     {
       id: 1,
       title: "Drone Survey Georeferenced",
-      desc: "Garuda-V completed Kalyanpur Bridge corridor audit with 42 orthophotos.",
+      desc: "Garuda-V completed  Bridge corridor audit with 42 orthophotos.",
       time: "10m ago"
     },
     {
       id: 2,
       title: "Discrepancy Alert Flagged",
-      desc: "Kalyanpur road status discrepancy detected (Govt: All-Weather vs Citizen: Washout).",
+      desc: " road status discrepancy detected (Govt: All-Weather vs Citizen: Washout).",
       time: "45m ago"
     },
     {
@@ -299,7 +299,7 @@ export default function LokSwarHome({ onNavigateTab }) {
             ? 'ଆମ ଗାଁ କଲ୍ୟାଣପୁରରୁ ଡାକ୍ତରଖାନା ଯିବା ରାସ୍ତା ବର୍ଷାରେ ସମ୍ପୂର୍ଣ୍ଣ ଧୋଇ ହୋଇଯାଇଛି।'
             : selectedLang === 'hi'
             ? 'हमारे गांव कल्याणपुर से अस्पताल जाने वाली मुख्य सड़क बारिश में पूरी तरह बह गई है।'
-            : 'The main all-weather road from Kalyanpur village to the primary health clinic is washed out.'
+            : 'The main all-weather road from  village to the primary health clinic is washed out.'
         );
       }
     } else {
@@ -754,7 +754,7 @@ export default function LokSwarHome({ onNavigateTab }) {
               </button>
               <button
                 onClick={() => {
-                  setInputText("The main culvert bridge between Kalyanpur and Sundargarh hospital has collapsed.");
+                  setInputText("The main culvert bridge between  and  hospital has collapsed.");
                   setSelectedLang('en');
                   playChime('tap');
                 }}
@@ -764,7 +764,7 @@ export default function LokSwarHome({ onNavigateTab }) {
                     : 'bg-[#F4F9F6] border-[#D8E2DC] text-[#1E4B3D] hover:bg-[#E8F0EC]'
                 }`}
               >
-                🗣️ EN: "Kalyanpur Bridge collapsed..."
+                🗣️ EN: " Bridge collapsed..."
               </button>
             </div>
           </div>

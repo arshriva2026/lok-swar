@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Menu,
   Bell,
@@ -71,7 +71,7 @@ export default function MinimalistCivicHome({ onNavigateTab }) {
       recordingPrompt: "🔴 आपकी आवाज़ रिकॉर्ड हो रही है... बोलें",
       successMsg: "आपकी प्राथमिकता रिपोर्ट सफलतापूर्वक दर्ज कर ली गई है!",
       drawerTitle: "People's Priorities",
-      constituencyTag: "AC-134 SUNDARGARH",
+      constituencyTag: "",
       systemMode: "Standard Mode • Online 4G/5G",
       navSectionTitle: "सूचना व निर्णय डैशबोर्ड (8 TABS)",
       notifTitle: "अधिसूचनाएं (Notifications)",
@@ -84,7 +84,7 @@ export default function MinimalistCivicHome({ onNavigateTab }) {
       recordingPrompt: "🔴 ଆପଣଙ୍କ ସ୍ୱର ରେକର୍ଡ ହେଉଛି... କୁହନ୍ତୁ",
       successMsg: "ଆପଣଙ୍କ ରିପୋର୍ଟ ସଫଳତାର ସହ ଦାଖଲ ହୋଇଛି!",
       drawerTitle: "People's Priorities",
-      constituencyTag: "AC-134 SUNDARGARH",
+      constituencyTag: "",
       systemMode: "Standard Mode • Online 4G/5G",
       navSectionTitle: "ସୂଚନା ଓ ବିକାଶ ଡ୍ୟାସବୋର୍ଡ (8 TABS)",
       notifTitle: "ବିଜ୍ଞପ୍ତି (Notifications)",
@@ -97,7 +97,7 @@ export default function MinimalistCivicHome({ onNavigateTab }) {
       recordingPrompt: "🔴 Recording voice... Speak clearly now",
       successMsg: "Your priority report has been officially registered!",
       drawerTitle: "People's Priorities",
-      constituencyTag: "AC-134 SUNDARGARH",
+      constituencyTag: "",
       systemMode: "Standard Mode • Online 4G/5G",
       navSectionTitle: "Executive Information Clusters (8 Tabs)",
       notifTitle: "Civic Notifications",
@@ -125,7 +125,7 @@ export default function MinimalistCivicHome({ onNavigateTab }) {
       title: "Overview & KPIs",
       titleHi: "क्षेत्रीय प्रगति व सांख्यिकी",
       desc: "Constituency KPIs, resolution metrics, and sector-wise distribution.",
-      badge: "AC-134 Sundargarh"
+      badge: ""
     },
     {
       id: "gis_map",
@@ -188,14 +188,14 @@ export default function MinimalistCivicHome({ onNavigateTab }) {
     {
       id: 1,
       title: "Drone Survey Georeferenced",
-      desc: "Garuda-V completed Kalyanpur Bridge corridor audit with 42 orthophotos.",
+      desc: "Garuda-V completed  Bridge corridor audit with 42 orthophotos.",
       time: "10m ago",
       type: "drone"
     },
     {
       id: 2,
       title: "Discrepancy Alert Flagged",
-      desc: "Kalyanpur road status discrepancy detected (Govt: All-Weather vs Citizen: Washout).",
+      desc: " road status discrepancy detected (Govt: All-Weather vs Citizen: Washout).",
       time: "45m ago",
       type: "alert"
     },
@@ -253,7 +253,7 @@ export default function MinimalistCivicHome({ onNavigateTab }) {
             ? 'ଆମ ଗାଁ କଲ୍ୟାଣପୁରରୁ ଡାକ୍ତରଖାନା ଯିବା ରାସ୍ତା ବର୍ଷାରେ ସମ୍ପୂର୍ଣ୍ଣ ଧୋଇ ହୋଇଯାଇଛି।'
             : selectedLang === 'hi'
             ? 'हमारे गांव कल्याणपुर से अस्पताल जाने वाली मुख्य सड़क बारिश में पूरी तरह बह गई है।'
-            : 'The main all-weather road from Kalyanpur village to the primary health clinic is washed out.'
+            : 'The main all-weather road from  village to the primary health clinic is washed out.'
         );
       }
     } else {
@@ -498,7 +498,7 @@ export default function MinimalistCivicHome({ onNavigateTab }) {
             नागरिक विकास प्राथमिकता इंजन
           </h2>
           <p className={`text-xs md:text-sm font-medium mt-1 ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-            District Planning Intelligence • AC-134 Sundargarh
+            District Planning Intelligence • 
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Menu,
   Volume2,
@@ -135,7 +135,7 @@ export default function CivicSearchEngine({ onClusterSelect }) {
       title: "Constituency Overview & KPIs",
       titleHi: "क्षेत्रीय प्रगति व सांख्यिकी",
       desc: "Executive summary, 94% verification index, and sector-wise demand breakdown.",
-      badge: "AC-134 Sundargarh",
+      badge: "",
       color: "text-blue-700 bg-blue-50 border-blue-200"
     },
     {
@@ -175,7 +175,7 @@ export default function CivicSearchEngine({ onClusterSelect }) {
       title: "Priority Ranking Engine",
       titleHi: "पारदर्शी प्राथमिकता गणना",
       desc: "12-factor mathematical scoring formula with configurable dynamic weight sliders.",
-      badge: "Rank #1: Kalyanpur",
+      badge: "Rank #1: ",
       color: "text-teal-700 bg-teal-50 border-teal-200"
     },
     {
@@ -273,7 +273,7 @@ export default function CivicSearchEngine({ onClusterSelect }) {
             ? 'ଆମ ଗାଁ କଲ୍ୟାଣପୁରରୁ ଡାକ୍ତରଖାନା ଯିବା ରାସ୍ତା ବର୍ଷାରେ ସମ୍ପୂର୍ଣ୍ଣ ଧୋଇ ହୋଇଯାଇଛି।'
             : selectedLang === 'hi'
               ? 'हमारे गांव कल्याणपुर से अस्पताल जाने वाली मुख्य सड़क बारिश में पूरी तरह बह गई है।'
-              : 'The main all-weather road from Kalyanpur village to the primary health clinic is washed out.'
+              : 'The main all-weather road from  village to the primary health clinic is washed out.'
         );
       }
     } else {
@@ -429,7 +429,7 @@ export default function CivicSearchEngine({ onClusterSelect }) {
             नागरिक विकास प्राथमिकता इंजन
           </h2>
           <p className="text-sm text-slate-600 font-medium mt-1">
-            Official Constituency Intelligence Engine • AC-134 Sundargarh
+            Official Constituency Intelligence Engine • 
           </p>
         </div>
 
@@ -732,7 +732,7 @@ export default function CivicSearchEngine({ onClusterSelect }) {
             <div className="p-4 rounded-2xl bg-[#F4F7F5] border border-[#D8E2DC] mb-5">
               <div className="text-xs font-bold text-[#1B4D3E] uppercase mb-1">Live Operational Status:</div>
               <div className="text-xs text-slate-700">
-                Connected to Sundargarh District Planning Registry with verified evidence tri-factor scoring.
+                Connected to  Planning Registry with verified evidence tri-factor scoring.
               </div>
             </div>
 

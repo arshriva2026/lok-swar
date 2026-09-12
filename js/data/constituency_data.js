@@ -1,12 +1,12 @@
-/**
+﻿/**
  * People's Priorities - Constituency Master & Demo Data
- * Synthetic Ground Truth & Registry for Sundargarh Assembly Constituency
+ * Synthetic Ground Truth & Registry for 
  */
 
 export const CONSTITUENCY_INFO = {
-  name: "Sundargarh Rural & Urban Assembly Constituency",
-  code: "AC-134",
-  district: "Sundargarh District",
+  name: " Rural & Urban Assembly Constituency",
+  code: "",
+  district: "",
   state: "Odisha",
   total_population: 284000,
   rural_population_pct: 68.4,
@@ -17,20 +17,20 @@ export const CONSTITUENCY_INFO = {
 };
 
 export const DEMO_VILLAGES_AND_WARDS = [
-  { id: "V01", name: "Kalyanpur Gram Panchayat", type: "rural", block: "Lathikata", population: 4200, lat: 22.1245, lng: 84.0321, vulnerability: "High", literacy_pct: 62 },
+  { id: "V01", name: "", type: "rural", block: "", population: 4200, lat: 22.1245, lng: 84.0321, vulnerability: "High", literacy_pct: 62 },
   { id: "V02", name: "Birmitrapur Border Area", type: "rural", block: "Birmitrapur", population: 6100, lat: 22.1480, lng: 84.0890, vulnerability: "High", literacy_pct: 58 },
   { id: "V03", name: "Gopabandhu Nagar Ward 4", type: "urban", block: "Sector-4 Ward", population: 12400, lat: 22.2150, lng: 84.1420, vulnerability: "Medium", literacy_pct: 84 },
   { id: "V04", name: "Brahmani Valley Village", type: "rural", block: "Panposh", population: 3800, lat: 22.1890, lng: 84.0150, vulnerability: "Medium", literacy_pct: 69 },
   { id: "V05", name: "Jhirpani Tribal Hamlet", type: "extreme_rural", block: "Bisra", population: 2900, lat: 22.2450, lng: 84.2100, vulnerability: "Critical", literacy_pct: 44 },
   { id: "V06", name: "Koel River Colony Ward 8", type: "urban", block: "Koel Ward", population: 8900, lat: 22.2300, lng: 84.1650, vulnerability: "High", literacy_pct: 71 },
-  { id: "V07", name: "Mandira Forest Fringe Hamlet", type: "extreme_rural", block: "Lathikata", population: 1850, lat: 22.0950, lng: 83.9800, vulnerability: "Critical", literacy_pct: 48 },
+  { id: "V07", name: "Mandira Forest Fringe Hamlet", type: "extreme_rural", block: "", population: 1850, lat: 22.0950, lng: 83.9800, vulnerability: "Critical", literacy_pct: 48 },
   { id: "V08", name: "Nuagaon Agricultural Belt", type: "rural", block: "Bisra", population: 5400, lat: 22.1620, lng: 84.2250, vulnerability: "Medium", literacy_pct: 64 },
   { id: "V09", name: "Civil Township Zone 2", type: "urban", block: "Central Ward", population: 15600, lat: 22.2500, lng: 84.1200, vulnerability: "Low", literacy_pct: 92 },
   { id: "V10", name: "Kansbahal Industrial Corridor", type: "semi_urban", block: "Rajgangpur", population: 7200, lat: 22.1750, lng: 83.9200, vulnerability: "Medium", literacy_pct: 76 }
 ];
 
 export const DEMO_FACILITIES = [
-  { id: "FAC-01", name: "Kalyanpur Primary Health Centre", type: "Health (PHC)", lat: 22.1260, lng: 84.0350, capacity: "6 Beds", status: "Operational (Cut off in Monsoon)" },
+  { id: "FAC-01", name: " Primary Health Centre", type: "Health (PHC)", lat: 22.1260, lng: 84.0350, capacity: "6 Beds", status: "Operational (Cut off in Monsoon)" },
   { id: "FAC-02", name: "Birmitrapur Health Sub-Centre", type: "Health (Sub-Centre)", lat: 22.1510, lng: 84.0910, capacity: "OPD Only", status: "Staffing Deficit" },
   { id: "FAC-03", name: "Gopabandhu Govt High School", type: "Education", lat: 22.2170, lng: 84.1440, capacity: "450 Students (4 Classrooms)", status: "Severe Overcrowding" },
   { id: "FAC-04", name: "Jhirpani Piped Tap Stand #1", type: "Water", lat: 22.2430, lng: 84.2080, capacity: "Dry / Broken Pump", status: "Non-Functional" },
@@ -43,10 +43,10 @@ export const MULTILINGUAL_SAMPLE_PHRASES = [
   {
     lang: "Odia",
     text: "ଆମ ଗାଁ କଲ୍ୟାଣପୁରରୁ ଡାକ୍ତରଖାନା ଯିବା ରାସ୍ତା ବର୍ଷା ଦିନେ ପୂରା ଭାଙ୍ଗି ଯାଉଛି। ରୋଗୀ ମାନେ ୨୪ କିଲୋମିଟର ଦୂର ଯିବାକୁ ବାଧ୍ୟ ହେଉଛନ୍ତି।",
-    translation: "The road from our village Kalyanpur to the hospital gets completely washed out during rains. Patients are forced to travel 24 km around.",
+    translation: "The road from our village  to the hospital gets completely washed out during rains. Patients are forced to travel 24 km around.",
     category: "Roads & Healthcare",
     severity: "Critical",
-    location: "Kalyanpur Gram Panchayat",
+    location: "",
     impact: "Severe healthcare access blockage for 18,400 residents during monsoon emergency."
   },
   {

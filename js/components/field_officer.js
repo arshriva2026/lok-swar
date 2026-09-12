@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Field & Verification Officer Dashboard Component
  * Mobile-ready, offline capable inspection queue, geotagged evidence logger & verification checklists.
  */
@@ -10,8 +10,8 @@ export function renderFieldOfficerView(state) {
     {
       id: "TSK-401",
       submission_id: "SUB-1082",
-      title: "Verify Kalyanpur Road Bridge Washout",
-      location: "Kalyanpur Gram Panchayat (Lathikata Block)",
+      title: "Verify  Road Bridge Washout",
+      location: " ()",
       category: "Roads & Healthcare",
       urgency: "Immediate",
       assigned_to: "Field Officer R. K. Nayak",
@@ -52,7 +52,7 @@ export function renderFieldOfficerView(state) {
           </div>
           <div>
             <div style="font-weight: 700; font-size: 1.1rem;">Field Verification Officer Portal</div>
-            <div style="font-size: 0.78rem; color: #bfdbfe;">Assigned Officer: R. K. Nayak (Lathikata Circle)</div>
+            <div style="font-size: 0.78rem; color: #bfdbfe;">Assigned Officer: R. K. Nayak ( Circle)</div>
           </div>
         </div>
 

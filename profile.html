@@ -251,13 +251,15 @@ const TRANSLATIONS = {
     trustScore: "UIDAI नागरिक विश्वास",
     backToDashboard: "नागरिक मुख्य पृष्ठ",
     adminSuite: "प्रशासनिक सूट",
+    logout: "लॉग आउट",
+    signOut: "साइन आउट",
     voiceGuide: "आवाज गाइड",
     voiceMute: "मौन करें",
     notifications: "नागरिक सूचनाएं",
     sovereigntyFooter: "256-बिट एंड-टू-एंड एनक्रिप्शन • डिजिटल इंडिया सोवरेनिटी",
     closeMenu: "✓ मेनू बंद करें",
     drawerTitle: "नागरिक सेवाएं",
-    constituencyTag: "सुंदरगढ़ (AC-134)",
+    constituencyTag: "सुंदरगढ़ ()",
     navSectionTitle: "मुख्य सेवाएं (7 पृष्ठ)"
   },
   or: {
@@ -274,13 +276,15 @@ const TRANSLATIONS = {
     trustScore: "UIDAI ବିଶ୍ୱାସ ସ୍କୋର",
     backToDashboard: "ମୁଖ୍ୟ ପୃଷ୍ଠାକୁ ଫେରନ୍ତୁ",
     adminSuite: "ପ୍ରଶାସନିକ ସୁଟ୍",
+    logout: "ଲଗ୍ ଆଉଟ୍",
+    signOut: "ପ୍ରସ୍ଥାନ କରନ୍ତୁ",
     voiceGuide: "ଭଏସ୍ ଗାଇଡ୍",
     voiceMute: "ବନ୍ଦ କରନ୍ତୁ",
     notifications: "ନାଗରିକ ସୂଚନା",
     sovereigntyFooter: "୨୫୬-ବିଟ୍ ଏନକ୍ରିପସନ୍ • ଡିଜିଟାଲ୍ ଇଣ୍ଡିଆ ସୁରକ୍ଷା",
     closeMenu: "✓ ମେନୁ ବନ୍ଦ କରନ୍ତୁ",
     drawerTitle: "ନାଗରିକ ସେବା",
-    constituencyTag: "ସୁନ୍ଦରଗଡ଼ (AC-134)",
+    constituencyTag: "ସୁନ୍ଦରଗଡ଼ ()",
     navSectionTitle: "ମୁଖ୍ୟ ସେବା (୭ ପୃଷ୍ଠା)"
   },
   bho: {
@@ -297,13 +301,15 @@ const TRANSLATIONS = {
     trustScore: "UIDAI नागरिक बिस्वास",
     backToDashboard: "मुख्य पेज पर जाईं",
     adminSuite: "प्रशासनिक सूट",
+    logout: "लॉग आउट करीं",
+    signOut: "बाहर निकलीं",
     voiceGuide: "आवाज गाइड",
     voiceMute: "मौन करीं",
     notifications: "नागरिक सूचना",
     sovereigntyFooter: "256-बिट एन्क्रिप्शन • डिजिटल इंडिया सुरक्षा",
     closeMenu: "✓ मेनू बंद करीं",
     drawerTitle: "नागरिक सेवा",
-    constituencyTag: "सुंदरगढ़ (AC-134)",
+    constituencyTag: "सुंदरगढ़ ()",
     navSectionTitle: "मुख्य सेवा (7 पृष्ठ)"
   },
   bn: {
@@ -320,18 +326,20 @@ const TRANSLATIONS = {
     trustScore: "UIDAI নাগরিক আস্থা",
     backToDashboard: "মূল পাতায় ফিরুন",
     adminSuite: "প্রশাসনিক স্যুট",
+    logout: "লগ আউট",
+    signOut: "সাইন আউট",
     voiceGuide: "ভয়েস গাইড",
     voiceMute: "নিঃশব্দ করুন",
     notifications: "নাগরিক বিজ্ঞপ্তি",
     sovereigntyFooter: "২৫৬-বিট এনক্রিপশন • ডিজিটাল ইন্ডিয়া সার্বভৌমত্ব",
     closeMenu: "✓ মেনু বন্ধ করুন",
     drawerTitle: "নাগরিক পরিষেবা",
-    constituencyTag: "সুন্দরগড় (AC-134)",
+    constituencyTag: "সুন্দরগড় ()",
     navSectionTitle: "প্রধান পরিষেবা (৭টি পৃষ্ঠা)"
   },
   en: {
     brandTitle: "LOK SWAR",
-    brandSub: "Citizen Profile & e-KYC Identity Ledger • Sundargarh",
+    brandSub: "Citizen Profile & e-KYC Identity Ledger • ",
     nationalTitle: "Government of India • भारत सरकार",
     odishaSub: "Government of Odisha • DigiLocker e-KYC Portal",
     tabIdentity: "👤 e-KYC Identity Ledger",
@@ -343,13 +351,15 @@ const TRANSLATIONS = {
     trustScore: "UIDAI Civic Trust",
     backToDashboard: "Citizen Dashboard",
     adminSuite: "Admin Suite",
+    logout: "Logout",
+    signOut: "Sign Out",
     voiceGuide: "Voice Guide",
     voiceMute: "Mute",
     notifications: "Citizen Alerts",
     sovereigntyFooter: "256-Bit Sovereign Encryption • MeitY Digital Governance",
     closeMenu: "✓ Close Menu",
     drawerTitle: "Citizen Services",
-    constituencyTag: "Sundargarh (AC-134)",
+    constituencyTag: " ()",
     navSectionTitle: "Core Services (7 Pages)"
   }
 };
@@ -390,10 +400,14 @@ function ProfileApp() {
       return 'en';
     }
   });
-  const handleLanguageChange = newLang => {
+  const handleLanguageChange = (newLang, isExplicit = true) => {
     setSelectedLang(newLang);
     try {
       localStorage.setItem('lok_swar_selected_language', newLang);
+      if (isExplicit) {
+        localStorage.setItem('lok_swar_user_explicit_lang', 'true');
+        localStorage.setItem('lok_swar_user_lang_locked', newLang);
+      }
       window.dispatchEvent(new Event('storage'));
     } catch (e) {}
     playChime('tap');
@@ -438,7 +452,7 @@ function ProfileApp() {
     bn: "কটক",
     bho: "कटक"
   }, {
-    en: "Sundargarh",
+    en: "",
     or: "ସୁନ୍ଦରଗଡ଼",
     hi: "सुंदरगढ़",
     bn: "সুন্দরগড়",
@@ -486,13 +500,13 @@ function ProfileApp() {
     bn: "ব্রহ্মপুর",
     bho: "ब्रह्मपुर"
   }, {
-    en: "Kalyanpur",
+    en: "",
     or: "କଲ୍ୟାଣପୁର",
     hi: "कल्याणपुर",
     bn: "কল্যাণপুর",
     bho: "कल्याणपुर"
   }, {
-    en: "Lathikata",
+    en: "",
     or: "ଲାଠିକଟା",
     hi: "लाठीकाटा",
     bn: "লাঠিকাটা",
@@ -703,8 +717,8 @@ function ProfileApp() {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   // 5. Citizen Profile Form State
-  const [name, setName] = useState('Rishav Yadav');
-  const [email, setEmail] = useState('rishav.yadav.odisha@gmail.com');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [emailOtpSent, setEmailOtpSent] = useState(false);
   const [emailOtpCode, setEmailOtpCode] = useState('');
@@ -712,15 +726,15 @@ function ProfileApp() {
   const [isSendingEmailOtp, setIsSendingEmailOtp] = useState(false);
   const [isVerifyingEmailOtp, setIsVerifyingEmailOtp] = useState(false);
   const [emailError, setEmailError] = useState('');
-  const [mobile, setMobile] = useState('9861234567');
+  const [mobile, setMobile] = useState('');
   const [aadhaar, setAadhaar] = useState('5482 9104 1940');
   const [dpUrl, setDpUrl] = useState('assets/bg_1_smart_village.jpg');
-  const [village, setVillage] = useState('Kalyanpur Gram Panchayat (Ward 3)');
+  const [village, setVillage] = useState('');
   const [house, setHouse] = useState('Plot #14, Sector 2');
-  const [block, setBlock] = useState('Lathikata Block');
-  const [district, setDistrict] = useState('Sundargarh');
+  const [block, setBlock] = useState('');
+  const [district, setDistrict] = useState('');
   const [stateName, setStateName] = useState('Odisha');
-  const [pincode, setPincode] = useState('770037');
+  const [pincode, setPincode] = useState('');
   const [isDigiLockerVerified, setIsDigiLockerVerified] = useState(true);
   const [isFetchingDigiLocker, setIsFetchingDigiLocker] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -738,13 +752,13 @@ function ProfileApp() {
       return saved ? JSON.parse(saved) : {
         lat: 22.1245,
         lng: 84.0321,
-        name: "Kalyanpur Gram Panchayat (Ward 3)"
+        name: ""
       };
     } catch (e) {
       return {
         lat: 22.1245,
         lng: 84.0321,
-        name: "Kalyanpur Gram Panchayat (Ward 3)"
+        name: ""
       };
     }
   });
@@ -782,7 +796,7 @@ function ProfileApp() {
         },
         body: JSON.stringify({
           id: probId,
-          mobile: mobile || "9861234567"
+          mobile: mobile || ""
         })
       });
       showToast(`✓ Upvoted report #${probId}! Community backing recorded.`);
@@ -799,7 +813,7 @@ function ProfileApp() {
 
   // Load Session and DB Grievances on Mount
   useEffect(() => {
-    let currentMobile = "9861234567";
+    let currentMobile = "";
     try {
       const raw = localStorage.getItem('lok_swar_citizen_session') || localStorage.getItem('lok_swar_citizen_auth_session');
       if (raw) {
@@ -815,9 +829,9 @@ function ProfileApp() {
         if (data.village) setVillage(data.village);
         if (data.addressDetails) {
           setHouse(data.addressDetails.house || 'Plot #14, Sector 2');
-          setBlock(data.addressDetails.block || 'Lathikata Block');
-          setDistrict(data.addressDetails.district || 'Sundargarh');
-          setPincode(data.addressDetails.pincode || '770037');
+          setBlock(data.addressDetails.block || '');
+          setDistrict(data.addressDetails.district || '');
+          setPincode(data.addressDetails.pincode || '');
         }
       }
     } catch (e) {}
@@ -829,6 +843,22 @@ function ProfileApp() {
       }
     }).catch(() => {});
   }, []);
+
+  // Robust Citizen Logout Handler
+  const handleLogout = () => {
+    playChime('tap');
+    try {
+      localStorage.removeItem('lok_swar_citizen_session');
+      localStorage.removeItem('lok_swar_citizen_auth_session');
+      localStorage.removeItem('lok_swar_user_endorsements');
+      localStorage.removeItem('lok_swar_custom_grievances');
+    } catch (e) {}
+    const msg = selectedLang === 'or' ? "✓ ସଫଳତାର ସହ ଲଗ୍ ଆଉଟ୍ ହୋଇଛି।" : selectedLang === 'hi' ? "✓ सफलतापूर्वक लॉग आउट हो गया।" : selectedLang === 'bho' ? "✓ लॉग आउट हो गइल।" : selectedLang === 'bn' ? "✓ সফলভাবে লগ আউট হয়েছে।" : "✓ Logged out successfully.";
+    showToast(msg);
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 400);
+  };
 
   // GSAP Animations for Drawer
   useEffect(() => {
@@ -933,9 +963,9 @@ function ProfileApp() {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            mobile: mobile || "9861234567",
-            name: name || "Rishav Yadav",
-            village: village || "Kalyanpur Gram Panchayat (Ward 3)",
+            mobile: mobile || "",
+            name: name || "",
+            village: village || "",
             image: b64
           })
         });
@@ -980,11 +1010,11 @@ function ProfileApp() {
     setTimeout(() => {
       setIsFetchingDigiLocker(false);
       setIsDigiLockerVerified(true);
-      setHouse("Plot #14, Sector 2, Rajgangpur Road");
-      setVillage("Kalyanpur Gram Panchayat (Ward 3)");
-      setBlock("Lathikata Block");
-      setDistrict("Sundargarh");
-      setPincode("770037");
+      setHouse("Rajgangpur Road");
+      setVillage("");
+      setBlock("");
+      setDistrict("");
+      setPincode("");
       showToast("✓ Verified Address successfully fetched from DigiLocker!");
     }, 1200);
   };
@@ -1211,7 +1241,16 @@ function ProfileApp() {
     className: "w-4 h-4"
   }), unreadNotifCount > 0 && /*#__PURE__*/React.createElement("span", {
     className: "absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-600 text-white font-black text-[9px] flex items-center justify-center shadow-xs"
-  }, unreadNotifCount)))), isDrawerOpen && /*#__PURE__*/React.createElement("div", {
+  }, unreadNotifCount)), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: handleLogout,
+    className: "h-9 px-3 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/60 dark:hover:bg-rose-900/80 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all",
+    title: t.logout || "Logout"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "text-sm leading-none"
+  }, "🚪"), /*#__PURE__*/React.createElement("span", {
+    className: "font-black"
+  }, t.logout || "Logout")))), isDrawerOpen && /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-50 flex"
   }, /*#__PURE__*/React.createElement("div", {
     ref: overlayRef,
@@ -1296,8 +1335,14 @@ function ProfileApp() {
   }, tab.title), /*#__PURE__*/React.createElement("p", {
     className: "text-[11px] font-medium line-clamp-1 text-slate-500 dark:text-slate-400"
   }, tab.desc))))), /*#__PURE__*/React.createElement("div", {
-    className: "p-4 border-t bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800"
+    className: "p-4 border-t bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 space-y-2.5"
   }, /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: handleLogout,
+    className: "w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-rose-50 hover:bg-rose-100 dark:bg-rose-950/40 dark:hover:bg-rose-950/70 text-rose-700 dark:text-rose-300 font-bold text-xs border border-rose-200 dark:border-rose-800 cursor-pointer active:scale-95 transition-all"
+  }, /*#__PURE__*/React.createElement("span", null, "🚪"), /*#__PURE__*/React.createElement("span", {
+    className: "font-black"
+  }, t.logout || "Logout")), /*#__PURE__*/React.createElement("button", {
     onClick: closeDrawer,
     className: "w-full flex items-center justify-center p-3 rounded-2xl font-bold text-xs bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 cursor-pointer shadow-xs active:scale-95 transition-all border border-slate-300 dark:border-slate-700"
   }, t.closeMenu)))), isNotifOpen && /*#__PURE__*/React.createElement("div", {
@@ -1332,7 +1377,7 @@ function ProfileApp() {
     className: "text-[10px] text-slate-500"
   }, "10m ago")), /*#__PURE__*/React.createElement("p", {
     className: "text-xs text-slate-600 dark:text-slate-300"
-  }, "₹4.20 Cr SDRF fund released for Kalyanpur Culvert Reconstruction.")), /*#__PURE__*/React.createElement("div", {
+  }, "₹4.20 Cr SDRF fund released for  Culvert Reconstruction.")), /*#__PURE__*/React.createElement("div", {
     className: "p-3.5 rounded-2xl border bg-slate-50 dark:bg-slate-950/70 border-slate-200 dark:border-slate-800 space-y-1"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex justify-between text-xs font-bold text-slate-800 dark:text-slate-200"
@@ -1375,7 +1420,7 @@ function ProfileApp() {
     className: "text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 flex items-center gap-1"
   }, /*#__PURE__*/React.createElement("span", null, "✓"), /*#__PURE__*/React.createElement("span", null, t.verifiedBadge))), /*#__PURE__*/React.createElement("p", {
     className: "text-xs font-medium text-slate-500 dark:text-slate-400"
-  }, "AC-134 Sundargarh Constituency • 142 Gram Panchayats Public Ledger"), /*#__PURE__*/React.createElement("div", {
+  }, " Constituency • 142 Gram Panchayats Public Ledger"), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center justify-center sm:justify-start gap-3 pt-2 text-xs font-mono flex-wrap text-slate-600 dark:text-slate-300"
   }, /*#__PURE__*/React.createElement("span", {
     className: "flex items-center gap-1"
@@ -1655,7 +1700,19 @@ function ProfileApp() {
     className: "text-sm font-bold text-blue-600 dark:text-blue-400"
   }, "Tier 1 Sovereign Pass"), /*#__PURE__*/React.createElement("p", {
     className: "text-[11px] text-slate-500"
-  }, "Bypasses spam filters automatically."))))), /*#__PURE__*/React.createElement("footer", {
+  }, "Bypasses spam filters automatically."))), /*#__PURE__*/React.createElement("div", {
+    className: "p-4 rounded-2xl border bg-rose-50/50 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/60 flex items-center justify-between gap-4 flex-wrap"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "text-sm font-bold text-rose-700 dark:text-rose-300"
+  }, "Device Session Control"), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-rose-600/80 dark:text-rose-400"
+  }, "Sign out of your citizen account and clear credentials on this device.")), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    onClick: handleLogout,
+    className: "px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
+  }, /*#__PURE__*/React.createElement("span", null, "🚪"), /*#__PURE__*/React.createElement("span", {
+    className: "font-black"
+  }, t.logout || "Logout"))))), /*#__PURE__*/React.createElement("footer", {
     className: "w-full max-w-5xl mx-auto px-4 py-6 border-t flex items-center justify-between text-xs flex-wrap gap-2 z-10 border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2 font-medium"
@@ -1663,7 +1720,7 @@ function ProfileApp() {
     className: "w-4 h-4 text-emerald-600 dark:text-emerald-400"
   }), /*#__PURE__*/React.createElement("span", null, t.sovereigntyFooter)), /*#__PURE__*/React.createElement("div", {
     className: "font-mono text-[11px]"
-  }, /*#__PURE__*/React.createElement("span", null, "AC-134 Sundargarh • Data Sovereignty Verified"))));
+  }, /*#__PURE__*/React.createElement("span", null, " • Data Sovereignty Verified"))));
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(/*#__PURE__*/React.createElement(ProfileApp, null));

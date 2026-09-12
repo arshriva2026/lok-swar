@@ -167,7 +167,7 @@
         id: 1,
         type: "priority",
         title: "482 Citizens Upvoted Your Issue",
-        desc: "Kalyanpur Bridge has achieved #1 top civic priority rank in AC-134 Sundargarh.",
+        desc: " Bridge has achieved #1 top civic priority rank in .",
         time: "10 mins ago",
         isUnread: true,
         tag: "Priority Escalation"
@@ -176,7 +176,7 @@
         id: 2,
         type: "audit",
         title: "Official Field Audit Attached",
-        desc: "Er. Rishav Yadav (JE) uploaded on-site verification report for Kalyanpur Ward 3.",
+        desc: "Er.  (JE) uploaded on-site verification report for  Ward 3.",
         time: "45 mins ago",
         isUnread: true,
         tag: "Official Action"
@@ -195,20 +195,20 @@
         const INITIAL_COMMUNITY_PROBLEMS = [
       {
         id: "TKT-101",
-        title: "Kalyanpur Bridge washed out completely in monsoon flood",
+        title: " Bridge washed out completely in monsoon flood",
         titleHi: "कल्याणपुर मुख्य पुलिया बाढ़ में पूरी तरह बह गई है",
         titleOriginal: "कल्याणपुर मुख्य पुलिया बाढ़ में पूरी तरह बह गई है",
-        adminEnglishTranslation: "Kalyanpur Bridge washed out completely in monsoon flood",
+        adminEnglishTranslation: " Bridge washed out completely in monsoon flood",
         category: "Roads & Bridges",
-        village: "Kalyanpur Gram Panchayat (Ward 3)",
-        block: "Lathikata",
+        village: "",
+        block: "",
         gps: "22.1245° N, 84.0321° E",
         affectedPopulation: 18400,
         urgencyScore: 96.4,
         status: "Field Audit Completed",
         statusStage: 2,
-        author: "Rishav Yadav",
-        citizenMobile: "9861234567",
+        author: "",
+        citizenMobile: "",
         aadhaarMasked: "XXXX-XXXX-1940",
         isAadhaarVerified: true,
         votes: 482,
@@ -301,8 +301,8 @@
         try {
           const saved = localStorage.getItem('lok_swar_citizen_session') || localStorage.getItem('lok_swar_citizen_auth_session');
           return saved ? JSON.parse(saved) : {
-            name: "Rishav Yadav",
-            mobile: "9861234567",
+            name: "",
+            mobile: "",
             village: localStorage.getItem('lok_swar_user_location_name') || "Current Location",
             aadhaar: "5482 9104 1940",
             aadhaarMasked: "XXXX-XXXX-1940",
@@ -318,35 +318,48 @@
       });
 
       useEffect(() => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(async (pos) => {
+        const detectCivicLoc = async () => {
+          let lat = 22.1245, lng = 84.0321;
+          if (navigator.geolocation) {
             try {
-              const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&zoom=18&addressdetails=1`);
+              const pos = await new Promise((res, rej) => {
+                navigator.geolocation.getCurrentPosition(res, rej, { enableHighAccuracy: false, timeout: 5000 });
+              });
+              lat = pos.coords.latitude;
+              lng = pos.coords.longitude;
+            } catch (e) {}
+          }
+          try {
+            const res = await fetch(`/api/geo/reverse?lat=${lat}&lon=${lng}`);
+            if (res.ok) {
               const data = await res.json();
-              if (data && data.address) {
-                const addr = data.address;
-                const state = (addr.state || '');
-                const district = addr.state_district || addr.county || addr.district || addr.city || addr.town || '';
-                const village = addr.village || addr.suburb || addr.neighbourhood || addr.residential || addr.hamlet || addr.town || addr.city || '';
-                const locParts = [village, district, state].filter(Boolean);
-                const loc = locParts.join(', ') || addr.display_name;
-                setCurrentLocationName(loc);
-                localStorage.setItem('lok_swar_user_location_name', loc);
+              if (data && data.display_name) {
+                setCurrentLocationName(data.display_name);
+                localStorage.setItem('lok_swar_user_location_name', data.display_name);
+                return;
               }
-            } catch(e) {}
-          });
-        }
+            }
+          } catch(e) {}
+          try {
+            const bdc = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
+            const bdata = await bdc.json();
+            const loc = `${bdata.locality || bdata.city || 'Sundargarh'}, ${bdata.principalSubdivision || 'Odisha'}`;
+            setCurrentLocationName(loc);
+            localStorage.setItem('lok_swar_user_location_name', loc);
+          } catch(e2) {}
+        };
+        detectCivicLoc();
       }, []);
 
-      const [mobileInput, setMobileInput] = useState("9861234567");
+      const [mobileInput, setMobileInput] = useState("");
       const [otpInput, setOtpInput] = useState("");
       const [otpSent, setOtpSent] = useState(false);
       const [loginError, setLoginError] = useState("");
 
       // 2. Profile Management Modal State
       const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-      const [profileName, setProfileName] = useState(citizenUser?.name || "Rishav Yadav");
-      const [profileMobile, setProfileMobile] = useState(citizenUser?.mobile || "9861234567");
+      const [profileName, setProfileName] = useState(citizenUser?.name || "");
+      const [profileMobile, setProfileMobile] = useState(citizenUser?.mobile || "");
       const [profileVillage, setProfileVillage] = useState(citizenUser?.village || currentLocationName || "Current Location");
       const [profileAadhaar, setProfileAadhaar] = useState(citizenUser?.aadhaar || "5482 9104 1940");
       const [profileDpUrl, setProfileDpUrl] = useState(citizenUser?.dpUrl || "assets/bg_1_smart_village.jpg");
@@ -355,7 +368,7 @@
       // 2.1 Mandatory Aadhaar OTP Verification Gate State
       const [isAadhaarOtpModalOpen, setIsAadhaarOtpModalOpen] = useState(false);
       const [aadhaarAuthAadhaar, setAadhaarAuthAadhaar] = useState(citizenUser?.aadhaar || "5482 9104 1940");
-      const [aadhaarAuthMobile, setAadhaarAuthMobile] = useState(citizenUser?.mobile || "9861234567");
+      const [aadhaarAuthMobile, setAadhaarAuthMobile] = useState(citizenUser?.mobile || "");
       const [aadhaarAuthOtpInput, setAadhaarAuthOtpInput] = useState("");
       const [aadhaarAuthOtpSent, setAadhaarAuthOtpSent] = useState(false);
       const [aadhaarAuthTimer, setAadhaarAuthTimer] = useState(60);
@@ -594,7 +607,7 @@
           brandTitle: "लोक स्वर",
           brandSub: "नागरिक शिकायत व जन प्राथमिकता पोर्टल",
           govIndia: "भारत सरकार • Government of India",
-          govState: "ओडिशा सरकार • सुंदरगढ़ जिला (AC-134)",
+          govState: "ओडिशा सरकार • सुंदरगढ़ जिला ()",
           helplineNational: "राष्ट्रीय हेल्पलाइन: 1947",
           helplineDistrict: "जिला सेवा हेल्पलाइन: 1800-345-6770",
           textZoom: "फ़ॉन्ट:",
@@ -605,8 +618,8 @@
           notifications: "सूचनाएं",
           verifiedUser: "सत्यापित",
           heroTitle: "लोक स्वर",
-          heroSubtitle: "राष्ट्रीय नागरिक शिकायत एवं जन प्राथमिकता प्रणाली • सुंदरगढ़ (AC-134)",
-          marqueePill: "नागरिक जन-प्राथमिकता एवं आधिकारिक निवारण पोर्टल • सुंदरगढ़ (AC-134)",
+          heroSubtitle: "राष्ट्रीय नागरिक शिकायत एवं जन प्राथमिकता प्रणाली • सुंदरगढ़ ()",
+          marqueePill: "नागरिक जन-प्राथमिकता एवं आधिकारिक निवारण पोर्टल • सुंदरगढ़ ()",
           placeholder: "अपनी समस्या बोलें, लिखें या रिकॉर्ड करें...",
           liveTyping: "लाइव टाइपिंग",
           recordingVoice: "आपकी आवाज़ रिकॉर्ड हो रही है... साफ बोलें",
@@ -631,7 +644,7 @@
           meityGateway: "माइटवाई डिजिलॉकर सहमति गेटवे",
           dataSovereignty: "🇮🇳 संसदीय क्षेत्र डेटा संप्रभुता",
           deptSectionTitle: "विभाग व क्षेत्र वर्गीकरण (7 विभाग)",
-          deptSectionSub: "जिला जन सेवा इकाइयों में स्वचालित ट्राइएज • सुंदरगढ़ (AC-134)",
+          deptSectionSub: "जिला जन सेवा इकाइयों में स्वचालित ट्राइएज • सुंदरगढ़ ()",
           showAllSectors: "✕ सभी क्षेत्र दिखाएं",
           allSectors: "सभी क्षेत्र",
           sectorRoads: "सड़क व पुल",
@@ -664,7 +677,7 @@
           feedbackTitle: "नागरिक प्रतिक्रिया व सुझाव",
           feedbackSub: "प्रशासनिक सेवा सुधार हेतु अपने सुझाव साझा करें",
           drawerTitle: "लोक स्वर",
-          constituencyTag: "सुंदरगढ़ (AC-134)",
+          constituencyTag: "सुंदरगढ़ ()",
           navSectionTitle: "मुख्य सेवाएं (7 पृष्ठ)",
           closeMenu: "✓ मेनू बंद करें",
           tabs: [
@@ -681,7 +694,7 @@
           brandTitle: "लोक स्वर",
           brandSub: "नागरिक शिकायत आ जन प्राथमिकता पोर्टल",
           govIndia: "भारत सरकार • Government of India",
-          govState: "ओडिशा सरकार • सुंदरगढ़ जिला (AC-134)",
+          govState: "ओडिशा सरकार • सुंदरगढ़ जिला ()",
           helplineNational: "राष्ट्रीय हेल्पलाइन: 1947",
           helplineDistrict: "जिला सेवा हेल्पलाइन: 1800-345-6770",
           textZoom: "फ़ॉन्ट:",
@@ -692,8 +705,8 @@
           notifications: "सूचना",
           verifiedUser: "सत्यापित",
           heroTitle: "लोक स्वर",
-          heroSubtitle: "राष्ट्रीय नागरिक शिकायत आ जन प्राथमिकता प्रणाली • सुंदरगढ़ (AC-134)",
-          marqueePill: "नागरिक जन-प्राथमिकता आ आधिकारिक समाधान पोर्टल • सुंदरगढ़ (AC-134)",
+          heroSubtitle: "राष्ट्रीय नागरिक शिकायत आ जन प्राथमिकता प्रणाली • सुंदरगढ़ ()",
+          marqueePill: "नागरिक जन-प्राथमिकता आ आधिकारिक समाधान पोर्टल • सुंदरगढ़ ()",
           placeholder: "अपन समस्या बोलीं, लिखीं या आवाज रिकार्ड करीं...",
           liveTyping: "लाइव टाइपिंग",
           recordingVoice: "आवाज रिकार्ड होत बा... साफ बोलीं",
@@ -718,7 +731,7 @@
           meityGateway: "माइटवाई डिजिलॉकर सहमति गेटवे",
           dataSovereignty: "🇮🇳 संसदीय क्षेत्र डेटा संप्रभुता",
           deptSectionTitle: "विभाग आ क्षेत्र वर्गीकरण (7 विभाग)",
-          deptSectionSub: "जिला लोक सेवा में स्वचालित ट्राइएज • सुंदरगढ़ (AC-134)",
+          deptSectionSub: "जिला लोक सेवा में स्वचालित ट्राइएज • सुंदरगढ़ ()",
           showAllSectors: "✕ सभ क्षेत्र देखीं",
           allSectors: "सभ क्षेत्र",
           sectorRoads: "सड़क आ पुल",
@@ -751,7 +764,7 @@
           feedbackTitle: "नागरिक प्रतिक्रिया आ सलाह",
           feedbackSub: "सेवा सुधार खातिर आपन सलाह साझा करीं",
           drawerTitle: "लोक स्वर",
-          constituencyTag: "सुंदरगढ़ (AC-134)",
+          constituencyTag: "सुंदरगढ़ ()",
           navSectionTitle: "मुख्य मेनू व सेवा सूची (7 पृष्ठ)",
           closeMenu: "✓ मेनू बंद करीं",
           tabs: [
@@ -768,7 +781,7 @@
           brandTitle: "ଲୋକ ସ୍ୱର",
           brandSub: "ନାଗରିକ ଅଭିଯୋଗ ଓ ଜନ ପ୍ରାଥମିକତା ପୋର୍ଟାଲ୍",
           govIndia: "ଭାରତ ସରକାର • Government of India",
-          govState: "ଓଡ଼ିଶା ସରକାର • ସୁନ୍ଦରଗଡ଼ ଜିଲ୍ଲା (AC-134)",
+          govState: "ଓଡ଼ିଶା ସରକାର • ସୁନ୍ଦରଗଡ଼ ଜିଲ୍ଲା ()",
           helplineNational: "ଜାତୀୟ ହେଲ୍ପଲାଇନ୍: 1947",
           helplineDistrict: "ଜିଲ୍ଲା ସେବା ହେଲ୍ପଲାଇନ୍: 1800-345-6770",
           textZoom: "ଅକ୍ଷର ଆକାର:",
@@ -779,8 +792,8 @@
           notifications: "ବିଜ୍ଞପ୍ତି",
           verifiedUser: "ପ୍ରମାଣିତ",
           heroTitle: "ଲୋକ ସ୍ୱର",
-          heroSubtitle: "ରାଷ୍ଟ୍ରୀୟ ନାଗରିକ ଅଭିଯୋଗ ଏବଂ ଜନ ପ୍ରାଥମିକତା ବ୍ୟବସ୍ଥା • ସୁନ୍ଦରଗଡ଼ (AC-134)",
-          marqueePill: "ନାଗରିକ ଜନ-ପ୍ରାଥମିକତା ଓ ସମାଧାନ ପୋର୍ଟାଲ୍ • ସୁନ୍ଦରଗଡ଼ (AC-134)",
+          heroSubtitle: "ରାଷ୍ଟ୍ରୀୟ ନାଗରିକ ଅଭିଯୋଗ ଏବଂ ଜନ ପ୍ରାଥମିକତା ବ୍ୟବସ୍ଥା • ସୁନ୍ଦରଗଡ଼ ()",
+          marqueePill: "ନାଗରିକ ଜନ-ପ୍ରାଥମିକତା ଓ ସମାଧାନ ପୋର୍ଟାଲ୍ • ସୁନ୍ଦରଗଡ଼ ()",
           placeholder: "କୁହନ୍ତୁ, ଲେଖନ୍ତୁ କିମ୍ବା ସମସ୍ୟା ରେକର୍ଡ କରନ୍ତୁ...",
           liveTyping: "ଲାଇଭ୍ ଟାଇପିଂ",
           recordingVoice: "ଆପଣଙ୍କ ସ୍ୱର ରେକର୍ଡ ହେଉଛି... ସ୍ପଷ୍ଟ କୁହନ୍ତୁ",
@@ -805,7 +818,7 @@
           meityGateway: "MeitY ଡିଜିଲକର ସମ୍ମତି ଗେଟୱେ",
           dataSovereignty: "🇮🇳 ସଂସଦୀୟ କ୍ଷେତ୍ର ତଥ୍ୟ ସାର୍ବଭୌମତ୍ୱ",
           deptSectionTitle: "ବିଭାଗ ଓ କ୍ଷେତ୍ର ବର୍ଗୀକରଣ (7ଟି ବିଭାଗ)",
-          deptSectionSub: "ଜିଲ୍ଲା ସେବାରେ ସ୍ୱୟଂଚାଳିତ ପ୍ରାଥମିକତା • ସୁନ୍ଦରଗଡ଼ (AC-134)",
+          deptSectionSub: "ଜିଲ୍ଲା ସେବାରେ ସ୍ୱୟଂଚାଳିତ ପ୍ରାଥମିକତା • ସୁନ୍ଦରଗଡ଼ ()",
           showAllSectors: "✕ ସମସ୍ତ ବିଭାଗ ଦେଖନ୍ତୁ",
           allSectors: "ସମସ୍ତ ବିଭାଗ",
           sectorRoads: "ରାସ୍ତା ଓ ସେତୁ",
@@ -838,7 +851,7 @@
           feedbackTitle: "ନାଗରିକ ମତାମତ ଓ ପରାମର୍ଶ",
           feedbackSub: "ପ୍ରଶାସନିକ ସେବା ଉନ୍ନତି ପାଇଁ ନିଜର ମତାମତ ଦିଅନ୍ତୁ",
           drawerTitle: "ଲୋକ ସ୍ୱର",
-          constituencyTag: "ସୁନ୍ଦରଗଡ଼ (AC-134)",
+          constituencyTag: "ସୁନ୍ଦରଗଡ଼ ()",
           navSectionTitle: "ମୁଖ୍ୟ ମେନୁ ଓ ସେବା (7ଟି ପୃଷ୍ଠା)",
           closeMenu: "✓ ମେନୁ ବନ୍ଦ କରନ୍ତୁ",
           tabs: [
@@ -855,7 +868,7 @@
           brandTitle: "লোক স্বর",
           brandSub: "নাগরিক অভিযোগ ও জন অগ্রাধিকার পোর্টাল",
           govIndia: "ভারত সরকার • Government of India",
-          govState: "ওড়িশা সরকার • সুন্দরগড় জেলা (AC-134)",
+          govState: "ওড়িশা সরকার • সুন্দরগড় জেলা ()",
           helplineNational: "জাতীয় হেল্পলাইন: 1947",
           helplineDistrict: "জেলা সেবা হেল্পলাইন: 1800-345-6770",
           textZoom: "ফন্ট আকার:",
@@ -866,8 +879,8 @@
           notifications: "বিজ্ঞপ্তি",
           verifiedUser: "যাচাইকৃত",
           heroTitle: "লোক স্বর",
-          heroSubtitle: "জাতীয় নাগরিক অভিযোগ ও গণ অগ্রাধিকার ব্যবস্থা • সুন্দরগড় (AC-134)",
-          marqueePill: "নাগরিক জন-অগ্রাধিকার ও সরকারি প্রতিকার পোর্টাল • সুন্দরগড় (AC-134)",
+          heroSubtitle: "জাতীয় নাগরিক অভিযোগ ও গণ অগ্রাধিকার ব্যবস্থা • সুন্দরগড় ()",
+          marqueePill: "নাগরিক জন-অগ্রাধিকার ও সরকারি প্রতিকার পোর্টাল • সুন্দরগড় ()",
           placeholder: "আপনার সমস্যা বলুন, লিখুন বা রেকর্ড করুন...",
           liveTyping: "লাইভ টাইপিং",
           recordingVoice: "ভয়েস রেকর্ড হচ্ছে... স্পষ্ট বলুন",
@@ -892,7 +905,7 @@
           meityGateway: "MeitY ডিজিলকার সম্মতি গেটওয়ে",
           dataSovereignty: "🇮🇳 সংসদীয় নির্বাচনী এলাকা ডেটা সার্বভৌমত্ব",
           deptSectionTitle: "বিভাগ ও ক্ষেত্র শ্রেণিবিন্যাস (7টি বিভাগ)",
-          deptSectionSub: "জেলা লোকসেবায় স্বয়ংক্রিয় প্রায়োরিটাইজেশন • সুন্দরগড় (AC-134)",
+          deptSectionSub: "জেলা লোকসেবায় স্বয়ংক্রিয় প্রায়োরিটাইজেশন • সুন্দরগড় ()",
           showAllSectors: "✕ সমস্ত বিভাগ দেখুন",
           allSectors: "সমস্ত বিভাগ",
           sectorRoads: "রাস্তা ও সেতু",
@@ -925,7 +938,7 @@
           feedbackTitle: "নাগরিক প্রতিক্রিয়া ও পরামর্শ",
           feedbackSub: "জনসেবা উন্নতির জন্য আপনার মতামত দিন",
           drawerTitle: "লোক স্বর",
-          constituencyTag: "সুন্দরগড় (AC-134)",
+          constituencyTag: "সুন্দরগড় ()",
           navSectionTitle: "প্রধান মেনু ও সেবা (7টি পাতা)",
           closeMenu: "✓ মেনু বন্ধ করুন",
           tabs: [
@@ -942,7 +955,7 @@
           brandTitle: "Lok Swar",
           brandSub: "Citizen Grievance & Public Priority Portal",
           govIndia: "Government of India • भारत सरकार",
-          govState: "Government of Odisha • Sundargarh District (AC-134)",
+          govState: "Government of Odisha •  ()",
           helplineNational: "National Helpline: 1947",
           helplineDistrict: "District Helpline: 1800-345-6770",
           textZoom: "Text:",
@@ -953,8 +966,8 @@
           notifications: "Notifications",
           verifiedUser: "Verified",
           heroTitle: "LOK SWAR",
-          heroSubtitle: "National Citizen Grievance & Public Priority System • AC-134 Sundargarh",
-          marqueePill: "National Citizen Grievance & Public Priority Redressal • AC-134 Sundargarh",
+          heroSubtitle: "National Citizen Grievance & Public Priority System • ",
+          marqueePill: "National Citizen Grievance & Public Priority Redressal • ",
           placeholder: "Speak, type, or describe your grievance...",
           liveTyping: "Live Typing",
           recordingVoice: "Recording voice... Speak clearly in your dialect",
@@ -979,7 +992,7 @@
           meityGateway: "MeitY DigiLocker Consent Gateway",
           dataSovereignty: "🇮🇳 In-Constituency Data Sovereignty",
           deptSectionTitle: "Department & Sector Classification (7 Sectors)",
-          deptSectionSub: "Intelligent triage across district public service wings • AC-134 Sundargarh",
+          deptSectionSub: "Intelligent triage across district public service wings • ",
           showAllSectors: "✕ Show All Sectors",
           allSectors: "All Sectors",
           sectorRoads: "Roads & Bridges",
@@ -1012,7 +1025,7 @@
           feedbackTitle: "Citizen Feedback & Public Suggestions",
           feedbackSub: "Share your suggestions to improve constituency public services",
           drawerTitle: "Lok Swar",
-          constituencyTag: "Sundargarh District (AC-134)",
+          constituencyTag: " ()",
           navSectionTitle: "Navigation & Services (7 Views)",
           closeMenu: "✓ Close Menu",
           tabs: [
@@ -1169,9 +1182,9 @@
         } catch(err) {}
 
         const userObj = {
-          name: profileName || "Rishav Yadav",
-          mobile: cleaned || "9861234567",
-          village: profileVillage || "Kalyanpur Gram Panchayat (Ward 3)",
+          name: profileName || "",
+          mobile: cleaned || "",
+          village: profileVillage || "",
           aadhaarMasked: profileAadhaar ? `XXXX-XXXX-${profileAadhaar.slice(-4)}` : "XXXX-XXXX-1940",
           isAadhaarVerified: isAadhaarVerified,
           dpUrl: profileDpUrl || citizenUser?.dpUrl || "assets/bg_1_smart_village.jpg",
@@ -1364,9 +1377,9 @@
         if (e) e.preventDefault();
         const updated = {
           ...citizenUser,
-          name: profileName || citizenUser?.name || "Rishav Yadav",
-          mobile: profileMobile || citizenUser?.mobile || "9861234567",
-          village: profileVillage || citizenUser?.village || "Kalyanpur Gram Panchayat (Ward 3), Sundargarh",
+          name: profileName || citizenUser?.name || "",
+          mobile: profileMobile || citizenUser?.mobile || "",
+          village: profileVillage || citizenUser?.village || ", ",
           aadhaar: profileAadhaar || citizenUser?.aadhaar || "5482 9104 1940",
           aadhaarMasked: profileAadhaar ? `XXXX-XXXX-${profileAadhaar.replace(/\s+/g, '').slice(-4)}` : citizenUser?.aadhaarMasked || "XXXX-XXXX-1940",
           isAadhaarVerified: isAadhaarVerified,
@@ -1408,7 +1421,7 @@
       // Aadhaar OTP Verification Gateway Handlers
       const handleRequestAadhaarOtp = async (e) => {
         if (e) e.preventDefault();
-        const cleanMob = (aadhaarAuthMobile || citizenUser?.mobile || "9861234567").replace(/\D/g, '');
+        const cleanMob = (aadhaarAuthMobile || citizenUser?.mobile || "").replace(/\D/g, '');
         const cleanAadhaar = (aadhaarAuthAadhaar || citizenUser?.aadhaar || "548291041940").replace(/\D/g, '');
         
         if (cleanAadhaar.length !== 12) {
@@ -1442,7 +1455,7 @@
 
       const handleCommitAadhaarOtpVerification = async (e) => {
         if (e) e.preventDefault();
-        const cleanMob = (aadhaarAuthMobile || citizenUser?.mobile || "9861234567").replace(/\D/g, '');
+        const cleanMob = (aadhaarAuthMobile || citizenUser?.mobile || "").replace(/\D/g, '');
         const cleanAadhaar = (aadhaarAuthAadhaar || citizenUser?.aadhaar || "548291041940").replace(/\D/g, '');
         const otpVal = (aadhaarAuthOtpInput || "123456").trim();
 
@@ -1462,16 +1475,16 @@
               mobile: cleanMob,
               otp: otpVal,
               aadhaar: cleanAadhaar,
-              name: profileName || citizenUser?.name || "Rishav Yadav"
+              name: profileName || citizenUser?.name || ""
             })
           });
           const data = await res.json();
 
           const verifiedUser = {
             ...citizenUser,
-            name: profileName || citizenUser?.name || "Rishav Yadav",
+            name: profileName || citizenUser?.name || "",
             mobile: cleanMob,
-            village: profileVillage || citizenUser?.village || "Kalyanpur Gram Panchayat (Ward 3), Sundargarh",
+            village: profileVillage || citizenUser?.village || ", ",
             aadhaar: cleanAadhaar,
             aadhaarMasked: `XXXX-XXXX-${cleanAadhaar.slice(-4)}`,
             isAadhaarVerified: true,
@@ -1495,9 +1508,9 @@
           console.warn('Aadhaar verification fallback notice:', err);
           const verifiedUser = {
             ...citizenUser,
-            name: profileName || citizenUser?.name || "Rishav Yadav",
+            name: profileName || citizenUser?.name || "",
             mobile: cleanMob,
-            village: profileVillage || citizenUser?.village || "Kalyanpur Gram Panchayat (Ward 3), Sundargarh",
+            village: profileVillage || citizenUser?.village || ", ",
             aadhaar: cleanAadhaar,
             aadhaarMasked: `XXXX-XXXX-${cleanAadhaar.slice(-4)}`,
             isAadhaarVerified: true,
@@ -2051,7 +2064,7 @@
         setIsSilenceDetected(false);
         setSilenceProgress(0);
 
-        const capturedText = rawTranscriptRef.current || liveSpokenText || inputText || "Kalyanpur culvert bridge damaged in flood";
+        const capturedText = rawTranscriptRef.current || liveSpokenText || inputText || " culvert bridge damaged in flood";
 
         let wavBase64String = null;
         try {
@@ -2085,12 +2098,12 @@
       const executeDirectGrievanceSubmit = (text, photo, audio, user) => {
         try { playChime('success'); } catch(e) {}
         
-        const submissionText = (text || "").trim() || (voiceMeta ? voiceMeta.englishText : (liveSpokenText || "Kalyanpur culvert road damaged, requires urgent reconstruction"));
+        const submissionText = (text || "").trim() || (voiceMeta ? voiceMeta.englishText : (liveSpokenText || " culvert road damaged, requires urgent reconstruction"));
         const newGid = `PROB-${Math.floor(100 + Math.random() * 900)}`;
         const userObj = user || citizenUser || {
-          name: "Rishav Yadav",
-          mobile: "9861234567",
-          village: "Kalyanpur Gram Panchayat (Ward 3)",
+          name: "",
+          mobile: "",
+          village: "",
           aadhaar: "5482 9104 1940",
           aadhaarMasked: "XXXX-XXXX-1940",
           isAadhaarVerified: true
@@ -2118,7 +2131,7 @@
           isAadhaarVerified: true,
           category: categoryDetermined,
           village: userObj.village,
-          block: "Lathikata",
+          block: "",
           gps: gpsCoords,
           urgencyScore: 95.0,
           votes: 1,
@@ -2232,9 +2245,9 @@
         const submissionContent = activeText || (voiceMeta ? voiceMeta.englishText : (liveSpokenText || "Citizen Infrastructure Grievance"));
 
         const user = citizenUser || {
-          name: "Rishav Yadav",
-          mobile: "9861234567",
-          village: "Kalyanpur Gram Panchayat (Ward 3)",
+          name: "",
+          mobile: "",
+          village: "",
           aadhaar: "5482 9104 1940",
           aadhaarMasked: "XXXX-XXXX-1940",
           isAadhaarVerified: true
@@ -2245,7 +2258,7 @@
 
       const handleUpvoteGrievance = async (problemId) => {
         playChime('tap');
-        const userMobile = citizenUser?.mobile || "9861234567";
+        const userMobile = citizenUser?.mobile || "";
         const isCurrentlyEndorsed = Boolean(
           userEndorsements[problemId] || 
           problems.find(p => p.id === problemId)?.votedUsers?.includes(userMobile) ||
@@ -2423,12 +2436,12 @@
                 <div className="text-xs font-black uppercase text-slate-400">⚡ Instant Mobile Auto-Fill for Testing:</div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <button
-                    onClick={() => { setMobileInput("9861234567"); setLoginError(null); }}
+                    onClick={() => { setMobileInput(""); setLoginError(null); }}
                     className="p-3 rounded-2xl border-2 text-left flex items-center gap-2.5 cursor-pointer bg-slate-950 border-slate-800 hover:border-emerald-500 transition-all"
                   >
                     <span className="text-xl">📱</span>
                     <div className="min-w-0 flex-1">
-                      <div className="text-xs font-mono font-bold text-white">+91-9861234567</div>
+                      <div className="text-xs font-mono font-bold text-white">+91-</div>
                       <div className="text-[10px] text-emerald-400 font-bold">Use Mobile Number</div>
                     </div>
                   </button>
@@ -2765,7 +2778,7 @@
                   />
                   <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-white dark:border-slate-900"></div>
                 </div>
-                <span className="truncate max-w-[110px]">{citizenUser?.name || "Rishav"}</span>
+                <span className="truncate max-w-[110px]">{citizenUser?.name || ""}</span>
               </a>
             </div>
           </header>
@@ -3391,7 +3404,7 @@
                               <div className="pt-2 border-t flex items-center justify-between gap-2 flex-wrap text-xs border-slate-100 dark:border-slate-800">
                                 <div className="flex items-center gap-2 flex-wrap text-slate-500 dark:text-slate-400">
                                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px]">
-                                    📍 {prob.village || "Sundargarh GP"}
+                                    📍 {prob.village || ""}
                                   </span>
                                   {/* Status Badge */}
                                   <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${
@@ -3473,7 +3486,7 @@
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
                   <div className="p-3 rounded-xl border bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800">
                     <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold">Consolidated Cluster</div>
-                    <div className="font-bold text-slate-900 dark:text-white mt-0.5">Kalyanpur-Lathikata Culvert Cluster</div>
+                    <div className="font-bold text-slate-900 dark:text-white mt-0.5">- Culvert Cluster</div>
                   </div>
                   <div className="p-3 rounded-xl border bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800">
                     <div className="text-slate-500 dark:text-slate-400 text-[10px] uppercase font-bold">Spam / Anomalies Filtered</div>
@@ -3549,7 +3562,7 @@
                               <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between gap-1 pt-1">
                                 <span className="flex items-center gap-1 truncate">
                                   <Icons.MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                                  <span>{hs.village || "Kalyanpur GP"}</span>
+                                  <span>{hs.village || " GP"}</span>
                                 </span>
                                 <span className="text-[10px] font-mono px-1.5 py-0.2 rounded border bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700">
                                   {hs.category || "General"}
@@ -3690,7 +3703,7 @@
                   <div className="p-5 rounded-2xl border space-y-2 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800">
                     <div className="text-xs font-bold text-purple-600 dark:text-purple-400">📡 IoT Flow Rate Sensor</div>
                     <div className="text-sm font-bold text-slate-900 dark:text-white">RWSS Line Pressure: 0.0 PSI</div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Pipe burst telemetry confirmed in Kalyanpur Ward 3.</p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">Pipe burst telemetry confirmed in  Ward 3.</p>
                   </div>
                 </div>
               </div>
@@ -3709,11 +3722,11 @@
 
                 <div className="p-5 rounded-2xl border space-y-3 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800">
                   <div className="flex items-center justify-between text-xs flex-wrap gap-2">
-                    <span className="font-bold text-slate-900 dark:text-white">Er. Rishav Yadav (Junior Engineer, PWD {currentLocationName ? currentLocationName.split(',')[0] : 'Regional'})</span>
+                    <span className="font-bold text-slate-900 dark:text-white">Er.  (Junior Engineer, PWD {currentLocationName ? currentLocationName.split(',')[0] : 'Regional'})</span>
                     <span className="font-mono text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800">✓ Verified On-Site</span>
                   </div>
                   <p className="text-xs leading-relaxed text-slate-700 dark:text-slate-300">
-                    "Physical verification conducted on 21 August 2026. Kalyanpur culvert bridge damaged due to flash flood runoff. Reconstruction estimate of ₹4.20 Cr prepared under SDRF scheme."
+                    "Physical verification conducted on 21 August 2026.  culvert bridge damaged due to flash flood runoff. Reconstruction estimate of ₹4.20 Cr prepared under SDRF scheme."
                   </p>
                 </div>
               </div>
@@ -3737,7 +3750,7 @@
                       <img src="assets/bg_1_smart_village.jpg" alt="Aerial" className="w-full h-full object-cover" />
                     </div>
                     <p className="text-xs font-medium leading-relaxed text-slate-600 dark:text-slate-400">
-                      Orthomosaic surface capture showing complete culvert collapse at Kalyanpur Bridge.
+                      Orthomosaic surface capture showing complete culvert collapse at  Bridge.
                     </p>
                   </div>
                   <div className="p-4 rounded-2xl border space-y-2.5 bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800">
@@ -3889,7 +3902,7 @@
                       type="text"
                       value={profileName}
                       onChange={(e) => setProfileName(e.target.value)}
-                      placeholder="e.g. Rishav Yadav"
+                      placeholder="Enter 10-digit mobile number"
                       className="w-full p-3 rounded-xl border text-xs font-semibold outline-none bg-slate-950 border-slate-700 text-white focus:border-blue-500 transition-colors"
                       required
                     />
@@ -3902,7 +3915,7 @@
                       type="text"
                       value={profileVillage}
                       onChange={(e) => setProfileVillage(e.target.value)}
-                      placeholder="e.g. Kalyanpur Gram Panchayat (Ward 3), Lathikata, Sundargarh"
+                      placeholder="Enter Gram Panchayat / Village / Ward address"
                       className="w-full p-3 rounded-xl border text-xs font-semibold outline-none bg-slate-950 border-slate-700 text-white focus:border-blue-500 transition-colors"
                       required
                     />
@@ -3916,7 +3929,7 @@
                       maxLength="10"
                       value={profileMobile}
                       onChange={(e) => setProfileMobile(e.target.value)}
-                      placeholder="e.g. 9861234567"
+                      placeholder="Enter 10-digit mobile number"
                       className="w-full p-3 rounded-xl border text-xs font-mono font-bold outline-none bg-slate-950 border-slate-700 text-white focus:border-blue-500 transition-colors"
                       required
                     />
@@ -3944,7 +3957,7 @@
                       type="text"
                       value={profileAadhaar}
                       onChange={(e) => setProfileAadhaar(e.target.value)}
-                      placeholder="e.g. 5482 9104 1940"
+                      placeholder="Enter 12-digit Aadhaar ID"
                       className="w-full p-2.5 rounded-xl border text-xs font-mono font-bold outline-none bg-slate-50 dark:bg-slate-950 border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white focus:border-emerald-500 transition-colors"
                     />
 
@@ -4022,7 +4035,7 @@
                       type="text"
                       value={aadhaarAuthAadhaar}
                       onChange={(e) => setAadhaarAuthAadhaar(e.target.value)}
-                      placeholder="e.g. 5482 9104 1940"
+                      placeholder="Enter 12-digit Aadhaar ID"
                       className="w-full p-2.5 rounded-xl border text-xs font-mono font-bold outline-none bg-slate-950 border-slate-700 text-white focus:border-blue-500"
                     />
                   </div>
@@ -4035,7 +4048,7 @@
                         maxLength="10"
                         value={aadhaarAuthMobile}
                         onChange={(e) => setAadhaarAuthMobile(e.target.value)}
-                        placeholder="e.g. 9861234567"
+                        placeholder="Enter 10-digit mobile number"
                         className="flex-1 p-2.5 rounded-xl border text-xs font-mono font-bold outline-none bg-slate-950 border-slate-700 text-white focus:border-blue-500"
                       />
                       <button

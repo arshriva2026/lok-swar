@@ -1,15 +1,15 @@
-// Auto-generated universal bundle for People's Priorities
+﻿// Auto-generated universal bundle for People's Priorities
 
 // --- data/constituency_data.js ---
 /**
  * People's Priorities - Constituency Master & Demo Data
- * Synthetic Ground Truth & Registry for Sundargarh Assembly Constituency
+ * Synthetic Ground Truth & Registry for 
  */
 
 const CONSTITUENCY_INFO = {
-  name: "Sundargarh Rural & Urban Assembly Constituency",
-  code: "AC-134",
-  district: "Sundargarh District",
+  name: " Rural & Urban Assembly Constituency",
+  code: "",
+  district: "",
   state: "Odisha",
   total_population: 284000,
   rural_population_pct: 68.4,
@@ -20,20 +20,20 @@ const CONSTITUENCY_INFO = {
 };
 
 const DEMO_VILLAGES_AND_WARDS = [
-  { id: "V01", name: "Kalyanpur Gram Panchayat", type: "rural", block: "Lathikata", population: 4200, lat: 22.1245, lng: 84.0321, vulnerability: "High", literacy_pct: 62 },
+  { id: "V01", name: "", type: "rural", block: "", population: 4200, lat: 22.1245, lng: 84.0321, vulnerability: "High", literacy_pct: 62 },
   { id: "V02", name: "Birmitrapur Border Area", type: "rural", block: "Birmitrapur", population: 6100, lat: 22.1480, lng: 84.0890, vulnerability: "High", literacy_pct: 58 },
   { id: "V03", name: "Gopabandhu Nagar Ward 4", type: "urban", block: "Sector-4 Ward", population: 12400, lat: 22.2150, lng: 84.1420, vulnerability: "Medium", literacy_pct: 84 },
   { id: "V04", name: "Brahmani Valley Village", type: "rural", block: "Panposh", population: 3800, lat: 22.1890, lng: 84.0150, vulnerability: "Medium", literacy_pct: 69 },
   { id: "V05", name: "Jhirpani Tribal Hamlet", type: "extreme_rural", block: "Bisra", population: 2900, lat: 22.2450, lng: 84.2100, vulnerability: "Critical", literacy_pct: 44 },
   { id: "V06", name: "Koel River Colony Ward 8", type: "urban", block: "Koel Ward", population: 8900, lat: 22.2300, lng: 84.1650, vulnerability: "High", literacy_pct: 71 },
-  { id: "V07", name: "Mandira Forest Fringe Hamlet", type: "extreme_rural", block: "Lathikata", population: 1850, lat: 22.0950, lng: 83.9800, vulnerability: "Critical", literacy_pct: 48 },
+  { id: "V07", name: "Mandira Forest Fringe Hamlet", type: "extreme_rural", block: "", population: 1850, lat: 22.0950, lng: 83.9800, vulnerability: "Critical", literacy_pct: 48 },
   { id: "V08", name: "Nuagaon Agricultural Belt", type: "rural", block: "Bisra", population: 5400, lat: 22.1620, lng: 84.2250, vulnerability: "Medium", literacy_pct: 64 },
   { id: "V09", name: "Civil Township Zone 2", type: "urban", block: "Central Ward", population: 15600, lat: 22.2500, lng: 84.1200, vulnerability: "Low", literacy_pct: 92 },
   { id: "V10", name: "Kansbahal Industrial Corridor", type: "semi_urban", block: "Rajgangpur", population: 7200, lat: 22.1750, lng: 83.9200, vulnerability: "Medium", literacy_pct: 76 }
 ];
 
 const DEMO_FACILITIES = [
-  { id: "FAC-01", name: "Kalyanpur Primary Health Centre", type: "Health (PHC)", lat: 22.1260, lng: 84.0350, capacity: "6 Beds", status: "Operational (Cut off in Monsoon)" },
+  { id: "FAC-01", name: " Primary Health Centre", type: "Health (PHC)", lat: 22.1260, lng: 84.0350, capacity: "6 Beds", status: "Operational (Cut off in Monsoon)" },
   { id: "FAC-02", name: "Birmitrapur Health Sub-Centre", type: "Health (Sub-Centre)", lat: 22.1510, lng: 84.0910, capacity: "OPD Only", status: "Staffing Deficit" },
   { id: "FAC-03", name: "Gopabandhu Govt High School", type: "Education", lat: 22.2170, lng: 84.1440, capacity: "450 Students (4 Classrooms)", status: "Severe Overcrowding" },
   { id: "FAC-04", name: "Jhirpani Piped Tap Stand #1", type: "Water", lat: 22.2430, lng: 84.2080, capacity: "Dry / Broken Pump", status: "Non-Functional" },
@@ -46,10 +46,10 @@ const MULTILINGUAL_SAMPLE_PHRASES = [
   {
     lang: "Odia",
     text: "ଆମ ଗାଁ କଲ୍ୟାଣପୁରରୁ ଡାକ୍ତରଖାନା ଯିବା ରାସ୍ତା ବର୍ଷା ଦିନେ ପୂରା ଭାଙ୍ଗି ଯାଉଛି। ରୋଗୀ ମାନେ ୨୪ କିଲୋମିଟର ଦୂର ଯିବାକୁ ବାଧ୍ୟ ହେଉଛନ୍ତି।",
-    translation: "The road from our village Kalyanpur to the hospital gets completely washed out during rains. Patients are forced to travel 24 km around.",
+    translation: "The road from our village  to the hospital gets completely washed out during rains. Patients are forced to travel 24 km around.",
     category: "Roads & Healthcare",
     severity: "Critical",
-    location: "Kalyanpur Gram Panchayat",
+    location: "",
     impact: "Severe healthcare access blockage for 18,400 residents during monsoon emergency."
   },
   {
@@ -422,7 +422,7 @@ class AudioAIEngine {
         category: "Roads",
         sub_category: "Healthcare Access & All-Weather Road Connectivity",
         severity: "Critical",
-        location: "Kalyanpur Gram Panchayat (Lathikata Block)",
+        location: " ()",
         affected_population_estimate: 18400,
         potential_impact: "Emergency medical access cutoff for 18,400 citizens; 24 km detour required to reach district hospital.",
         confidence: 0.94,
@@ -470,7 +470,7 @@ class AudioAIEngine {
       category: "Public Infrastructure",
       sub_category: "Civic Amenity Upgrade",
       severity: "Medium",
-      location: "Sundargarh Local Ward",
+      location: " Local Ward",
       affected_population_estimate: 2400,
       potential_impact: "General quality of life and accessibility constraints for local residents.",
       confidence: 0.85,
@@ -662,9 +662,9 @@ class EvidenceFusionEngine {
     const discrepancies = [
       {
         hotspot_id: "HOT-01",
-        title: "Kalyanpur Road Access to Primary Health Centre",
+        title: " Road Access to Primary Health Centre",
         citizen_perception: "412 citizens report hospital is 24 km away and inaccessible during monsoon emergency.",
-        official_registry: "PMGSY GIS records show an operational Bituminous Road connecting to Kalyanpur PHC within 4.2 km.",
+        official_registry: "PMGSY GIS records show an operational Bituminous Road connecting to  PHC within 4.2 km.",
         discrepancy_type: "Physical Infrastructure Severance / Monsoon Inundation",
         root_cause_explanation: "The road physically exists in registry records, but 2 bridge culverts collapsed during flash floods. The road is impassable for ambulances, forcing a 24 km detour via highway.",
         recommendation: "PRIORITY VERIFICATION MISSION: Deploy Drone / Field Engineer to map culvert structural damage and update road network graph."
@@ -791,7 +791,7 @@ class PortfolioOptimizerEngine {
       if (currentCost + p.estimated_cost_cr <= budgetCr + 0.001) {
         selectedIds.add(p.id);
         currentCost += p.estimated_cost_cr;
-        if (p.location.toLowerCase().includes("kalyanpur") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira") || p.location.toLowerCase().includes("rural") || p.location.toLowerCase().includes("nuagaon")) {
+        if (p.location.toLowerCase().includes("") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira") || p.location.toLowerCase().includes("rural") || p.location.toLowerCase().includes("nuagaon")) {
           ruralCount++;
         }
       }
@@ -799,7 +799,7 @@ class PortfolioOptimizerEngine {
 
     // Equity check: if rural count < minRuralRequired, substitute lowest urban project
     if (ruralCount < minRuralRequired) {
-      const unselectedRural = scoredList.filter(p => !selectedIds.has(p.id) && (p.location.toLowerCase().includes("kalyanpur") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira")));
+      const unselectedRural = scoredList.filter(p => !selectedIds.has(p.id) && (p.location.toLowerCase().includes("") || p.location.toLowerCase().includes("jhirpani") || p.location.toLowerCase().includes("mandira")));
       if (unselectedRural.length > 0) {
         // Swap with least efficient selected project
         // (Handled automatically by solver weights)
@@ -1287,7 +1287,7 @@ function renderHeader(state) {
               <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.75rem;">
                 <div style="padding: 0.5rem; border-radius: 8px; background: var(--neutral-50); border: 1px solid var(--border-subtle);">
                   <div style="font-weight: 700; color: var(--neutral-900);">Drone Photo Check Done</div>
-                  <div style="color: var(--neutral-600);">Kalyanpur Bridge area surveyed with photos.</div>
+                  <div style="color: var(--neutral-600);"> Bridge area surveyed with photos.</div>
                   <div style="color: var(--neutral-400); font-size: 0.68rem; margin-top: 2px;">10m ago</div>
                 </div>
                 <div style="padding: 0.5rem; border-radius: 8px; background: var(--neutral-50); border: 1px solid var(--border-subtle);">
@@ -1752,7 +1752,7 @@ function renderAdminOverview(state) {
               <div style="font-weight: 700; font-size: 0.95rem; color: #38bdf8;">Drone Verification Flight</div>
             </div>
             <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 1rem;">
-              Garuda-V MAVLink autonomous surveyor is primed on standby at Kalyanpur Corridor.
+              Garuda-V MAVLink autonomous surveyor is primed on standby at  Corridor.
             </div>
             <button class="btn btn-primary nav-tab" data-view="drone_simulator" style="width: 100%; font-size: 0.85rem;">
               Launch Autonomous Drone Survey →
@@ -1833,7 +1833,7 @@ function renderGISMapView(state) {
               Critical Hotspot Selected
             </div>
             <div style="font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--neutral-900); margin-bottom: 0.5rem;">
-              ${selectedHotspot ? selectedHotspot.title : 'Kalyanpur-Lathikata Corridor'}
+              ${selectedHotspot ? selectedHotspot.title : '- Corridor'}
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.82rem;">
@@ -1861,7 +1861,7 @@ function renderGISMapView(state) {
               <div>
                 <strong>Nearest Govt Facility:</strong>
                 <div style="color: var(--neutral-600); margin-top: 0.15rem;">
-                  ${selectedHotspot ? selectedHotspot.nearest_facility : 'Kalyanpur PHC (4.2 km) / Hospital (24 km)'}
+                  ${selectedHotspot ? selectedHotspot.nearest_facility : ' PHC (4.2 km) / Hospital (24 km)'}
                 </div>
               </div>
 
@@ -2075,7 +2075,7 @@ function renderDataFusionView(state) {
           <div style="background: white; border: 1px solid #fef08a; border-radius: var(--radius-md); padding: 1rem;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
               <div style="font-weight: 700; color: #854d0e; font-size: 0.95rem;">
-                🚨 Discrepancy #1: Kalyanpur Healthcare Access Route (Hotspot #1)
+                🚨 Discrepancy #1:  Healthcare Access Route (Hotspot #1)
               </div>
               <span class="badge badge-critical">Severe Severance</span>
             </div>
@@ -2085,7 +2085,7 @@ function renderDataFusionView(state) {
                 <strong>Citizen Perception:</strong> "Nearest hospital is 24 km away; road completely blocked in rain."
               </div>
               <div style="background: #e0f2fe; padding: 0.6rem; border-radius: var(--radius-sm); border: 1px solid #bae6fd;">
-                <strong>Official GIS Record:</strong> "PMGSY Master Plan records operational all-weather BT road to Kalyanpur PHC within 4.2 km."
+                <strong>Official GIS Record:</strong> "PMGSY Master Plan records operational all-weather BT road to  PHC within 4.2 km."
               </div>
             </div>
 
@@ -2181,8 +2181,8 @@ function renderFieldOfficerView(state) {
     {
       id: "TSK-401",
       submission_id: "SUB-1082",
-      title: "Verify Kalyanpur Road Bridge Washout",
-      location: "Kalyanpur Gram Panchayat (Lathikata Block)",
+      title: "Verify  Road Bridge Washout",
+      location: " ()",
       category: "Roads & Healthcare",
       urgency: "Immediate",
       assigned_to: "Field Officer R. K. Nayak",
@@ -2223,7 +2223,7 @@ function renderFieldOfficerView(state) {
           </div>
           <div>
             <div style="font-weight: 700; font-size: 1.1rem;">Field Verification Officer Portal</div>
-            <div style="font-size: 0.78rem; color: #bfdbfe;">Assigned Officer: R. K. Nayak (Lathikata Circle)</div>
+            <div style="font-size: 0.78rem; color: #bfdbfe;">Assigned Officer: R. K. Nayak ( Circle)</div>
           </div>
         </div>
 
@@ -2377,7 +2377,7 @@ function renderDroneSimulatorView(state) {
           </div>
 
           <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; color: #94a3b8;">
-            <div>Target: <strong>Kalyanpur to Brahmani Bridge Corridor</strong></div>
+            <div>Target: <strong> to Brahmani Bridge Corridor</strong></div>
             <div style="color: #4ade80;">● AI Inference Engine: YOLO-Infrastructure-v8 Active</div>
           </div>
         </div>
@@ -2391,7 +2391,7 @@ function renderDroneSimulatorView(state) {
 
             <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.82rem;">
               <div><strong>Mission ID:</strong> MSN-DRONE-882</div>
-              <div><strong>Target Hotspot:</strong> HOT-01 (Kalyanpur Healthcare Access)</div>
+              <div><strong>Target Hotspot:</strong> HOT-01 ( Healthcare Access)</div>
               <div><strong>Created By:</strong> District Collector / Planning Officer</div>
               <div><strong>Verification Type:</strong> Multispectral Photogrammetry</div>
               <div><strong>Flight Path:</strong> 8 Pre-programmed Waypoints</div>
@@ -2873,7 +2873,7 @@ const DEMO_STEPS = [
     id: "step-voice",
     title: "1. Multilingual Citizen Voice Intake",
     target_view: "citizen",
-    desc: "A rural citizen from Kalyanpur speaks in Odia reporting an impassable flooded road cutting off the primary healthcare clinic. The AI voice engine transcribes, translates, and normalizes the request without requiring technical jargon.",
+    desc: "A rural citizen from  speaks in Odia reporting an impassable flooded road cutting off the primary healthcare clinic. The AI voice engine transcribes, translates, and normalizes the request without requiring technical jargon.",
     action_label: "Simulate Odia Voice Input 🎙️",
     badge: "Input Layer"
   },
@@ -2891,7 +2891,7 @@ const DEMO_STEPS = [
     id: "step-hotspot",
     title: "3. Spatial GIS Hotspot Detection",
     target_view: "gis_map",
-    desc: "GIS engine identifies a critical demand density hotspot in Kalyanpur affecting 18,400 citizens with a 24 km detour to tertiary care.",
+    desc: "GIS engine identifies a critical demand density hotspot in  affecting 18,400 citizens with a 24 km detour to tertiary care.",
     action_label: "Inspect GIS Hotspot 🗺️",
     badge: "Spatial Analytics"
   },
@@ -2918,7 +2918,7 @@ const DEMO_STEPS = [
     id: "step-ranking",
     title: "6. Transparent Priority Recalculation (Score: 92.4)",
     target_view: "priority_ranking",
-    desc: "With verified evidence and high life-safety impact, the transparent scoring formula recalculates the Kalyanpur All-Weather Road & Bridge project to Rank #1 with a score of 92.4/100.",
+    desc: "With verified evidence and high life-safety impact, the transparent scoring formula recalculates the  All-Weather Road & Bridge project to Rank #1 with a score of 92.4/100.",
     action_label: "Inspect Score Breakdown ⚖️",
     badge: "Scoring Engine"
   },
@@ -2947,7 +2947,7 @@ function renderGuidedDemoView(state) {
               End-to-End Showcase Tour • 7 Steps
             </div>
             <h2 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: white;">
-              Scenario: From Kalyanpur Citizen Voice to ₹10 Cr Approved Plan
+              Scenario: From  Citizen Voice to ₹10 Cr Approved Plan
             </h2>
           </div>
 
@@ -3420,7 +3420,7 @@ class App {
           category: this.state.currentExtractedNLP?.category || "Roads",
           sub_category: this.state.currentExtractedNLP?.sub_category || "Rural Road Connectivity",
           issue_description: textVal || "Citizen reported development priority.",
-          administrative_area: "Kalyanpur Gram Panchayat",
+          administrative_area: "",
           severity: "Critical",
           language: this.state.currentLang,
           is_assisted: false,
@@ -3505,7 +3505,7 @@ class App {
     const btnStartDrone = document.getElementById('btn-start-drone-mission');
     if (btnStartDrone) {
       btnStartDrone.onclick = () => {
-        this.showToast("🚁 Garuda-V MAVLink drone survey launched over Kalyanpur corridor!");
+        this.showToast("🚁 Garuda-V MAVLink drone survey launched over  corridor!");
         let alt = 45;
         let bat = 94;
         const interval = setInterval(() => {
@@ -3604,7 +3604,7 @@ class App {
               category: "Roads",
               sub_category: "Healthcare Access & Road Connectivity",
               severity: "Critical",
-              location: "Kalyanpur Gram Panchayat",
+              location: "",
               affected_population_estimate: 18400,
               potential_impact: sample.impact,
               confidence: 0.94,

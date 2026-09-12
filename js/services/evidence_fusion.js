@@ -1,4 +1,4 @@
-/**
+﻿/**
  * People's Priorities - Multi-Source Data & Evidence Fusion Engine
  * Implements Tri-Factor Evidence Scoring and Automated Discrepancy Detection between citizen perception & datasets.
  */
@@ -44,9 +44,9 @@ export class EvidenceFusionEngine {
     const discrepancies = [
       {
         hotspot_id: "HOT-01",
-        title: "Kalyanpur Road Access to Primary Health Centre",
+        title: " Road Access to Primary Health Centre",
         citizen_perception: "412 citizens report hospital is 24 km away and inaccessible during monsoon emergency.",
-        official_registry: "PMGSY GIS records show an operational Bituminous Road connecting to Kalyanpur PHC within 4.2 km.",
+        official_registry: "PMGSY GIS records show an operational Bituminous Road connecting to  PHC within 4.2 km.",
         discrepancy_type: "Physical Infrastructure Severance / Monsoon Inundation",
         root_cause_explanation: "The road physically exists in registry records, but 2 bridge culverts collapsed during flash floods. The road is impassable for ambulances, forcing a 24 km detour via highway.",
         recommendation: "PRIORITY VERIFICATION MISSION: Deploy Drone / Field Engineer to map culvert structural damage and update road network graph."
