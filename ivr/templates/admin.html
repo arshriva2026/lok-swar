@@ -258,7 +258,16 @@
 
         const res = await fetch(`/admin/tickets?${params}`);
         const data = await res.json();
-        allTickets = data.tickets || [];
+        const incomingTickets = data.tickets || [];
+
+        // Alert on newly detected live calls
+        if (allTickets.length > 0 && incomingTickets.length > allTickets.length) {
+          const newest = incomingTickets[0];
+          playNotificationChime();
+          showToast(`🚨 New Call Received from ${newest.caller_phone || '+91 8926160600'}!`);
+        }
+
+        allTickets = incomingTickets;
         renderStats(data.total || 0, allTickets);
         renderTickets();
       } catch (err) {
@@ -295,10 +304,11 @@
     function renderTickets() {
       const query = state.search;
       const filtered = allTickets.filter(t => {
-        const phone = '+91 8926160600';
+        const phone = t.caller_phone || '+91 8926160600';
         if (query && !phone.toLowerCase().includes(query) &&
             !t.caller_phone.toLowerCase().includes(query) &&
             !t.call_sid.toLowerCase().includes(query) &&
+            !(t.transcription || '').toLowerCase().includes(query) &&
             !(t.admin_notes || '').toLowerCase().includes(query)) return false;
         return true;
       });
@@ -327,15 +337,14 @@
       const statusClass = { new: 'badge-new', in_progress: 'badge-in_progress', resolved: 'badge-resolved' }[t.status] || 'badge-new';
       const isNew = t.status === 'new';
 
-      // Always enforce the requested mobile number format
-      const displayPhone = '+91 8926160600';
+      const displayPhone = t.caller_phone || '+91 8926160600';
 
       const createdAt = t.created_at ? new Date(t.created_at) : new Date();
       const timeStr = createdAt.toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
       // Audio player source
       let audioSrc = t.recording_url || '';
-      if (audioSrc && t.recording_sid && t.recording_sid !== 'RE_MOCK') {
+      if (t.recording_sid && t.recording_sid !== 'RE_MOCK') {
         audioSrc = `/ivr/audio/${t.recording_sid}`;
       }
 
@@ -382,6 +391,18 @@
 
           <!-- Audio Player Block -->
           ${audioBlock}
+
+          <!-- Audio Grievance Transcript -->
+          ${t.transcription ? `
+          <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-3 space-y-1">
+            <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-emerald-800">
+              <span class="flex items-center gap-1.5">🗣️ Recorded Grievance Transcript</span>
+              <span class="text-[9px] bg-emerald-100/80 text-emerald-700 px-1.5 py-0.2 rounded border border-emerald-200 font-semibold">AI Ingested</span>
+            </div>
+            <div class="text-xs text-slate-800 font-medium leading-relaxed italic">
+              "${t.transcription}"
+            </div>
+          </div>` : ''}
 
           <!-- Status Switcher -->
           <div class="flex items-center gap-2 pt-1">

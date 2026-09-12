@@ -308,7 +308,7 @@
           callTimer.textContent = `${mins}:${secs}`;
         }, 1000);
 
-        const welcomeText = "नमस्ते। लोक स्वर ग्राहक सेवा में आपका स्वागत है। हिंदी के लिए 1 दबाएँ।";
+        const welcomeText = "नमस्ते। लोक स्वर में आपका स्वागत है। हिंदी के लिए 1 दबाएँ।";
         speakHindi(welcomeText);
       }, 2400);
     }
@@ -367,27 +367,36 @@
       micIndicator.classList.add('hidden');
       screenWaveform.classList.add('hidden');
 
+      // Stop media recording if active
       if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
+        await new Promise(resolve => {
+          mediaRecorder.onstop = resolve;
+          mediaRecorder.stop();
+        });
       }
 
       callState = 'ENDED';
       screenStatus.textContent = 'SUBMITTING...';
       screenSubtext.textContent = 'Pushing to Admin Console';
 
-      // Send to FastAPI IVR backend
+      // Send actual audio blob + metadata to FastAPI IVR backend
       let newTicket = null;
       try {
-        const params = new URLSearchParams({
-          lang: chosenLang,
-          cat: chosenCat,
-          From: '+91 8926160600',
-          RecordingDuration: String(Math.max(seconds, 8)),
-          RecordingUrl: 'https://api.twilio.com/cowbell.mp3',
-          format: 'json'
-        });
-        const res = await fetch(`/ivr/save-recording?${params}`, {
+        const formData = new FormData();
+        formData.append('lang', chosenLang);
+        formData.append('cat', chosenCat);
+        formData.append('From', '+91 8926160600');
+        formData.append('RecordingDuration', String(Math.max(seconds, 8)));
+        formData.append('format', 'json');
+
+        if (audioChunks && audioChunks.length > 0) {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          formData.append('audio_file', audioBlob, 'grievance.webm');
+        }
+
+        const res = await fetch('/ivr/save-recording', {
           method: 'POST',
+          body: formData,
           headers: { 'Accept': 'application/json' }
         });
         const json = await res.json();
@@ -410,14 +419,14 @@
       showLiveAlert(newTicket || {
         caller_phone: '+91 8926160600',
         category: chosenCat,
-        recording_url: 'https://api.twilio.com/cowbell.mp3'
+        recording_url: '/ivr/audio/REC_TEST'
       });
 
       // Reload Right Column Stream
       loadAdminStream();
 
       // Farewell voice
-      const thanksText = "धन्यवाद। आपकी शिकायत दर्ज कर ली गई है। प्रशासनिक टीम शीघ्र कार्रवाई करेगी।";
+      const thanksText = "धन्यवाद। आपकी शिकायत लोक स्वर में दर्ज कर ली गई है। प्रशासनिक टीम शीघ्र कार्रवाई करेगी।";
       speakHindi(thanksText, () => {
         endCall();
       });
@@ -426,10 +435,10 @@
     function showLiveAlert(ticket) {
       const card = document.getElementById('live-alert-card');
       document.getElementById('alert-phone').textContent = ticket.caller_phone || '+91 8926160600';
-      document.getElementById('alert-category').textContent = `Category: ${ticket.category.toUpperCase()} • Language: HINDI`;
+      document.getElementById('alert-category').textContent = `Category: ${(ticket.category || 'ELECTRICITY').toUpperCase()} • Language: HINDI`;
       
       const audioPlayer = document.getElementById('alert-audio-player');
-      audioPlayer.src = ticket.recording_url || 'https://api.twilio.com/cowbell.mp3';
+      audioPlayer.src = ticket.recording_url || '';
       card.classList.remove('hidden');
 
       setTimeout(() => {

@@ -20,6 +20,7 @@ class IVRTicket(BaseModel):
     duration: int = 0                  # seconds
     status: Literal["new", "in_progress", "resolved"] = "new"
     admin_notes: str = ""
+    transcription: str = ""
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
@@ -101,24 +102,24 @@ PROMPTS: dict[str, dict[str, str]] = {
         "Press 3 for Other complaints."
     ),
     "record_hi": (
-        "कृपया बीप के बाद अपनी समस्या बताएं और समाप्त होने पर हैश दबाएँ।"
+        "कृपया बीप के बाद अपनी समस्या विस्तार से बताएं। बोलने के बाद हैश दबाएँ या सीधे फोन काट दें।"
     ),
     "record_te": (
-        "దయచేసి బీప్ తర్వాత మీ సమస్యను వివరించండి మరియు పూర్తయిన తర్వాత హ్యాష్ నొక్కండి."
+        "దయచేసి బీప్ తర్వాత మీ సమస్యను వివరించండి మరియు పూర్తయిన తర్వాత హ్యాష్ నొక్కండి లేదా కాల్ ముగించండి."
     ),
     "record_en": (
-        "Please describe your issue after the beep. Press hash when you are done."
+        "Please describe your issue after the beep. Press hash or hang up when you are done."
     ),
     "thanks_hi": (
-        "धन्यवाद। आपकी शिकायत दर्ज कर ली गई है। "
-        "जल्द ही समाधान किया जाएगा। नमस्ते।"
+        "धन्यवाद। आपकी शिकायत लोक स्वर में दर्ज कर ली गई है। "
+        "प्रशासनिक टीम शीघ्र कार्रवाई करेगी। नमस्ते।"
     ),
     "thanks_te": (
-        "ధన్యవాదాలు. మీ ఫిర్యాదు నమోదు చేయబడింది. "
+        "ధన్యవాదాలు. మీ ఫిర్యాదు లోక్ స్వర్ లో నమోదు చేయబడింది. "
         "త్వరలో పరిష్కరించబడుతుంది. నమస్కారం."
     ),
     "thanks_en": (
-        "Thank you. Your complaint has been registered. "
+        "Thank you. Your complaint has been registered with Lok Swar. "
         "It will be resolved shortly. Goodbye."
     ),
     "invalid": {

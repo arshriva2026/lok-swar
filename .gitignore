@@ -27,6 +27,8 @@ uploads/photos/*
 !uploads/photos/.gitkeep
 uploads/voice-notes/*
 !uploads/voice-notes/.gitkeep
+ivr/recordings/*
+!ivr/recordings/.gitkeep
 
 # Environment variables & secrets
 .env
