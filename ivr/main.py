@@ -454,6 +454,12 @@ async def admin_dashboard(request: Request):
     return templates.TemplateResponse(request=request, name="admin.html")
 
 
+@app.get("/phone", response_class=HTMLResponse)
+async def keypad_simulator(request: Request):
+    """Interactive Keypad Phone Simulator for demo."""
+    return templates.TemplateResponse(request=request, name="phone.html")
+
+
 # ---------------------------------------------------------------------------
 # Root redirect
 # ---------------------------------------------------------------------------

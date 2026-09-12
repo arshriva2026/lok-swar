@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lok Swar — Keypad Phone IVR Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .font-mono-screen { font-family: 'Share Tech Mono', monospace; }
+    .key-btn:active { transform: scale(0.93); }
+    /* Vintage Nokia Green screen tint */
+    .screen-tint {
+      background: #c2d8b4;
+      color: #1e3314;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.35);
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-4 selection:bg-emerald-500 selection:text-white">
+
+  <!-- Back to Admin link -->
+  <div class="mb-4 flex items-center gap-3">
+    <a href="/admin" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs font-semibold text-emerald-400 transition">
+      ← Back to IVR Admin Dashboard
+    </a>
+    <span class="text-xs text-slate-400">Caller: <strong class="text-white">+91 8926160600</strong></span>
+  </div>
+
+  <!-- ───── PHONE BODY (Chassis) ───── -->
+  <div class="relative w-full max-w-[340px] bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 border-4 border-slate-600 rounded-[42px] p-5 shadow-[0_25px_60px_rgba(0,0,0,0.7)]">
+    
+    <!-- Top Speaker Earpiece Grille -->
+    <div class="flex justify-center mb-4">
+      <div class="w-16 h-2 bg-slate-900 rounded-full border border-slate-700"></div>
+    </div>
+
+    <!-- Phone Brand Name -->
+    <div class="text-center font-bold tracking-widest text-[11px] text-slate-400 uppercase mb-3">
+      LOK SWAR • 4G KEYPAD
+    </div>
+
+    <!-- ───── LCD SCREEN ───── -->
+    <div class="screen-tint rounded-2xl p-3.5 mb-5 border-2 border-slate-600 font-mono-screen min-h-[140px] flex flex-col justify-between">
+      <!-- Screen Top Bar -->
+      <div class="flex items-center justify-between text-[11px] border-b border-black/20 pb-1">
+        <span class="font-bold flex items-center gap-1">📶 JIO 4G</span>
+        <span id="call-timer" class="font-bold">00:00</span>
+        <span>🔋 98%</span>
+      </div>
+
+      <!-- Main Display Status -->
+      <div class="text-center py-2">
+        <div id="screen-status" class="text-xs font-bold uppercase tracking-wider text-black/70">Toll-Free Helpline</div>
+        <div id="screen-number" class="text-lg font-extrabold tracking-tight mt-0.5 truncate text-black">1800-892-6160</div>
+        <div id="screen-subtext" class="text-[11px] font-semibold text-black/80 mt-1 min-h-[28px] leading-tight">Press [CALL] to connect</div>
+      </div>
+
+      <!-- Screen Bottom Hints -->
+      <div class="flex items-center justify-between text-[10px] border-t border-black/20 pt-1 font-semibold">
+        <span id="left-soft">Menu</span>
+        <span id="call-badge" class="px-1.5 py-0.2 rounded bg-black/10">IDLE</span>
+        <span id="right-soft">Clear</span>
+      </div>
+    </div>
+
+    <!-- ───── CONTROL BUTTONS ───── -->
+    <div class="grid grid-cols-2 gap-3 mb-4">
+      <button id="call-btn" onclick="startCall()" class="key-btn py-3 bg-emerald-600 hover:bg-emerald-500 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-md active:scale-95 transition">
+        📞 CALL
+      </button>
+      <button id="hangup-btn" onclick="endCall()" class="key-btn py-3 bg-red-600 hover:bg-red-500 rounded-2xl flex items-center justify-center text-white font-bold text-sm shadow-md active:scale-95 transition">
+        ❌ END
+      </button>
+    </div>
+
+    <!-- ───── NUMERIC KEYPAD (1-9, *, 0, #) ───── -->
+    <div class="grid grid-cols-3 gap-2.5">
+      <button onclick="pressDigit('1')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">1</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Hindi</div>
+      </button>
+      <button onclick="pressDigit('2')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">2</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Water</div>
+      </button>
+      <button onclick="pressDigit('3')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">3</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Power</div>
+      </button>
+
+      <button onclick="pressDigit('4')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">4</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">GHI</div>
+      </button>
+      <button onclick="pressDigit('5')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">5</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">JKL</div>
+      </button>
+      <button onclick="pressDigit('6')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">6</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">MNO</div>
+      </button>
+
+      <button onclick="pressDigit('7')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">7</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">PQRS</div>
+      </button>
+      <button onclick="pressDigit('8')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">8</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">TUV</div>
+      </button>
+      <button onclick="pressDigit('9')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">9</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">WXYZ</div>
+      </button>
+
+      <button onclick="pressDigit('*')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">*</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Repeat</div>
+      </button>
+      <button onclick="pressDigit('0')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">0</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">+</div>
+      </button>
+      <button onclick="pressDigit('#')" class="key-btn bg-slate-700/80 hover:bg-slate-600 border border-slate-600/80 rounded-xl py-3 text-center transition">
+        <div class="text-lg font-bold leading-none">#</div>
+        <div class="text-[9px] text-slate-400 uppercase mt-0.5 font-semibold">Submit</div>
+      </button>
+    </div>
+
+    <!-- Microphone input indicator -->
+    <div id="mic-indicator" class="hidden mt-4 bg-red-950/60 border border-red-500/50 rounded-xl p-2 text-center text-xs text-red-400 animate-pulse font-semibold">
+      🎙️ Recording Voice (Speak now, press # when done)...
+    </div>
+  </div>
+
+  <script>
+    // Audio Context for realistic DTMF keypress beeps
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq = 440, duration = 0.12) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    // Call State Machine
+    let callState = 'IDLE'; // IDLE, RINGING, WELCOME, CATEGORY, RECORDING, ENDED
+    let seconds = 0;
+    let timerInterval = null;
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let chosenLang = 'hi';
+    let chosenCat = 'water';
+
+    const screenStatus = document.getElementById('screen-status');
+    const screenNumber = document.getElementById('screen-number');
+    const screenSubtext = document.getElementById('screen-subtext');
+    const callBadge = document.getElementById('call-badge');
+    const callTimer = document.getElementById('call-timer');
+    const micIndicator = document.getElementById('mic-indicator');
+
+    // Text-to-Speech playback
+    function speakHindi(text, onEnd) {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'hi-IN';
+      utter.rate = 0.95;
+      utter.pitch = 1.05;
+      
+      // Try to find a Hindi voice
+      const voices = window.speechSynthesis.getVoices();
+      const hiVoice = voices.find(v => v.lang.includes('hi') || v.name.includes('Hindi') || v.name.includes('Aditi'));
+      if (hiVoice) utter.voice = hiVoice;
+
+      if (onEnd) utter.onend = onEnd;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function startCall() {
+      if (callState !== 'IDLE') return;
+      playBeep(800, 0.2);
+
+      callState = 'RINGING';
+      screenStatus.textContent = 'Calling...';
+      screenSubtext.textContent = 'Connecting to Lok Swar...';
+      callBadge.textContent = 'DIALING';
+
+      // Ringing tone
+      playBeep(425, 0.8);
+      setTimeout(() => playBeep(425, 0.8), 1200);
+
+      setTimeout(() => {
+        // Connected!
+        callState = 'WELCOME';
+        callBadge.textContent = 'CONNECTED';
+        screenStatus.textContent = 'Call Connected';
+        screenSubtext.textContent = 'Listening to Lok Swar...';
+
+        seconds = 0;
+        timerInterval = setInterval(() => {
+          seconds++;
+          const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+          const secs = String(seconds % 60).padStart(2, '0');
+          callTimer.textContent = `${mins}:${secs}`;
+        }, 1000);
+
+        // Play Welcome in Hindi
+        const welcomeText = "नमस्ते। लोक स्वर ग्राहक सेवा में आपका स्वागत है। हिंदी के लिए 1 दबाएँ।";
+        screenSubtext.textContent = 'Press 1 for Hindi';
+        speakHindi(welcomeText);
+      }, 2500);
+    }
+
+    function pressDigit(digit) {
+      playBeep(350 + parseInt(digit || 5) * 50, 0.15);
+
+      if (callState === 'WELCOME') {
+        if (digit === '1') {
+          chosenLang = 'hi';
+          callState = 'CATEGORY';
+          screenStatus.textContent = 'Language: HINDI';
+          screenSubtext.textContent = 'Press 1: Bijli, 2: Paani';
+          const catText = "अपनी समस्या की श्रेणी चुनें। बिजली के लिए 1 दबाएँ। पानी की समस्या के लिए 2 दबाएँ। अन्य के लिए 3 दबाएँ।";
+          speakHindi(catText);
+        }
+      } else if (callState === 'CATEGORY') {
+        if (digit === '1') chosenCat = 'electricity';
+        else if (digit === '2') chosenCat = 'water';
+        else chosenCat = 'other';
+
+        callState = 'RECORDING';
+        screenStatus.textContent = `Category: ${chosenCat.toUpperCase()}`;
+        screenSubtext.textContent = 'Speak after BEEP... Press #';
+
+        const recordPrompt = "कृपया बीप के बाद अपनी समस्या संक्षेप में बताएं और समाप्त होने पर हैश दबाएँ।";
+        speakHindi(recordPrompt, () => {
+          // Long Beep to start recording
+          playBeep(1000, 0.4);
+          micIndicator.classList.remove('hidden');
+          startMicRecording();
+        });
+      } else if (callState === 'RECORDING') {
+        if (digit === '#') {
+          stopAndSaveRecording();
+        }
+      }
+    }
+
+    // Microphone audio capture
+    async function startMicRecording() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+        mediaRecorder.start();
+      } catch (err) {
+        console.log('Mic access not available, using simulated audio', err);
+      }
+    }
+
+    async function stopAndSaveRecording() {
+      micIndicator.classList.add('hidden');
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
+
+      callState = 'ENDED';
+      screenStatus.textContent = 'Submitting...';
+      screenSubtext.textContent = 'Saving to Admin Dashboard';
+
+      // Send to FastAPI IVR backend
+      try {
+        const params = new URLSearchParams({
+          lang: chosenLang,
+          cat: chosenCat,
+          From: '+91 8926160600',
+          RecordingDuration: '15',
+          RecordingUrl: 'https://api.twilio.com/cowbell.mp3'
+        });
+        await fetch(`/ivr/save-recording?${params}`, { method: 'POST' });
+      } catch (e) {
+        console.error(e);
+      }
+
+      const thanksText = "धन्यवाद। आपकी शिकायत दर्ज कर ली गई है। प्रशासनिक टीम शीघ्र कार्रवाई करेगी।";
+      speakHindi(thanksText, () => {
+        endCall();
+      });
+    }
+
+    function endCall() {
+      window.speechSynthesis.cancel();
+      playBeep(400, 0.3);
+      if (timerInterval) clearInterval(timerInterval);
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+
+      callState = 'IDLE';
+      micIndicator.classList.add('hidden');
+      callBadge.textContent = 'IDLE';
+      screenStatus.textContent = 'Call Ended';
+      screenSubtext.textContent = 'Ticket logged in Admin!';
+      callTimer.textContent = '00:00';
+
+      setTimeout(() => {
+        screenStatus.textContent = 'Toll-Free Helpline';
+        screenSubtext.textContent = 'Press [CALL] to connect';
+      }, 3000);
+    }
+
+    // Preload voices
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  </script>
+</body>
+</html>
