@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import os
 import re
+import json
+import asyncio
 import base64
 import httpx
 from datetime import datetime, timezone
@@ -19,7 +21,7 @@ from typing import Annotated, Optional
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, Form, HTTPException, Request, Query, UploadFile, File
-from fastapi.responses import HTMLResponse, JSONResponse, Response, FileResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response, FileResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
 from motor.motor_asyncio import AsyncIOMotorCollection
 from bson import ObjectId
@@ -59,6 +61,21 @@ RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
 # Twilio credentials from env (used for proxying audio)
 TWILIO_ACCOUNT_SID: str = os.getenv("TWILIO_ACCOUNT_SID", "")
 TWILIO_AUTH_TOKEN: str = os.getenv("TWILIO_AUTH_TOKEN", "")
+
+# Real-time SSE subscriber queues for instant live report streaming
+_sse_subscribers: set[asyncio.Queue] = set()
+
+async def broadcast_live_report(report_data: dict):
+    """Broadcast newly ingested call report to all open admin console tabs immediately."""
+    payload = json.dumps(report_data, default=str)
+    dead_queues = []
+    for q in _sse_subscribers:
+        try:
+            q.put_nowait(payload)
+        except Exception:
+            dead_queues.append(q)
+    for q in dead_queues:
+        _sse_subscribers.discard(q)
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -381,13 +398,51 @@ async def ivr_save_recording(
     except Exception as exc:
         print(f"[IVR] DB insert/upsert error: {exc}")
 
+    # Prepare serializable report payload
+    res_data = ticket_doc.copy()
+    res_data["id"] = ticket_id
+    res_data.pop("_id", None)
+    res_data["created_at"] = res_data.get("created_at", now).isoformat()
+    res_data["updated_at"] = res_data.get("updated_at", now).isoformat()
+
+    # 1. Real-Time SSE Push to all connected admin consoles (Instant Fetch)
+    try:
+        await broadcast_live_report(res_data)
+    except Exception as exc:
+        print(f"[IVR] Live SSE broadcast error: {exc}")
+
+    # 2. Mirror into main platform grievances collection for cross-portal consistency
+    try:
+        dept_map = {
+            "electricity": "Electricity Distribution Division (DISCOM)",
+            "water": "Rural Water Supply & Sanitation (RWSS)",
+            "other": "Panchayati Raj & Rural Infrastructure Dept"
+        }
+        grievances_col = collection.database["grievances"]
+        report_ref = f"IVR-{ticket_id[-6:].upper()}"
+        grievance_doc = {
+            "id": report_ref,
+            "title": f"Live Call Grievance ({cat.capitalize()}): {caller_phone}",
+            "titleOriginal": transcription,
+            "description": transcription,
+            "category": cat.capitalize(),
+            "department": dept_map.get(cat, "District Public Administration"),
+            "status": "Submitted",
+            "statusStage": "Stage 1: Grievance Ingested via Live IVR Call",
+            "citizenPhone": caller_phone,
+            "urgencyScore": 89.0,
+            "votes": 1,
+            "audioUrl": recording_url,
+            "intakeChannel": "Toll-Free Keypad IVR (+91 8926160600)",
+            "createdAt": res_data["created_at"],
+            "updatedAt": res_data["updated_at"],
+        }
+        await grievances_col.update_one({"id": report_ref}, {"$set": grievance_doc}, upsert=True)
+    except Exception as exc:
+        print(f"[IVR] Grievance mirror sync notice: {exc}")
+
     # Return JSON if requested by client (e.g. phone simulator)
     if "application/json" in request.headers.get("accept", "") or form_data.get("format") == "json":
-        res_data = ticket_doc.copy()
-        res_data["id"] = ticket_id
-        res_data.pop("_id", None)
-        res_data["created_at"] = res_data.get("created_at", now).isoformat()
-        res_data["updated_at"] = res_data.get("updated_at", now).isoformat()
         return JSONResponse({"ok": True, "ticket_id": ticket_id, "ticket": res_data})
 
     # Twilio Voice XML response
@@ -470,6 +525,48 @@ async def create_mock_ticket(
     }
     result = await collection.insert_one(mock)
     return {"inserted_id": str(result.inserted_id), "message": "Mock ticket created"}
+
+
+# ---------------------------------------------------------------------------
+# Admin Live Stream (SSE) — Zero-latency push of call reports
+# ---------------------------------------------------------------------------
+
+@app.get("/admin/events")
+async def sse_admin_events(request: Request):
+    """
+    Server-Sent Events (SSE) stream for admin dashboard.
+    Instantly pushes new call reports and recordings as soon as call finishes.
+    """
+    q = asyncio.Queue(maxsize=50)
+    _sse_subscribers.add(q)
+
+    async def event_generator():
+        try:
+            # Handshake
+            yield "event: connected\ndata: {\"status\": \"active\", \"stream\": \"live_call_reports\"}\n\n"
+            while True:
+                if await request.is_disconnected():
+                    break
+                try:
+                    data = await asyncio.wait_for(q.get(), timeout=12.0)
+                    yield f"event: new_call_report\ndata: {data}\n\n"
+                except asyncio.TimeoutError:
+                    # Keep-alive heartbeat
+                    yield "event: ping\ndata: keep-alive\n\n"
+        except asyncio.CancelledError:
+            pass
+        finally:
+            _sse_subscribers.discard(q)
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
 
 
 # ---------------------------------------------------------------------------

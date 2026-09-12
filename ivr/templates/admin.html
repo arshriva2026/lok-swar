@@ -95,6 +95,10 @@
 
       <!-- Actions -->
       <div class="flex items-center gap-2.5">
+        <div id="live-stream-badge" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border border-emerald-200 bg-emerald-50 text-emerald-700 transition shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          Live Stream Active
+        </div>
         <a href="/phone" target="_blank"
           class="flex items-center gap-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl text-xs font-bold text-emerald-800 transition cursor-pointer shadow-2xs">
           📱 Open Keypad Phone
@@ -214,9 +218,11 @@
       } catch(e) {}
     }
 
-    // ── Boot & Realtime Channel ────────────────────────────────────────────
+    // ── Boot & Realtime Stream ────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
       loadTickets();
+      connectLiveStream();
+
       document.getElementById('search-input')?.addEventListener('input', (e) => {
         state.search = e.target.value.toLowerCase();
         renderTickets();
@@ -227,20 +233,88 @@
         const syncChannel = new BroadcastChannel('lok_swar_ivr_sync');
         syncChannel.onmessage = (e) => {
           if (e.data?.type === 'NEW_CALL_TICKET') {
-            playNotificationChime();
-            showToast(`🚨 New Live Call Ingested: ${e.data.phone || '+91 8926160600'}!`);
-            loadTickets(true);
+            if (e.data.ticket) {
+              handleLiveIncomingReport(e.data.ticket);
+            } else {
+              loadTickets(true);
+            }
           }
         };
       } catch(err) {
         console.log('BroadcastChannel not supported', err);
       }
 
-      // Seamless background auto-refresh every 3.5 seconds
+      // Background auto-refresh polling every 2.5s (failsafe backup)
       setInterval(() => {
         loadTickets(true);
-      }, 3500);
+      }, 2500);
     });
+
+    // ── Zero-Latency SSE Real-time Connection ──────────────────────────────
+    let sseSource = null;
+    function connectLiveStream() {
+      if (!window.EventSource) return;
+      try {
+        if (sseSource) sseSource.close();
+        sseSource = new EventSource('/admin/events');
+
+        sseSource.addEventListener('connected', () => {
+          const badge = document.getElementById('live-stream-badge');
+          if (badge) {
+            badge.className = 'hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border border-emerald-200 bg-emerald-50 text-emerald-700 transition shadow-2xs';
+            badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Live Stream Active';
+          }
+        });
+
+        sseSource.addEventListener('new_call_report', (e) => {
+          try {
+            const report = JSON.parse(e.data);
+            handleLiveIncomingReport(report);
+          } catch (err) {
+            console.error(err);
+          }
+        });
+
+        sseSource.onerror = () => {
+          const badge = document.getElementById('live-stream-badge');
+          if (badge) {
+            badge.className = 'hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border border-amber-200 bg-amber-50 text-amber-700 transition shadow-2xs';
+            badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-500"></span> Reconnecting Stream…';
+          }
+          if (sseSource) sseSource.close();
+          setTimeout(connectLiveStream, 3500);
+        };
+      } catch (err) {
+        console.warn('SSE Setup Error:', err);
+      }
+    }
+
+    function handleLiveIncomingReport(report) {
+      playNotificationChime();
+      showToast(`🚨 Live Call Ingested: ${report.caller_phone || '+91 8926160600'} (${(report.category || 'ELECTRICITY').toUpperCase()})!`);
+
+      const idx = allTickets.findIndex(t => t.id === report.id);
+      if (idx >= 0) {
+        allTickets[idx] = report;
+      } else {
+        allTickets.unshift(report);
+      }
+
+      renderStats(allTickets.length, allTickets);
+      renderTickets();
+
+      // Soft pulsating glow highlight on newly ingested card
+      setTimeout(() => {
+        const cardEl = document.getElementById(`card-${report.id}`);
+        if (cardEl) {
+          cardEl.classList.add('ring-4', 'ring-emerald-500/50', 'bg-emerald-50/30');
+          cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          setTimeout(() => {
+            cardEl.classList.remove('ring-4', 'ring-emerald-500/50', 'bg-emerald-50/30');
+          }, 4500);
+        }
+      }, 120);
+    }
 
     // ── Data fetch ─────────────────────────────────────────────────────────
     async function loadTickets(silent = false) {
@@ -403,6 +477,16 @@
               "${t.transcription}"
             </div>
           </div>` : ''}
+
+          <!-- Administrative Assessment & SLA Routing -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 flex items-center justify-between text-[11px] font-medium text-slate-600">
+            <div class="flex items-center gap-1.5 truncate">
+              <span>🏛️ <strong>${t.category === 'electricity' ? 'DISCOM Power Division' : (t.category === 'water' ? 'RWSS Drinking Water' : 'Rural Works & Panchayati Raj')}</strong></span>
+            </div>
+            <div class="flex items-center gap-1 text-emerald-800 font-bold bg-emerald-100/70 border border-emerald-200/60 px-2 py-0.5 rounded text-[10px] shrink-0">
+              <span>⚡ 24h SLA Active</span>
+            </div>
+          </div>
 
           <!-- Status Switcher -->
           <div class="flex items-center gap-2 pt-1">
