@@ -1,4 +1,4 @@
-﻿/**
+/**
  * People's Priorities - Audio & Multilingual NLP Intelligence Engine
  * Features Gemini Pegasus Neural Voice Synthesizer & Multilingual Entity Extraction (Odia, Hindi, Bengali, English)
  */
@@ -224,41 +224,33 @@ export class AudioAIEngine {
     if (window.speechSynthesis.paused) window.speechSynthesis.resume();
 
     const voices = window.speechSynthesis.getVoices() || [];
-    const isOdia = (lang === "Odia" || lang === "or" || lang === "or-IN");
-    const isHindi = (lang === "Hindi" || lang === "hi" || lang === "hi-IN");
-    const isBengali = (lang === "Bengali" || lang === "bn" || lang === "bn-IN");
+    const langMap = {
+      "Odia": "or-IN", "or": "or-IN", "or-IN": "or-IN",
+      "Bengali": "bn-IN", "bn": "bn-IN", "bn-IN": "bn-IN",
+      "Hindi": "hi-IN", "hi": "hi-IN", "hi-IN": "hi-IN",
+      "Bhojpuri": "hi-IN", "bho": "hi-IN",
+      "Tamil": "ta-IN", "ta": "ta-IN",
+      "Telugu": "te-IN", "te": "te-IN",
+      "Kannada": "kn-IN", "kn": "kn-IN",
+      "Malayalam": "ml-IN", "ml": "ml-IN",
+      "Marathi": "mr-IN", "mr": "mr-IN",
+      "Gujarati": "gu-IN", "gu": "gu-IN",
+      "Punjabi": "pa-IN", "pa": "pa-IN",
+      "Urdu": "ur-IN", "ur": "ur-IN",
+      "Assamese": "as-IN", "as": "as-IN",
+      "Maithili": "hi-IN", "mai": "hi-IN",
+      "Santali": "hi-IN", "sat": "hi-IN",
+      "Kashmiri": "ur-IN", "ks": "ur-IN",
+      "Sindhi": "hi-IN", "sd": "hi-IN",
+      "English": "en-US", "en": "en-US"
+    };
 
-    let speechText = text;
-    let targetLangCode = "hi-IN";
-
-    if (isOdia) {
-      const nativeOdiaVoice = voices.find(v => 
-        v.lang.startsWith('or') || 
-        v.name.toLowerCase().includes('odia') || 
-        v.name.toLowerCase().includes('oriya')
-      );
-
-      if (nativeOdiaVoice) {
-        targetLangCode = nativeOdiaVoice.lang || "or-IN";
-        speechText = text || "ଲୋକ ସ୍ୱର ନାଗରିକ ସେବାକୁ ସ୍ୱାଗତ। ମାଇକ୍ ବଟନ୍ ଦବାଇ ନିଜର ସମସ୍ୟା କୁହନ୍ତୁ କିମ୍ବା କ୍ୟାମେରାରୁ ଫଟୋ ନିଅନ୍ତୁ ଏବଂ ତଳେ ଥିବା ବଟନ୍ ଦବାଇ ରିପୋର୍ଟ ପଠାନ୍ତୁ।";
-      } else {
-        targetLangCode = "hi-IN";
-        speechText = "लोक स्वर नागरिक सेवाकु स्वागत। माइक बटन दबाई आपण निज समस्या कुहंतु किंवा फोटो देई रिपोर्ट दाख़ल करंतु।";
-      }
-    } else if (isBengali) {
-      targetLangCode = "bn-IN";
-      speechText = text || "লোক স্বরে আপনাকে স্বাগতম। মাইক বোতাম টিপে আপনার সমস্যা বলুন বা ক্যামেরা থেকে ছবি তুলুন, তারপর নিচে বোতাম টিপে রিপোর্ট জমা দিন।";
-    } else if (isHindi) {
-      targetLangCode = "hi-IN";
-      speechText = text || "लोक स्वर में आपका स्वागत है। माइक बटन दबाकर अपनी समस्या बोलें या कैमरा से फोटो लगाएं, फिर नीचे रिपोर्ट जमा करें।";
-    } else {
-      targetLangCode = "en-US";
-      speechText = text || "Welcome to Lok Swar Civic Intelligence. Tap the microphone to speak your issue, attach photo evidence with the camera button, and press Submit Report.";
-    }
+    let targetLangCode = langMap[lang] || "en-US";
+    let speechText = text || "Welcome to Lok Swar. Tap anywhere for voice guidance.";
 
     const utterance = new SpeechSynthesisUtterance(speechText);
     utterance.lang = targetLangCode;
-    utterance.rate = isOdia ? 0.88 : 0.92;
+    utterance.rate = 0.92;
     utterance.pitch = 1.02;
 
     const matchedVoice = voices.find(v => v.lang === targetLangCode || v.lang.startsWith(targetLangCode.split('-')[0]))

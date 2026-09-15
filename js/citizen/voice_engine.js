@@ -22,6 +22,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "লোক স্বর পোর্টালে স্বাগতম। স্ক্রিনে যেকোনো স্থানে ক্লিক করলে ভয়েস অ্যাসিস্ট্যান্ট আপনাকে সাহায্য করবে।",
         enSub: "Welcome to Lok Swar. Tap anywhere for speech guidance in Bengali."
       },
+      ta: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      te: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      kn: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      ml: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      mr: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      gu: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      pa: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      ur: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      as: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      mai: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      sat: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      ks: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
+      sd: {
+
+        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+
+        enSub: "Voice guidance active. Tap any element to hear its description."
+
+      },
       en: {
         display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
         spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
@@ -48,6 +165,123 @@ const GUIDANCE_DICTIONARY = {
         display: "অভিযোগ লেখার বাক্স: আপনার समस्या टाइप করুন বা মাইক চেপে বলুন।",
         spoken: "এটি অভিযোগ লেখার মূল বাক্স। আপনার समस्या टाइप করুন বা মাইক চেপে বলুন।",
         enSub: "Grievance input box in Bengali."
+      },
+      ta: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      te: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      kn: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      ml: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      mr: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      gu: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      pa: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      ur: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      as: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      mai: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      sat: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      ks: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
+      },
+      sd: {
+
+        display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
+
+        spoken: "This is the main complaint box. Type your issue or tap the microphone to speak.",
+
+        enSub: "Primary input bar for civic grievances."
+
       },
       en: {
         display: "Grievance Input Box: Type your issue or tap the microphone to speak.",
@@ -76,6 +310,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "মাইক রেকর্ডিং বোতাম। নিজের ভাষায় সমস্যা বলতে এখানে ক্লিক করুন।",
         enSub: "Tap to record voice in Bengali."
       },
+      ta: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      te: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      kn: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      ml: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      mr: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      gu: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      pa: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      ur: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      as: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      mai: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      sat: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      ks: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
+      sd: {
+
+        display: "Microphone Recording: Click to speak your civic issue.",
+
+        spoken: "Microphone recording button. Click to record your issue in your spoken language.",
+
+        enSub: "Click to record voice grievance."
+
+      },
       en: {
         display: "Microphone Recording: Click to speak your civic issue.",
         spoken: "Microphone recording button. Click to record your issue in your spoken language.",
@@ -102,6 +453,123 @@ const GUIDANCE_DICTIONARY = {
         display: "রিপোর্ট জমা দিন: পোর্টালে আপনার অভিযোগ দায়ের করতে এখানে চাপুন।",
         spoken: "রিপোর্ট জমা দিন বোতাম। সরকারি পোর্টালে আপনার অভিযোগ দায়ের করতে এখানে চাপুন।",
         enSub: "Submit report in Bengali."
+      },
+      ta: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      te: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      kn: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      ml: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      mr: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      gu: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      pa: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      ur: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      as: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      mai: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      sat: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      ks: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
+      },
+      sd: {
+
+        display: "Submit Report: Tap to officially file your civic complaint.",
+
+        spoken: "Submit Report button. Tap to officially submit your complaint to the government portal.",
+
+        enSub: "Official filing button."
+
       },
       en: {
         display: "Submit Report: Tap to officially file your civic complaint.",
@@ -130,6 +598,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "ক্যামেরা বোতাম। সমস্যার ছবি বা প্রমাণ আপলোড করতে এখানে ক্লিক করুন।",
         enSub: "Upload photo in Bengali."
       },
+      ta: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      te: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      kn: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      ml: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      mr: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      gu: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      pa: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      ur: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      as: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      mai: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      sat: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      ks: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
+      sd: {
+
+        display: "Camera Button: Upload photo or evidence of the civic issue.",
+
+        spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
+
+        enSub: "Upload photographic proof."
+
+      },
       en: {
         display: "Camera Button: Upload photo or evidence of the civic issue.",
         spoken: "Camera button. Click to upload photos or evidence of the civic issue.",
@@ -142,6 +727,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "भाषा अनुवाद बटन। क्षेत्रीय भाषा को अंग्रेज़ी में बदलने के लिए यहाँ क्लिक करें।",
         enSub: "Translate regional text into English."
       },
+      ta: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      te: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      kn: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      ml: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      mr: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      gu: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      pa: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      ur: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      as: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      mai: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      sat: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      ks: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
+      sd: {
+
+        display: "Translation Button: Converts regional dialect to English.",
+
+        spoken: "Translation button. Converts your regional language input into English.",
+
+        enSub: "Real-time AI translation."
+
+      },
       en: {
         display: "Translation Button: Converts regional dialect to English.",
         spoken: "Translation button. Converts your regional language input into English.",
@@ -153,6 +855,123 @@ const GUIDANCE_DICTIONARY = {
         display: "पूर्ववत करें: अनुवाद हटाकर मूल क्षेत्रीय शब्दों पर वापस जाने के लिए क्लिक करें।",
         spoken: "पूर्ववत करें बटन। अनुवाद हटाकर अपने मूल क्षेत्रीय शब्दों पर वापस जाने के लिए क्लिक करें।",
         enSub: "Revert back to your original regional input."
+      },
+      ta: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      te: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      kn: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      ml: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      mr: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      gu: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      pa: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      ur: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      as: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      mai: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      sat: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      ks: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
+      },
+      sd: {
+
+        display: "Undo Translation: Restore your original typed words.",
+
+        spoken: "Undo translation button. Revert back to your original input.",
+
+        enSub: "Reverts to original text."
+
       },
       en: {
         display: "Undo Translation: Restore your original typed words.",
@@ -181,6 +1000,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "রাস্তা ও পরিকাঠামো বিভাগ। ভাঙা রাস্তা, গর্ত ও নিকাশী ব্যবস্থার অভিযোগ এখানে জানান।",
         enSub: "Roads and Infrastructure in Bengali."
       },
+      ta: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      te: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      kn: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      ml: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      mr: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      gu: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      pa: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      ur: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      as: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      mai: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      sat: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      ks: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
+      sd: {
+
+        display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
+
+        spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
+
+        enSub: "Explore civil works and road maintenance."
+
+      },
       en: {
         display: "Roads & Infrastructure: PWD, PMGSY, and connectivity works.",
         spoken: "Roads and Infrastructure section. Report broken roads, potholes, bridges, and drainage works.",
@@ -207,6 +1143,123 @@ const GUIDANCE_DICTIONARY = {
         display: "অগ্রগতি ও জনসমর্থন: চলমান উন্নয়ন কাজের স্থিতি দেখুন এবং ভোট দিন।",
         spoken: "অগ্রগতি ও জনসমর্থন। চলমান উন্নয়ন কাজের স্থিতি দেখুন এবং অগ্রাধিকার দিন।",
         enSub: "Progress & Upvotes in Bengali."
+      },
+      ta: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      te: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      kn: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      ml: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      mr: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      gu: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      pa: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      ur: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      as: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      mai: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      sat: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      ks: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
+      },
+      sd: {
+
+        display: "Progress & Upvotes: Community priorities and live civic support.",
+
+        spoken: "Progress and Public Support section. Track active projects and upvote community priorities.",
+
+        enSub: "Citizen upvoting and priority tracking."
+
       },
       en: {
         display: "Progress & Upvotes: Community priorities and live civic support.",
@@ -235,6 +1288,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "গ্রাম জিআইএস হটস্পট মানচিত্র। স্যাটেলাইট মানচিত্রে সমস্যার জিপিএস অবস্থান দেখুন।",
         enSub: "GIS Hotspot in Bengali."
       },
+      ta: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      te: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      kn: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      ml: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      mr: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      gu: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      pa: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      ur: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      as: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      mai: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      sat: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      ks: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
+      sd: {
+
+        display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
+
+        spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
+
+        enSub: "Geographic incident clustering."
+
+      },
       en: {
         display: "Village GIS Hotspot: Satellite map and verified evidence coordinates.",
         spoken: "Village GIS Hotspot map. View geospatial incident clusters and live telemetry on the map.",
@@ -262,6 +1432,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "নাগরিক পরিষেবা ও প্রোফাইল। আধার ই-কেওয়াইসি এবং আপনার পূর্বের অভিযোগের স্থিতি দেখুন।",
         enSub: "Citizen Profile in Bengali."
       },
+      ta: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      te: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      kn: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      ml: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      mr: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      gu: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      pa: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      ur: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      as: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      mai: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      sat: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      ks: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
+      sd: {
+
+        display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
+
+        spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
+
+        enSub: "Profile, credentials, and ledger history."
+
+      },
       en: {
         display: "Citizen Services & Profile: Aadhaar e-KYC and DigiLocker identity verification.",
         spoken: "Citizen Services and Profile. View your Aadhaar e-KYC, DigiLocker, and past grievance history.",
@@ -273,6 +1560,123 @@ const GUIDANCE_DICTIONARY = {
         display: "लाइव स्थान: वर्तमान सत्यापित जीपीएस क्षेत्र।",
         spoken: "लाइव स्थान। यह आपका वर्तमान जीपीएस क्षेत्र प्रदर्शित कर रहा है।",
         enSub: "Live Location: Displays your verified GPS detected location."
+      },
+      ta: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      te: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      kn: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      ml: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      mr: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      gu: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      pa: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      ur: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      as: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      mai: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      sat: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      ks: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
+      },
+      sd: {
+
+        display: "Live Location: Displays your verified GPS detected location.",
+
+        spoken: "Live Location. Displays your verified GPS detected location.",
+
+        enSub: "Verified telemetry zone."
+
       },
       en: {
         display: "Live Location: Displays your verified GPS detected location.",
@@ -286,6 +1690,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "जीपीएस रिफ्रेश बटन। वर्तमान उपग्रह जीपीएस निर्देशांक पुनः प्राप्त करने के लिए क्लिक किया गया।",
         enSub: "Refreshing live GPS satellite telemetry."
       },
+      ta: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      te: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      kn: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      ml: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      mr: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      gu: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      pa: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      ur: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      as: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      mai: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      sat: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      ks: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
+      sd: {
+
+        display: "Refresh GPS: Updating live satellite coordinates.",
+
+        spoken: "Refresh GPS button. Updating your live coordinates and area name.",
+
+        enSub: "GPS telemetry refresh."
+
+      },
       en: {
         display: "Refresh GPS: Updating live satellite coordinates.",
         spoken: "Refresh GPS button. Updating your live coordinates and area name.",
@@ -297,6 +1818,123 @@ const GUIDANCE_DICTIONARY = {
         display: "स्थान बदलें: अपनी ग्राम पंचायत, वार्ड या जिला मैन्युअल रूप से चुनें।",
         spoken: "स्थान बदलने का विकल्प। अपनी ग्राम पंचायत, वार्ड या जिला मैन्युअल रूप से चुनने के लिए क्लिक करें।",
         enSub: "Change Location: Select your Gram Panchayat or Ward manually."
+      },
+      ta: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      te: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      kn: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      ml: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      mr: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      gu: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      pa: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      ur: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      as: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      mai: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      sat: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      ks: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
+      },
+      sd: {
+
+        display: "Change Location: Select your Gram Panchayat, Ward, or District.",
+
+        spoken: "Change Location. Select your Gram Panchayat, Ward, or District manually.",
+
+        enSub: "Manual administrative zone selector."
+
       },
       en: {
         display: "Change Location: Select your Gram Panchayat, Ward, or District.",
@@ -310,6 +1948,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "भाषा बदलने का मेनू। हिन्दी, ओडिया, भोजपुरी, बांग्ला या अंग्रेजी का चयन करें।",
         enSub: "Language selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English."
       },
+      ta: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      te: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      kn: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      ml: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      mr: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      gu: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      pa: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      ur: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      as: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      mai: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      sat: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      ks: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
+      sd: {
+
+        display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
+
+        spoken: "Language selector. Choose your preferred language.",
+
+        enSub: "Select portal interface language."
+
+      },
       en: {
         display: "Language Selector: Choose Hindi, Odia, Bhojpuri, Bengali, or English.",
         spoken: "Language selector. Choose your preferred language.",
@@ -321,6 +2076,123 @@ const GUIDANCE_DICTIONARY = {
         display: "थीम बटन: डार्क मोड या लाइट मोड पर स्विच करें।",
         spoken: "थीम बदलने का बटन। डार्क मोड या लाइट मोड पर स्विच करें।",
         enSub: "Theme toggle: Switch between dark mode and light mode."
+      },
+      ta: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      te: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      kn: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      ml: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      mr: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      gu: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      pa: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      ur: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      as: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      mai: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      sat: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      ks: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
+      },
+      sd: {
+
+        display: "Theme Toggle: Switch between dark mode and light mode.",
+
+        spoken: "Theme toggle. Switch between dark mode and light mode.",
+
+        enSub: "Color appearance mode switch."
+
       },
       en: {
         display: "Theme Toggle: Switch between dark mode and light mode.",
@@ -334,6 +2206,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "सूचनाएं। आपकी शिकायतों पर हुई ताज़ा प्रशासनिक कार्रवाई की सूचनाएं यहाँ देखें।",
         enSub: "Notifications: Real-time action alerts on your complaints."
       },
+      ta: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      te: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      kn: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      ml: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      mr: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      gu: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      pa: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      ur: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      as: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      mai: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      sat: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      ks: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
+      sd: {
+
+        display: "Notifications: Real-time action alerts on your complaints.",
+
+        spoken: "Notifications. Check status updates and actions on your grievances.",
+
+        enSub: "Official status alerts."
+
+      },
       en: {
         display: "Notifications: Real-time action alerts on your complaints.",
         spoken: "Notifications. Check status updates and actions on your grievances.",
@@ -345,6 +2334,123 @@ const GUIDANCE_DICTIONARY = {
         display: "नागरिक प्रोफ़ाइल: आपकी व्यक्तिगत जानकारी और डिजीलॉकर खाता।",
         spoken: "नागरिक प्रोफ़ाइल। आपकी व्यक्तिगत जानकारी और डिजीलॉकर सत्यापन रिकॉर्ड।",
         enSub: "Citizen Profile: Account credentials and DigiLocker credentials."
+      },
+      ta: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      te: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      kn: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      ml: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      mr: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      gu: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      pa: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      ur: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      as: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      mai: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      sat: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      ks: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
+      },
+      sd: {
+
+        display: "Citizen Profile: Account credentials and DigiLocker credentials.",
+
+        spoken: "Citizen Profile. Access your personal account and DigiLocker records.",
+
+        enSub: "View profile details."
+
       },
       en: {
         display: "Citizen Profile: Account credentials and DigiLocker credentials.",
@@ -358,6 +2464,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "सरकारी आपातकालीन हेल्पलाइन नंबर। राष्ट्रीय सेवा 1947 या जिला सेवा पर सीधे संपर्क करें।",
         enSub: "Official emergency helplines: National 1947 & District support."
       },
+      ta: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      te: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      kn: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      ml: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      mr: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      gu: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      pa: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      ur: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      as: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      mai: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      sat: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      ks: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
+      sd: {
+
+        display: "Official Helplines: National 1947 and district support.",
+
+        spoken: "Official emergency helplines. National helpline 1947 and district support.",
+
+        enSub: "Direct emergency assistance."
+
+      },
       en: {
         display: "Official Helplines: National 1947 and district support.",
         spoken: "Official emergency helplines. National helpline 1947 and district support.",
@@ -369,6 +2592,123 @@ const GUIDANCE_DICTIONARY = {
         display: "फ़ॉन्ट आकार: स्क्रीन के अक्षरों को बड़ा या छोटा करें।",
         spoken: "फ़ॉन्ट आकार विकल्प। स्क्रीन के अक्षरों को बड़ा या छोटा करें।",
         enSub: "Font size adjustment for comfortable reading."
+      },
+      ta: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      te: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      kn: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      ml: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      mr: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      gu: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      pa: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      ur: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      as: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      mai: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      sat: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      ks: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
+      },
+      sd: {
+
+        display: "Font Size: Adjust text size for comfortable reading.",
+
+        spoken: "Font size controls. Adjust text size for comfortable reading.",
+
+        enSub: "Accessibility zoom controls."
+
       },
       en: {
         display: "Font Size: Adjust text size for comfortable reading.",
@@ -382,6 +2722,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "दूरी दायरा। अपने आस-पास के चुने हुए दायरे की समस्याएं देखें।",
         enSub: "Distance radar filter: View issues within your selected radius."
       },
+      ta: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      te: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      kn: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      ml: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      mr: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      gu: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      pa: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      ur: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      as: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      mai: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      sat: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      ks: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
+      sd: {
+
+        display: "Distance Radar: Filter complaints by geographic radius.",
+
+        spoken: "Distance radar filter. View issues within your selected radius.",
+
+        enSub: "Spatial distance scope."
+
+      },
       en: {
         display: "Distance Radar: Filter complaints by geographic radius.",
         spoken: "Distance radar filter. View issues within your selected radius.",
@@ -393,6 +2850,123 @@ const GUIDANCE_DICTIONARY = {
         display: "डेटा संलयन: उपग्रह चित्रों और जमीनी साक्ष्यों का एआई मिलान।",
         spoken: "डेटा संलयन विश्लेषण। उपग्रह चित्रों और जमीनी साक्ष्यों का एआई मिलान।",
         enSub: "Multi-Source Ground Truth Data Fusion Suite."
+      },
+      ta: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      te: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      kn: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      ml: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      mr: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      gu: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      pa: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      ur: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      as: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      mai: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      sat: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      ks: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
+      },
+      sd: {
+
+        display: "Data Fusion: Multi-sensor satellite and drone verification.",
+
+        spoken: "Data Fusion analysis. AI verification across satellite, field, and citizen data.",
+
+        enSub: "Multimodal truth engine."
+
       },
       en: {
         display: "Data Fusion: Multi-sensor satellite and drone verification.",
@@ -421,6 +2995,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "লোক স্বর প্রধান পৃষ্ঠায় স্বাগতম। এখানে আপনি समस्या বলে বা লিখে নথিভুক্ত করতে পারেন மற்றும் মানচিত্রে দেখতে পারেন।",
         enSub: "Portal tour in Bengali."
       },
+      ta: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      te: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      kn: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      ml: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      mr: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      gu: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      pa: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      ur: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      as: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      mai: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      sat: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      ks: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
+      sd: {
+
+        display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
+
+        spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
+
+        enSub: "Audio guided tour of portal capabilities."
+
+      },
       en: {
         display: "Lok Swar Tour: Voice or text complaints, GIS maps, and community progress.",
         spoken: "Welcome to the Lok Swar main portal. Here you can voice or write your civic issues with instant translation, view geographic hotspots, and track community progress.",
@@ -447,6 +3138,123 @@ const GUIDANCE_DICTIONARY = {
         display: "ভয়েস অ্যাসিস্ট্যান্ট সক্রিয় হয়েছে। আপনি স্ক্রিনে যেখানেই ক্লিক করবেন, আমি বলে পথ দেখাব।",
         spoken: "ভয়েস অ্যাসিস্ট্যান্ট সক্রিয় হয়েছে। আপনি স্ক্রিনে যেখানেই ক্লিক করবেন, আমি বলে পথ দেখাব।",
         enSub: "Voice Assistant active in Bengali."
+      },
+      ta: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      te: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      kn: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      ml: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      mr: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      gu: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      pa: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      ur: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      as: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      mai: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      sat: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      ks: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
+      },
+      sd: {
+
+        display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        spoken: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
+
+        enSub: "Spoken guidance active on every click."
+
       },
       en: {
         display: "Voice Assistant is active. Wherever you click on the page, I will guide you through speech.",
@@ -475,6 +3283,123 @@ const GUIDANCE_DICTIONARY = {
         spoken: "ভয়েস অ্যাসিস্ট্যান্ট মিউট করা হয়েছে।",
         enSub: "Voice Assistant muted in Bengali."
       },
+      ta: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      te: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      kn: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      ml: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      mr: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      gu: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      pa: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      ur: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      as: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      mai: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      sat: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      ks: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
+      sd: {
+
+        display: "Voice Assistant is now muted.",
+
+        spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
+
+        enSub: "Voice guidance muted."
+
+      },
       en: {
         display: "Voice Assistant is now muted.",
         spoken: "Voice Assistant is now muted. Click Voice Guide to turn back on.",
@@ -486,6 +3411,123 @@ const GUIDANCE_DICTIONARY = {
         display: "कृपया अपनी समस्या रिकॉर्ड करने के लिए माइक बटन दबाएं, या सर्च बार में लिखें।",
         spoken: "कृपया अपनी समस्या रिकॉर्ड करने के लिए माइक बटन दबाएं, या सर्च बार में लिखें।",
         enSub: "Please tap the microphone button to record your issue, or type in the search bar."
+      },
+      ta: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      te: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      kn: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      ml: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      mr: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      gu: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      pa: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      ur: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      as: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      mai: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      sat: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      ks: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
+      },
+      sd: {
+
+        display: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        spoken: "Please tap the microphone button to record your issue, or type in the search bar.",
+
+        enSub: "Voice or text input is required before submitting."
+
       },
       en: {
         display: "Please tap the microphone button to record your issue, or type in the search bar.",

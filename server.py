@@ -145,7 +145,27 @@ class LokSwarBackendHandler(http.server.SimpleHTTPRequestHandler):
                 return
 
             # Map to neural voice language code
-            tl = "hi" if lang in ["or", "bho", "bihari", "bhojpuri"] else ("bn" if lang in ["bn", "bengali"] else ("hi" if lang in ["hi", "hindi"] else "en"))
+            lang_map = {
+                "bn": "bn", "bengali": "bn",
+                "ta": "ta", "tamil": "ta",
+                "te": "te", "telugu": "te",
+                "kn": "kn", "kannada": "kn",
+                "ml": "ml", "malayalam": "ml",
+                "mr": "mr", "marathi": "mr",
+                "gu": "gu", "gujarati": "gu",
+                "pa": "pa", "punjabi": "pa",
+                "ur": "ur", "urdu": "ur",
+                "as": "bn", "assamese": "bn",
+                "or": "hi", "odia": "hi",
+                "mai": "hi", "maithili": "hi",
+                "sat": "hi", "santali": "hi",
+                "ks": "ur", "kashmiri": "ur",
+                "sd": "hi", "sindhi": "hi",
+                "bho": "hi", "bhojpuri": "hi", "bihari": "hi",
+                "hi": "hi", "hindi": "hi",
+                "en": "en", "english": "en"
+            }
+            tl = lang_map.get(lang, "hi")
             try:
                 encoded_q = urllib.parse.quote(text)
                 tts_url = f"https://translate.google.com/translate_tts?ie=UTF-8&tl={tl}&client=tw-ob&q={encoded_q}"

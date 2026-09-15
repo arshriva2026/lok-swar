@@ -217,13 +217,21 @@ def detect_language(text):
     if re.search(r'[\u0D00-\u0D7F]', text):
         return "Malayalam"
 
-    # Arabic / Urdu Unicode range: \u0600-\u06FF
+    # Santali (Ol Chiki)
+    if re.search(r'[\u1C50-\u1C7F]', text):
+        return "Santali"
+
+    # Maithili (Tirhuta)
+    if re.search(r'[\U00011480-\U000114DF]', text):
+        return "Maithili"
+
+    # Arabic / Urdu / Sindhi / Kashmiri Unicode range: \u0600-\u06FF
     if re.search(r'[\u0600-\u06FF]', text):
-        return "Urdu"
+        return "Urdu/Kashmiri/Sindhi"
     
-    # Devanagari (Hindi, Marathi, Bhojpuri) Unicode range: \u0900-\u097F
+    # Devanagari (Hindi, Marathi, Bhojpuri, Maithili) Unicode range: \u0900-\u097F
     if re.search(r'[\u0900-\u097F]', text):
-        return "Hindi"
+        return "Hindi/Marathi"
     
     return "English"
 
@@ -254,13 +262,26 @@ def transcribe_audio_data(raw_audio_bytes, preferred_lang=None):
                 "bn": "bn-IN", "bengali": "bn-IN", "bangla": "bn-IN",
                 "hi": "hi-IN", "hindi": "hi-IN",
                 "bho": "hi-IN", "bihari": "hi-IN", "bhojpuri": "hi-IN",
-                "en": "en-IN", "english": "en-IN"
+                "en": "en-IN", "english": "en-IN",
+                "ta": "ta-IN", "tamil": "ta-IN",
+                "te": "te-IN", "telugu": "te-IN",
+                "kn": "kn-IN", "kannada": "kn-IN",
+                "ml": "ml-IN", "malayalam": "ml-IN",
+                "mr": "mr-IN", "marathi": "mr-IN",
+                "gu": "gu-IN", "gujarati": "gu-IN",
+                "pa": "pa-IN", "punjabi": "pa-IN",
+                "ur": "ur-IN", "urdu": "ur-IN",
+                "as": "as-IN", "assamese": "as-IN",
+                "mai": "mai-IN", "maithili": "mai-IN",
+                "sat": "sat-IN", "santali": "sat-IN",
+                "ks": "ks-IN", "kashmiri": "ks-IN",
+                "sd": "sd-IN", "sindhi": "sd-IN"
             }
             if pl in lang_map:
                 candidate_langs.append(lang_map[pl])
 
-        # Priority scan: Odia, Hindi/Bihari, Bengali, English
-        all_langs = ["hi-IN", "or-IN", "bn-IN", "en-IN", "en-US"]
+        # Priority scan: Odia, Hindi/Bihari, Bengali, English + some common ones
+        all_langs = ["hi-IN", "en-IN", "bn-IN", "te-IN", "ta-IN", "mr-IN", "gu-IN", "ur-IN"]
         for l in all_langs:
             if l not in candidate_langs:
                 candidate_langs.append(l)
@@ -270,10 +291,21 @@ def transcribe_audio_data(raw_audio_bytes, preferred_lang=None):
                 transcript = r.recognize_google(audio_data, language=lang_code)
                 if transcript and transcript.strip():
                     detected = detect_language(transcript)
-                    if lang_code == "or-IN":
-                        detected = "Odia"
-                    elif lang_code == "bn-IN":
-                        detected = "Bengali"
+                    if lang_code == "or-IN": detected = "Odia"
+                    elif lang_code == "bn-IN": detected = "Bengali"
+                    elif lang_code == "as-IN": detected = "Assamese"
+                    elif lang_code == "mr-IN": detected = "Marathi"
+                    elif lang_code == "ta-IN": detected = "Tamil"
+                    elif lang_code == "te-IN": detected = "Telugu"
+                    elif lang_code == "kn-IN": detected = "Kannada"
+                    elif lang_code == "ml-IN": detected = "Malayalam"
+                    elif lang_code == "gu-IN": detected = "Gujarati"
+                    elif lang_code == "pa-IN": detected = "Punjabi"
+                    elif lang_code == "ur-IN": detected = "Urdu"
+                    elif lang_code == "mai-IN": detected = "Maithili"
+                    elif lang_code == "sat-IN": detected = "Santali"
+                    elif lang_code == "ks-IN": detected = "Kashmiri"
+                    elif lang_code == "sd-IN": detected = "Sindhi"
                     return transcript.strip(), detected
             except sr.UnknownValueError:
                 continue
