@@ -3,147 +3,96 @@
 const GUIDANCE_DICTIONARY = {
     welcome: {
       hi: {
-        display: "लोक स्वर में आपका स्वागत है। स्क्रीन पर कहीं भी क्लिक करें, मैं बोलकर आपका मार्गदर्शन करूँगा।",
-        spoken: "लोक स्वर में आपका स्वागत है। स्क्रीन पर कहीं भी क्लिक करें, मैं बोलकर आपका मार्गदर्शन करूँगा।",
-        enSub: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+        "display": "लोक स्वर में आपका स्वागत है। स्क्रीन पर कहीं भी क्लिक करें, मैं बोलकर आपका मार्गदर्शन करूँगा।",
+        "spoken": "लोक स्वर में आपका स्वागत है। स्क्रीन पर कहीं भी क्लिक करें, मैं बोलकर आपका मार्गदर्शन करूँगा।",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
       },
       bho: {
-        display: "लोक स्वर में रउआ के स्वागत बा। स्क्रीन पर कहीं भी क्लिक करब, हम बोल के बताएम।",
-        spoken: "लोक स्वर में रउआ के स्वागत बा। स्क्रीन पर कहीं भी क्लिक करब, हम बोल के बताएम।",
-        enSub: "Welcome to Lok Swar. Tap anywhere for speech guidance in Bhojpuri."
+        "display": "लोक स्वर में रउआ के स्वागत बा। स्क्रीन पर कहीं भी क्लिक करब, हम बोल के बताएम।",
+        "spoken": "लोक स्वर में रउआ के स्वागत बा। स्क्रीन पर कहीं भी क्लिक करब, हम बोल के बताएम।",
+        "enSub": "Welcome to Lok Swar. Tap anywhere for speech guidance in Bhojpuri."
       },
       or: {
-        display: "ଲୋକ ସ୍ୱର ପୋର୍ଟାଲକୁ ସ୍ୱାଗତ। ସ୍କ୍ରିନରେ ଯେକୌଣସି ସ୍ଥାନରେ କ୍ଲିକ୍ କରନ୍ତୁ, ଭଏସ୍ ଆସିଷ୍ଟାଣ୍ଟ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିବ।",
-        spoken: "ଲୋକ ସ୍ୱର ପୋର୍ଟାଲକୁ ସ୍ୱାଗତ। ସ୍କ୍ରିନରେ ଯେକୌଣସି ସ୍ଥାନରେ କ୍ଲିକ୍ କରନ୍ତୁ, ଭଏସ୍ ଆସିଷ୍ଟାଣ୍ଟ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିବ।",
-        enSub: "Welcome to Lok Swar. Tap anywhere for speech guidance in Odia."
+        "display": "ଲୋକ ସ୍ୱର ପୋର୍ଟାଲକୁ ସ୍ୱାଗତ। ସ୍କ୍ରିନରେ ଯେକୌଣସି ସ୍ଥାନରେ କ୍ଲିକ୍ କରନ୍ତୁ, ଭଏସ୍ ଆସିଷ୍ଟାଣ୍ଟ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିବ।",
+        "spoken": "ଲୋକ ସ୍ୱର ପୋର୍ଟାଲକୁ ସ୍ୱାଗତ। ସ୍କ୍ରିନରେ ଯେକୌଣସି ସ୍ଥାନରେ କ୍ଲିକ୍ କରନ୍ତୁ, ଭଏସ୍ ଆସିଷ୍ଟାଣ୍ଟ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିବ।",
+        "enSub": "Welcome to Lok Swar. Tap anywhere for speech guidance in Odia."
       },
       bn: {
-        display: "লোক স্বর পোর্টালে স্বাগতম। স্ক্রিনে যেকোনো স্থানে ক্লিক করলে ভয়েস অ্যাসিস্ট্যান্ট আপনাকে সাহায্য করবে।",
-        spoken: "লোক স্বর পোর্টালে স্বাগতম। স্ক্রিনে যেকোনো স্থানে ক্লিক করলে ভয়েস অ্যাসিস্ট্যান্ট আপনাকে সাহায্য করবে।",
-        enSub: "Welcome to Lok Swar. Tap anywhere for speech guidance in Bengali."
-      },
-      ta: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      te: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      kn: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      ml: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      mr: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      gu: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      pa: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      ur: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      as: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      mai: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      sat: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      ks: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
-      },
-      sd: {
-
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-
-        enSub: "Voice guidance active. Tap any element to hear its description."
-
+        "display": "লোক স্বর পোর্টালে স্বাগতম। স্ক্রিনে যেকোনো স্থানে ক্লিক করলে ভয়েস অ্যাসিস্ট্যান্ট আপনাকে সাহায্য করবে।",
+        "spoken": "লোক স্বর পোর্টালে স্বাগতম। স্ক্রিনে যেকোনো স্থানে ক্লিক করলে ভয়েস অ্যাসিস্ট্যান্ট আপনাকে সাহায্য করবে।",
+        "enSub": "Welcome to Lok Swar. Tap anywhere for speech guidance in Bengali."
       },
       en: {
-        display: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-        spoken: "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
-        enSub: "Voice guidance active. Tap any element to hear its description."
+        "display": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+        "spoken": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech.",
+        "enSub": "Voice guidance active. Tap any element to hear its description."
+      },
+      ta: {
+        "display": "லோக் ஸ்வருக்கு வரவேற்கிறோம். பக்கத்தில் எங்கு வேண்டுமானாலும் தட்டவும், குரல் உதவியாளர் உங்களை வழிநடத்துவார்.",
+        "spoken": "லோக் ஸ்வருக்கு வரவேற்கிறோம். பக்கத்தில் எங்கு வேண்டுமானாலும் தட்டவும், குரல் உதவியாளர் உங்களை வழிநடத்துவார்.",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      te: {
+        "display": "లోక్ స్వర్ కు స్వాగతం. పేజీపై ఎక్కడైనా నొక్కండి, వాయిస్ అసిస్టెంట్ మీకు మార్గనిర్దేశం చేస్తుంది.",
+        "spoken": "లోక్ స్వర్ కు స్వాగతం. పేజీపై ఎక్కడైనా నొక్కండి, వాయిస్ అసిస్టెంట్ మీకు మార్గనిర్దేశం చేస్తుంది.",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      kn: {
+        "display": "ಲೋಕ್ ಸ್ವರಗೆ ಸುಸ್ವಾಗತ. ಪುಟದಲ್ಲಿ ಎಲ್ಲಿಯಾದರೂ ಟ್ಯಾಪ್ ಮಾಡಿ ಮತ್ತು ಧ್ವನಿ ಸಹಾಯಕರು ನಿಮಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತಾರೆ.",
+        "spoken": "ಲೋಕ್ ಸ್ವರಗೆ ಸುಸ್ವಾಗತ. ಪುಟದಲ್ಲಿ ಎಲ್ಲಿಯಾದರೂ ಟ್ಯಾಪ್ ಮಾಡಿ ಮತ್ತು ಧ್ವನಿ ಸಹಾಯಕರು ನಿಮಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತಾರೆ.",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      ml: {
+        "display": "ലോക് സ്വറിലേക്ക് സ്വാഗതം. പേജിൽ എവിടെയെങ്കിലും ടാപ്പ് ചെയ്യുക, വോയ്‌സ് അസിസ്റ്റൻ്റ് നിങ്ങളെ നയിക്കും.",
+        "spoken": "ലോക് സ്വറിലേക്ക് സ്വാഗതം. പേജിൽ എവിടെയെങ്കിലും ടാപ്പ് ചെയ്യുക, വോയ്‌സ് അസിസ്റ്റൻ്റ് നിങ്ങളെ നയിക്കും.",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      mr: {
+        "display": "लोक स्वर मध्ये आपले स्वागत आहे. पृष्ठावर कोठेही टॅप करा आणि व्हॉइस असिस्टंट तुम्हाला मार्गदर्शन करेल.",
+        "spoken": "लोक स्वर मध्ये आपले स्वागत आहे. पृष्ठावर कोठेही टॅप करा आणि व्हॉइस असिस्टंट तुम्हाला मार्गदर्शन करेल.",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      gu: {
+        "display": "લોક સ્વરમાં તમારું સ્વાગત છે. પૃષ્ઠ પર ગમે ત્યાં ટેપ કરો અને વૉઇસ સહાયક તમને માર્ગદર્શન આપશે.",
+        "spoken": "લોક સ્વરમાં તમારું સ્વાગત છે. પૃષ્ઠ પર ગમે ત્યાં ટેપ કરો અને વૉઇસ સહાયક તમને માર્ગદર્શન આપશે.",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      pa: {
+        "display": "ਲੋਕ ਸਵਰ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ। ਪੰਨੇ 'ਤੇ ਕਿਤੇ ਵੀ ਟੈਪ ਕਰੋ ਅਤੇ ਵੌਇਸ ਅਸਿਸਟੈਂਟ ਤੁਹਾਨੂੰ ਮਾਰਗਦਰਸ਼ਨ ਕਰੇਗਾ।",
+        "spoken": "ਲੋਕ ਸਵਰ ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ। ਪੰਨੇ 'ਤੇ ਕਿਤੇ ਵੀ ਟੈਪ ਕਰੋ ਅਤੇ ਵੌਇਸ ਅਸਿਸਟੈਂਟ ਤੁਹਾਨੂੰ ਮਾਰਗਦਰਸ਼ਨ ਕਰੇਗਾ।",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      ur: {
+        "display": "لوک سور میں خوش آمدید۔ صفحہ پر کہیں بھی تھپتھپائیں اور وائس اسسٹنٹ آپ کی رہنمائی کرے گا۔",
+        "spoken": "لوک سور میں خوش آمدید۔ صفحہ پر کہیں بھی تھپتھپائیں اور وائس اسسٹنٹ آپ کی رہنمائی کرے گا۔",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      sd: {
+        "display": "لوڪ سور ۾ ڀليڪار. صفحي تي ڪٿي به ٽيپ ڪريو ۽ وائس اسسٽنٽ توهان جي رهنمائي ڪندو.",
+        "spoken": "لوڪ سور ۾ ڀليڪار. صفحي تي ڪٿي به ٽيپ ڪريو ۽ وائس اسسٽنٽ توهان جي رهنمائي ڪندو.",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      as: {
+        "display": "লোক স্বৰলৈ স্বাগতম। পৃষ্ঠাটোত যিকোনো ঠাইতে টিপক আৰু ভয়েচ এচিষ্টেণ্টে আপোনাক পথ প্ৰদৰ্শন কৰিব।",
+        "spoken": "লোক স্বৰলৈ স্বাগতম। পৃষ্ঠাটোত যিকোনো ঠাইতে টিপক আৰু ভয়েচ এচিষ্টেণ্টে আপোনাক পথ প্ৰদৰ্শন কৰিব।",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      mai: {
+        "display": "लोक स्वर मे अहाँक स्वागत अछि। पन्ना पर कतौ टैप करू आ वॉयस असिस्टेंट अहाँक मार्गदर्शन करत।",
+        "spoken": "लोक स्वर मे अहाँक स्वागत अछि। पन्ना पर कतौ टैप करू आ वॉयस असिस्टेंट अहाँक मार्गदर्शन करत।",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      sat: {
+        "display": "ᱞᱚᱠ ᱥᱣᱚᱨ ᱨᱮ ᱟᱢᱟᱜ ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ᱾ ᱯᱮᱡᱽ ᱨᱮ ᱡᱟᱦᱟᱸ ᱨᱮᱜᱮ ᱴᱮᱯ ᱢᱮ ᱟᱨ ᱵᱷᱚᱭᱮᱥ ᱟᱥᱤᱥᱴᱮᱱᱴ ᱟᱢᱮ ᱜᱟᱭᱤᱰ ᱢᱮᱭᱟ᱾",
+        "spoken": "ᱞᱚᱠ ᱥᱣᱚᱨ ᱨᱮ ᱟᱢᱟᱜ ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ᱾ ᱯᱮᱡᱽ ᱨᱮ ᱡᱟᱦᱟᱸ ᱨᱮᱜᱮ ᱴᱮᱯ ᱢᱮ ᱟᱨ ᱵᱷᱚᱭᱮᱥ ᱟᱥᱤᱥᱴᱮᱱᱴ ᱟᱢᱮ ᱜᱟᱭᱤᱰ ᱢᱮᱭᱟ᱾",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
+      },
+      ks: {
+        "display": "لوک سورَس مَنٛز خۄش آمدید۔ پیجَس پؠٹھ کُنہِ تِہ جاۓ دَبٲوِو تہٕ وائس اَسِسٹنٹ کَرِ تُہٕنٛز رَہنُمٲیی۔",
+        "spoken": "لوک سورَس مَنٛز خۄش آمدید۔ پیجَس پؠٹھ کُنہِ تِہ جاۓ دَبٲوِو تہٕ وائس اَسِسٹنٹ کَرِ تُہٕنٛز رَہنُمٲیی۔",
+        "enSub": "Welcome to Lok Swar. Tap anywhere on the page and the voice assistant will guide you through speech."
       }
+
     },
     search_input: {
       hi: {

@@ -658,6 +658,16 @@ function CitizenPortalApp() {
     }
   };
 
+  // Auto-play welcome voice guidance on platform entry and language change
+  useEffect(() => {
+    // Delay slightly to ensure browser audio context is ready
+    const timer = setTimeout(() => {
+      speakGuidance('welcome', null, selectedLang);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [selectedLang]);
+
+
   // Toggle Voice Assistant Guidance Mode
   const toggleVoiceGuide = () => {
     playChime('tap');
