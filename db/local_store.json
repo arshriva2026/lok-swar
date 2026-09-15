@@ -113,6 +113,54 @@
       "badge": "UAV Squad Lead",
       "avatar": "🛸",
       "jurisdiction": "Aerial Disaster Survey Grid"
+    },
+    "admin@lokaswar.gov.in": {
+      "id": "admin@lokaswar.gov.in",
+      "aadhaar": "889911223344",
+      "aadhaarFormatted": "8899 1122 3344",
+      "password": "admin123",
+      "name": "Dr. K. C. Tripathy (IAS)",
+      "designation": "District Magistrate & Collector",
+      "department": "District Administration",
+      "badge": "District Head",
+      "avatar": "👨‍💼",
+      "jurisdiction": "Entire Constituency"
+    },
+    "dpc.planner@lokaswar.gov.in": {
+      "id": "dpc.planner@lokaswar.gov.in",
+      "aadhaar": "556677889900",
+      "aadhaarFormatted": "5566 7788 9900",
+      "password": "admin123",
+      "name": "Er. A. Sharma (DPC)",
+      "designation": "District Planning Coordinator (DPC)",
+      "department": "Planning Dept",
+      "badge": "Budget Sanction Head",
+      "avatar": "📋",
+      "jurisdiction": "All Gram Panchayats"
+    },
+    "ee.roads@lokaswar.gov.in": {
+      "id": "ee.roads@lokaswar.gov.in",
+      "aadhaar": "123456789012",
+      "aadhaarFormatted": "1234 5678 9012",
+      "password": "admin123",
+      "name": "Er. Sunita Soren",
+      "designation": "Executive Engineer (R&B)",
+      "department": "Works Dept",
+      "badge": "Field Ops Lead",
+      "avatar": "👷‍♀️",
+      "jurisdiction": "All Blocks"
+    },
+    "drone.commander@lokaswar.gov.in": {
+      "id": "drone.commander@lokaswar.gov.in",
+      "aadhaar": "998877665544",
+      "aadhaarFormatted": "9988 7766 5544",
+      "password": "admin123",
+      "name": "Squadron Ldr. S. Patnaik",
+      "designation": "Aerial Drone Telemetry Commander",
+      "department": "Space Applications Centre Liaison",
+      "badge": "UAV Squad Lead",
+      "avatar": "🛸",
+      "jurisdiction": "Aerial Disaster Survey Grid"
     }
   },
   "grievances": {},
