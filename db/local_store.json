@@ -63,6 +63,19 @@
       "dpUrl": "assets/bg_1_smart_village.jpg",
       "createdAt": "2026-08-26T20:57:32.585086",
       "updatedAt": "2026-08-26T20:57:44.860062"
+    },
+    "9123492187": {
+      "mobile": "9123492187",
+      "name": "",
+      "password": "raj1234",
+      "email": "citizen_9123492187@lokaswar.in",
+      "village": "",
+      "aadhaarMasked": "XXXX-XXXX-2187",
+      "isAadhaarVerified": true,
+      "trustScore": 99,
+      "dpUrl": "assets/bg_1_smart_village.jpg",
+      "createdAt": "2026-09-15T21:21:54.535529",
+      "updatedAt": "2026-09-15T21:21:54.535559"
     }
   },
   "officers": {
