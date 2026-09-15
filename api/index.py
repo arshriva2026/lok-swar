@@ -88,6 +88,8 @@ def application(environ, start_response):
     start_response(status, headers)
     return [body_bytes]
 
+app = application
+
 if __name__ == "__main__":
     env = {
         'REQUEST_METHOD': 'GET',
